@@ -1,0 +1,87 @@
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.iso14755: False
+URxvt.perl-ext-common: default,url-select,clipboard,fullscreen,selection-to-clipboard,keyboard-select
+
+URxvt.keysym.F11: perl:fullscreen:switch
+
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: true
+
+URxvt.secondaryScreen: true
+URxvt.externalBorder: 2
+
+/* URxvt.font: xft:DejaVu Sans Mono:size=10 */
+URxvt.font: xft:Liberation Mono:size=10
+URxvt*lineSpace: 6
+URxvt.scrollBar: false
+
+URxvt.letterSpace: 0
+
+! Set the key to be interpreted as the Meta key to: alt, meta, hyper, super, mod1, mod2, mod3, mod4, mod5; option -mod.
+URxvt*modifier: Alt
+
+XTerm*locale: true
+XTerm*metaSendsEscape: true
+XTerm*eightBitInput: false
+XTerm*backarrowKey: false
+XTerm*ttyModes: erase ^?
+Xterm*saveLines: 8172
+
+xterm*faceName: Liberation Mono:size=11:antialias=false
+xterm*font: 7x12
+XTerm*scaleHeight: 2.05
+xterm*borderWidth: 0
+XTerm*selectToClipboard:true
+
+XTerm*VT100.Translations:       #override\n\
+ Shift Ctrl <KeyPress> v: insert-selection(CLIPBOARD)\n\
+ Shift Ctrl <KeyPress> c: copy-selection(CLIPBOARD)\n
+
+XTerm*visualBell: false
+
+*VT100*translations: #override Shift <Btn1Up>: exec-formatted("google-chrome '%t'", PRIMARY)
+
+XTerm*cursorBlink: true
+Xterm*vt100*geometry: 80x60
+Xterm*loginShell: true
+Xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
+Xterm*termName: xterm-color
+Xterm*eightBitInput: false
+
+*.foreground:   #c9c9c9
+*.background:   #393939
+*.cursorColor:  #f0e9dc
+
+! http://www.xcolors.net/dl/dwmrob
+! Black
+*color0:   #151515
+*color8:   #505450
+
+! Red
+*color1:   #bf7979
+*color9:   #f4a45f
+
+! Green
+*color2:   #97b26b
+*color10:  #c5f779
+
+! Yellow
+*color3:   #cdcda1
+*color11:  #ffffaf
+
+! Blue
+*color4:   #91a4c1
+*color12:  #7d8794
+
+! Magneta
+*color5:   #ed37c3
+*color13:  #e04abe
+
+! Cyan
+*color6:   #88aadd
+*color14:  #99ccff
+
+! White
+*color7:   #ffffff
+*color15:  #dedede
