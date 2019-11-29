@@ -121,14 +121,9 @@ export EDITOR=vim
 unsetopt share_history
 setopt no_share_history
 
-export NVM_DIR="/home/fabian/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-setopt no_share_history
-#[[ "$TERM" == "xterm" ]] && export TERM=xterm-256color
-
 # zsh make vim work with <c-s>
 alias vim="stty stop '' -ixoff ; vim"
+
 # `Frozing' tty, so after any command terminal settings will be restored
 ttyctl -f
 
@@ -152,8 +147,6 @@ bindkey '^s' pet-select
 # disable beep
 setopt NO_BEEP
 xset b off
-
-# source <(kubectl completion zsh)
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/fita/google-cloud-sdk/path.zsh.inc' ]; then . '/home/fita/google-cloud-sdk/path.zsh.inc'; fi
