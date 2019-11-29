@@ -11,8 +11,8 @@ URxvt.url-select.underline: true
 URxvt.secondaryScreen: true
 URxvt.externalBorder: 2
 
-/* URxvt.font: xft:DejaVu Sans Mono:size=10 */
-URxvt.font: xft:Liberation Mono:size=10
+URxvt.font: xft:DejaVu Sans Mono:size=10
+/* URxvt.font: xft:Liberation Mono:size=10 */
 URxvt*lineSpace: 6
 URxvt.scrollBar: false
 
