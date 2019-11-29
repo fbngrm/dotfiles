@@ -116,7 +116,7 @@ if [ -f /etc/bash_completion ]; then
  . /etc/bash_completion
 fi
 
-export EDITOR=vim
+export EDITOR=nvim
 
 unsetopt share_history
 setopt no_share_history
