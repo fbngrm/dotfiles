@@ -50,7 +50,7 @@ Xterm*termName: xterm-color
 Xterm*eightBitInput: false
 
 *.foreground:   #c9c9c9
-*.background:   #393939
+*.background:   #333232
 *.cursorColor:  #f0e9dc
 
 ! http://www.xcolors.net/dl/dwmrob
@@ -63,8 +63,8 @@ Xterm*eightBitInput: false
 *color9:   #f4a45f
 
 ! Green
-*color2:   #97b26b
-*color10:  #c5f779
+*color2:   #6b9ab2
+*color10:  #79a7f7
 
 ! Yellow
 *color3:   #cdcda1
@@ -75,8 +75,8 @@ Xterm*eightBitInput: false
 *color12:  #7d8794
 
 ! Magneta
-*color5:   #ed37c3
-*color13:  #e04abe
+*color5:   #6b9ab2
+*color13:  #79a7f7
 
 ! Cyan
 *color6:   #88aadd
@@ -85,3 +85,4 @@ Xterm*eightBitInput: false
 ! White
 *color7:   #ffffff
 *color15:  #dedede
+
