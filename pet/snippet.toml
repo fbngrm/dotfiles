@@ -1,0 +1,124 @@
+[[snippets]]
+  description = "ssl cert info"
+  command = "cfssl certinfo -domain inserter-staging.fitanalytics.com"
+  output = ""
+
+[[snippets]]
+  description = "mysql monitor connections"
+  command = "mysqladmin -u root -p -i 1 processlist"
+  output = ""
+
+[[snippets]]
+  description = "wifi"
+  command = "sudo dhcpcd enp2s0"
+  output = ""
+
+[[snippets]]
+  description = "load xresources"
+  command = "xrdb -merge ~/.Xresources"
+  output = ""
+
+[[snippets]]
+  description = "start local mysql/mariadb"
+  command = "systemctl start mariadb"
+  output = ""
+
+[[snippets]]
+  description = "extract a k8s secret"
+  command = "kubectl get secret similar-products-env-v6 -o json | grep -E '\"\\.?env\":' | sed 's/^.* \"\\(.*\\)\"$/\\1/' | base64 -d"
+  output = ""
+
+[[snippets]]
+  description = "filter top by process"
+  command = "top -p $(pgrep -d',' proxy)"
+  output = ""
+
+[[snippets]]
+  description = "mount usb drive to /media/usb-dive"
+  command = "sudo mount -t ntfs-3g -o uid=1000,gid=1000 /dev/sdb1 /media/usb-drive"
+  output = ""
+
+[[snippets]]
+  description = "ssh gnome-keyring-bug workaround"
+  command = "SSH_AUTH_SOCK=0 ssh SERVER_ADDR"
+  output = ""
+
+[[snippets]]
+  description = "show regression test results"
+  command = "kubectl --context=gke_fitanalytics-staging_europe-west1-d_staging -n feed-import get jobs | grep -E '<branch_name>.**1\\s+0'"
+  output = ""
+
+[[snippets]]
+  description = "photo to video"
+  command = "ffmpeg -r 15 -pattern_type glob -i '*.JPG' -c:v libx264 -vf fps=25 -pix_fmt yuv420p out.mp4"
+  output = ""
+
+[[snippets]]
+  description = "gcloud switch cluster"
+  command = "gcloud container clusters get-credentials staging --zone europe-west1-d --project fitanalytics-staging"
+  output = ""
+
+[[snippets]]
+  description = "kubectl use context"
+  command = "kubectl config use-context "
+  output = ""
+
+[[snippets]]
+  description = "get gke contexts"
+  command = "kubectl config get-contexts"
+  output = ""
+
+[[snippets]]
+  description = "get job"
+  command = "kubectl --context=gke_fitanalytics-staging_europe-west1-d_staging -n feed-import get jobs -l release=in-stock-norm-all-1541427261-ms"
+  output = ""
+
+[[snippets]]
+  description = "Create mysql 5.7 container"
+  command = "docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_USER=reader -e MYSQL_PASSWORD=\"$MYSQL_PASS\" -v /var/lib/mysql:/var/lib/mysql -d mysql:5.7"
+  output = ""
+
+[[snippets]]
+  description = "Start a mysql server instance"
+  command = "docker run --rm --name mysql-local -v /data/fita/db/mysql:/var/lib/mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d mysql:5.7"
+  output = ""
+
+[[snippets]]
+  description = "Connect to MySQL from the MySQL command line client"
+  command = "docker run -it --link mysql-local:mysql --rm mysql sh -c 'exec mysql -h\"$MYSQL_PORT_3306_TCP_ADDR\" -P\"$MYSQL_PORT_3306_TCP_PORT\" -ureader -p'"
+  output = ""
+
+[[snippets]]
+  description = "Connect to MySQL from an application in another Docker container"
+  command = "docker run --name some-app --link some-mysql:mysql -d application-that-uses-mysql"
+  output = ""
+
+[[snippets]]
+  description = "check wifi connection status"
+  command = "iw wlp4s0 link"
+  output = ""
+
+[[snippets]]
+  description = "scan networks"
+  command = "sudo wpa_cli -i wlp4s0 "
+  output = ""
+
+[[snippets]]
+  description = "kubetcl port forwarding"
+  command = "kubectl -n staging8 port-forward staging8-gocload-5cc7cb6b45-hnk8m 9000:9000"
+  output = ""
+
+[[snippets]]
+  description = "deploy to staging"
+  command = "git push origin -f MYBRANCH:stagingX"
+  output = ""
+
+[[snippets]]
+  description = "create TOTP one time pass for HENNGE challenge"
+  command = "oathtool --totp=sha512 --verbose -b MZRG4Z3SNVAGO3LBNFWC4Y3PNVEEIRKDJBAUYTCFJZDUKMBQGMFA===="
+  output = ""
+
+[[snippets]]
+  description = "show file names in gitdiff"
+  command = "git config --global diff.noprefix true"
+  output = ""

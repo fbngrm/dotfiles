@@ -1,0 +1,5 @@
+[General]
+  snippetfile = "/home/fita/.config/pet/snippet.toml"
+  editor = "nvim"
+  column = 40
+  selectcmd = "peco"
