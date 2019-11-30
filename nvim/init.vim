@@ -9,7 +9,6 @@ Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-fugitive'
@@ -123,6 +122,8 @@ inoremap <C-BS> <C-w>
 " toggle linenumbers
 noremap <c-w> :set invnumber<CR>
 inoremap <c-w> :set invnumber<CR>
+noremap <c-e> :set invrelativenumber<CR>
+inoremap <c-e> :set invrelativenumber<CR>
 
 " use spell-checking and column-width for git commits
 autocmd Filetype gitcommit setlocal spell textwidth=72
@@ -267,8 +268,9 @@ set guifont=Consolas:h11:cANSI
 " --------------------------------------------------------------------------------
 
 "let $nvim_tui_enable_true_color=1
-"colorscheme base16-default-dark
-"set termguicolors
+" let base16colorspace=256
+" colorscheme base16-nord
+" set termguicolors
 
 " enable syntax highlighting
 syntax enable
@@ -289,11 +291,11 @@ syntax enable
 
 " move lines up and down with Alt+j/k
 nnoremap ê :m .+1<CR>==
-nnoremap ë :m .-2<CR>==
 inoremap ê <Esc>:m .+1<CR>==gi
 inoremap ë <Esc>:m .-2<CR>==gi
 vnoremap ê :m '>+1<CR>gv=gv
 vnoremap ë :m '<-2<CR>gv=gv
+nnoremap ë :m .-2<CR>==
 
 nnoremap fj :m .+1<CR>==
 nnoremap fk :m .-2<CR>==
@@ -493,12 +495,12 @@ au BufRead,BufNewFile *.md set filetype=markdown
 "  --------------------------------------------------------------------------------
 
 " do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-n>"
-let g:UltiSnipsJumpForwardTrigger="<c-m>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsExpandTrigger="<a-n>"
+let g:UltiSnipsJumpForwardTrigger="<a-m>"
+let g:UltiSnipsJumpBackwardTrigger="<a-b>"
 
 " --------------------------------------------------------------------------------
-"  yankstack 
+"  yankstack
 "  --------------------------------------------------------------------------------
 
 " Alt p and Alt P
