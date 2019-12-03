@@ -567,6 +567,38 @@ let g:tern_map_keys=1
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
 
+" generate ctags when saving go files exclude js files
+au BufWritePost *.go silent! !ctags -R --exclude='*node_modules' --exclude='*vendor' &
+
+" ctags for go
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
 let g:go_def_mapping_enabled = 0
 au FileType go nmap <Leader>m ]]
 au FileType go nmap <Leader>n [[
