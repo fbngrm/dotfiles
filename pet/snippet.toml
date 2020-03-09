@@ -1,9 +1,4 @@
-[[snippets]]
-  description = "ssl cert info"
-  command = "cfssl certinfo -domain inserter-staging.fitanalytics.com"
-  output = ""
-
-[[snippets]]
+﻿[[snippets]]
   description = "mysql monitor connections"
   command = "mysqladmin -u root -p -i 1 processlist"
   output = ""
@@ -43,10 +38,6 @@
   command = "SSH_AUTH_SOCK=0 ssh SERVER_ADDR"
   output = ""
 
-[[snippets]]
-  description = "show regression test results"
-  command = "kubectl --context=gke_fitanalytics-staging_europe-west1-d_staging -n feed-import get jobs | grep -E '<branch_name>.**1\\s+0'"
-  output = ""
 
 [[snippets]]
   description = "photo to video"
@@ -115,8 +106,6 @@
 
 [[snippets]]
   description = "create TOTP one time pass for HENNGE challenge"
-  command = "oathtool --totp=sha512 --verbose -b MZRG4Z3SNVAGO3LBNFWC4Y3PNVEEIRKDJBAUYTCFJZDUKMBQGMFA===="
-  output = ""
 
 [[snippets]]
   description = "show file names in gitdiff"
