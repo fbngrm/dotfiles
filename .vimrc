@@ -100,7 +100,7 @@ set wildmenu
 "set lazyredraw
 
 " higlight matching parenthesis
-set showmatch
+" set showmatch
 
 " better search
 " incremental search
