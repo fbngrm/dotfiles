@@ -224,6 +224,11 @@ git-cfg:
 	ln -vsf "${PWD}/git/gitconfig_work" "${HOME}/.gitconfig_work"
 	ln -vsf "${PWD}/git/gitignore_global" "${HOME}/.gitignore_global"
 
+git: git-pkg git-cfg
+
+nicotine:
+	sudo pacman -S --needed --noconfirm nicotine+
+
 .PHONY: \
 	zsh \
 	capture \
@@ -237,8 +242,10 @@ git-cfg:
 	neovim \
 	rofi \
 	git \
+	nicotine \
 
 install: \
+	git \
 	audio \
 	bash \
 	brightnessctl \
@@ -258,4 +265,4 @@ install: \
 	rofi \
 	sway \
 	waybar \
-	git \
+	nicotine \
