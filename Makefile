@@ -215,6 +215,13 @@ pet-cfg:
 
 pet: pet-cfg pet-install
 
+git-pkg:
+	sudo pacman -S --needed --noconfirm git
+
+git-cfg:
+	ln -vsf "${PWD}/git/gitconfig" "${HOME}/.gitconfig"
+	ln -vsf "${PWD}/git/gitconfig_work" "${HOME}/.gitconfig_work"
+	ln -vsf "${PWD}/git/gitignore_global" "${HOME}/.gitignore_global"
 
 .PHONY: \
 	zsh \
@@ -228,6 +235,7 @@ pet: pet-cfg pet-install
 	kitty \
 	neovim \
 	rofi \
+	git \
 
 install: \
 	audio \
@@ -249,3 +257,4 @@ install: \
 	rofi \
 	sway \
 	waybar \
+	git \
