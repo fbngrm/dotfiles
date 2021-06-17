@@ -130,6 +130,7 @@ kitty-pkgs:
 kitty-cfg:
 	mkdir -vp "${HOME}/.config/kitty"
 	ln -vsf "${PWD}/kitty/kitty.conf" "${HOME}/.config/kitty/kitty.conf"
+	ln -vsf "${PWD}/kitty/theme.conf" "${HOME}/.config/kitty/theme.conf"
 	ln -vsfn "${PWD}/kitty/sessions" "${HOME}/.config/kitty/sessions"
 
 kitty: kitty-pkgs kitty-cfg
