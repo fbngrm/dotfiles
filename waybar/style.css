@@ -1,0 +1,39 @@
+* {
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 1.1rem;
+}
+
+#waybar {
+  background-color: #21242b;
+  color: #bbc2cf;
+}
+
+#battery,
+#temperature,
+#cpu,
+#memory,
+#disk,
+#language,
+#backlight,
+#pulseaudio,
+#mode,
+#network {
+  padding: 0.5rem 0.75rem;
+}
+
+#battery.good {
+  color: #98be65;
+}
+
+#battery.warning {
+  color: #da8548;
+}
+
+.critical {
+  background-color: #ff6c6b;
+  color: #bbc2cf;
+}
+
+#battery.charging {
+  color: #ecbe7b;
+}

@@ -1,0 +1,117 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 15,
+  "modules-left": [
+    "battery",
+    "temperature",
+    "cpu",
+    "memory",
+    "disk",
+    "backlight",
+    "pulseaudio"
+  ],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "network",
+    "custom/himalaya",
+    "custom/wallet",
+    "sway/mode",
+    "tray"
+  ],
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-alt": "{time}",
+    "format-full": "",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "temperature": {
+    "tooltip": false,
+    "hwmon-path": "/sys/devices/virtual/hwmon/hwmon5/temp1_input",
+    "thermal-zone": 0,
+    "critical-threshold": 80,
+    "format": "{icon} {temperatureC}°C",
+    "format-critical": "{icon} {temperatureC}°C",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "cpu": {
+    "tooltip": false,
+    "format": " {usage}%"
+  },
+  "memory": {
+    "format": " {percentage}%",
+    "tooltip-format": "{used:0.2f}GiB/{avail:0.2f}GiB"
+  },
+  "disk": {
+    "interval": 60,
+    "path": "/",
+    "format": " {percentage_free}%",
+    "tooltip-format": "{used}/{total}"
+  },
+  "backlight": {
+    "tooltip": false,
+    "device": "acpi_video1",
+    "format": " {percent}%"
+  },
+  "sway/language": {
+    "tooltip": false,
+    "format": " {}"
+  },
+  "pulseaudio": {
+    "tooltip": false,
+    "scroll-step": 2,
+    "format": "{icon} {volume}%",
+    "format-bluetooth": " {icon} {volume}%",
+    "format-muted": "{icon} --%",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ""
+    }
+  },
+  "custom/himalaya": {
+    "exec": "tail -fn 1 /tmp/himalaya-unseen-msgs-counter | xargs -I {} sh -c 'if [ {} -gt 0 ]; then echo ; else echo; fi'",
+    "format": "{} ",
+    "tooltip": false
+  },
+  "clock": {
+    "tooltip": false,
+    "format": "{:%H:%M, %a %b %e}"
+  },
+  "tray": {
+    "icon-size": 25,
+    "spacing": 10
+  },
+  "custom/wallet": {
+    "exec": "sh -c '~/Code/binance/wallet.sh'",
+    "tooltip": true,
+    "interval": 60,
+    "format": "₿ "
+  },
+  "sway/mode": {
+    "format": "{}"
+  },
+  "custom/comodoro": {
+    "exec": "comodoro watch",
+    "on-click": "if [ -e /tmp/comodoro.pid ]; then comodoro stop; else comodoro start; fi"
+  },
+  "network": {
+    "interface": "wlp2*",
+    "format-wifi": " {ipaddr} ({signalStrength}%)",
+    "tooltip-format-wifi": "{essid}",
+    "format-ethernet": " {ipaddr}",
+    "tooltip-format-ethernet": "",
+    "format-disconnected": "⚠ No connection"
+  }
+}
