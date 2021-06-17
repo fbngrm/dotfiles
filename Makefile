@@ -201,6 +201,19 @@ waybar-cfg:
 
 waybar: waybar-pkgs waybar-cfg
 
+pet-install:
+	mkdir -p $GOPATH/src/github.com/knqyf263
+	cd $GOPATH/src/github.com/knqyf263
+	git clone https://github.com/knqyf263/pet.git
+	cd pet
+	make install
+
+pet-cfg:
+	mkdir -vp "${HOME}/.config/pet"
+	ln -vsf "${PWD}/pet/config.toml" "${HOME}/.config/pet/config.toml"
+	ln -vsf "${PWD}/pet/snippet.toml" "${HOME}/.config/pet/snippet.toml"
+
+
 .PHONY: \
 	zsh \
 	capture \

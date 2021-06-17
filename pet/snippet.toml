@@ -1,4 +1,154 @@
-﻿[[snippets]]
+[[snippets]]
+  description = "enable wifi interface"
+  command = "sudo ip link set wlp4s0 up"
+  output = ""
+
+[[snippets]]
+  description = "bash in docker image"
+  command = "docker run -it --entrypoint bash "
+  output = ""
+
+[[snippets]]
+  description = "k8s pod logs"
+  command = "k logs -p -c web uk-web-1449-feat-fg-uk-69b65c98c4-lbhmn"
+  output = ""
+
+[[snippets]]
+  description = "restore kde bar"
+  command = "rm rm ~/.config/plasma-org.kde.plasma.desktop-appletsrc\\n"
+  output = ""
+
+[[snippets]]
+  description = "random password"
+  command = "< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32"
+  output = ""
+
+[[snippets]]
+  description = "k8s pod shell"
+  command = "kubectl exec -it pizzly-postgres-6b4f89d765-2rzkc -- /bin/bash"
+  output = ""
+
+[[snippets]]
+  description = "get k8s cluster credentials"
+  command = "gcloud container clusters get-credentials --region=europe-west1-c eu-prod"
+  output = ""
+
+[[snippets]]
+  description = "remove docker-compose images"
+  command = "docker-compose stop && docker-compose rm -f"
+  output = ""
+
+[[snippets]]
+  description = "forward to k8s db"
+  command = "kubectl port-forward <target_pod> <port=5432>:5432"
+  output = ""
+
+[[snippets]]
+  description = "git last branches worked on"
+  command = "git for-each-ref --sort=-committerdate refs/heads/"
+  output = ""
+
+[[snippets]]
+  description = "git show filenames of changed files between HEAD and master"
+  command = "git diff --name-only HEAD master"
+  output = ""
+
+[[snippets]]
+  description = "git show diff of file between HEAD and master"
+  command = "git diff HEAD master -- "
+  output = ""
+
+[[snippets]]
+  description = "log into k8s container"
+  command = "kubectl exec --stdin --tty <container> -- /bin/bash"
+  output = ""
+
+[[snippets]]
+  description = "import postgres backup"
+  command = "psql -a -b -e -h localhost --username postgres -d uk_pento < /data/prod-db"
+  output = ""
+
+[[snippets]]
+  description = "create postgres db in docker"
+  command = "docker exec -it 24f09dc29ae7 psql -U postgres -d postgres -c \"CREATE DATABASE uk_pento;\""
+  output = ""
+
+[[snippets]]
+  description = "backup postgres from docker container"
+  command = "docker exec -t 2e3578f231de pg_dumpall -c -U postgres | gzip > /data/dump_`date +%d-%m-%Y\"_\"%H_%M_%S`.gz"
+  output = ""
+
+[[snippets]]
+  description = "diskspace"
+  command = "df -h"
+  output = ""
+
+[[snippets]]
+  description = "file size"
+  command = "du -sh ../pentoapp"
+  output = ""
+
+[[snippets]]
+  description = "pacman list orphan packages"
+  command = "sudo pacman -Qtdq"
+  output = ""
+
+[[snippets]]
+  description = "pacman remove orphan packages"
+  command = "sudo pacman -Rns $(pacman -Qtdq)"
+  output = ""
+
+[[snippets]]
+  description = "pacman remove cached packages that not currently installed"
+  command = "sudo pacman -Sc"
+  output = ""
+
+[[snippets]]
+  description = "pacman dry run cache pruning"
+  command = "paccache -d"
+  output = ""
+
+[[snippets]]
+  description = "clean systemd journal"
+  command = "sudo journalctl --vacuum-size=50M\\n"
+  output = ""
+
+[[snippets]]
+  description = "connect wifi with wpa_supplicant"
+  command = "sudo wpa_supplicant -B -i wlp4s0 -c /etc/wpa_supplicant/wpa_supplicant.conf"
+  output = ""
+
+[[snippets]]
+  description = "colortest"
+  command = "msgcat --color=test"
+  output = ""
+
+[[snippets]]
+  description = "list network adapters"
+  command = "rfkill list all"
+  output = ""
+
+[[snippets]]
+  description = "unblock network adapter"
+  command = "rfkill unblock 1"
+  output = ""
+
+[[snippets]]
+  description = "wifi blocked?"
+  command = "sudo rfkill list all"
+  output = ""
+
+[[snippets]]
+  description = "unblock wifi"
+  command = "rfkill unblock 1"
+  output = ""
+
+[[snippets]]
+  description = "find duplicate lines in a file"
+  command = "sort sl-employee-emails.txt | uniq -c"
+  output = ""
+
+[[snippets]]
   description = "mysql monitor connections"
   command = "mysqladmin -u root -p -i 1 processlist"
   output = ""
@@ -37,7 +187,6 @@
   description = "ssh gnome-keyring-bug workaround"
   command = "SSH_AUTH_SOCK=0 ssh SERVER_ADDR"
   output = ""
-
 
 [[snippets]]
   description = "photo to video"
@@ -102,12 +251,4 @@
 [[snippets]]
   description = "deploy to staging"
   command = "git push origin -f MYBRANCH:stagingX"
-  output = ""
-
-[[snippets]]
-  description = "create TOTP one time pass for HENNGE challenge"
-
-[[snippets]]
-  description = "show file names in gitdiff"
-  command = "git config --global diff.noprefix true"
   output = ""
