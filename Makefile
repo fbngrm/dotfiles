@@ -13,6 +13,7 @@ ranger:
 zsh-cfg:
 	ln -vsf "${PWD}/zsh/aliases.sh" "${HOME}/.bash_aliases"
 	ln -vsf "${PWD}/zsh/zshrc" "${HOME}/.zshrc"
+	ln -vsf "${PWD}/zsh/profile.sh" "${HOME}/.profile"
 	ln -vsf "${PWD}/zsh/theme" "${HOME}/.grimme.zsh-theme"
 
 zsh-setup:
