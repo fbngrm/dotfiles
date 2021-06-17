@@ -1,0 +1,14 @@
+[user]
+	email = fabian@pento.io
+	name = Fabian
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[diff]
+	noprefix = true
+[core]
+	excludesfile = /home/f/.gitignore_global
+[alias]
+	go = log --graph --all --decorate --oneline
+	root = rev-parse --show-toplevel
+[includeIf "gitdir:~/work/src/gitlab.com/pentoapp/pento/"]
+    path = ~/.gitconfig_work
