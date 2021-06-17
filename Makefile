@@ -11,7 +11,7 @@ ranger:
 	ln -vsf "${PWD}/ranger/rc.conf" "${HOME}/.config/ranger/rc.conf"
 
 zsh-cfg:
-	ln -vsf "${PWD}/zsh/aliases" "${HOME}/.bash_aliases"
+	ln -vsf "${PWD}/zsh/aliases.sh" "${HOME}/.bash_aliases"
 	ln -vsf "${PWD}/zsh/zshrc" "${HOME}/.zshrc"
 	ln -vsf "${PWD}/zsh/theme" "${HOME}/.grimme.zsh-theme"
 
