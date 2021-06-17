@@ -96,17 +96,9 @@ export GOBIN=$GOPATH/bin
 export GOPRIVATE=github.com/heetch
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 export PATH=/usr/local/go/bin:/usr/local/lib:$GOBIN/bin:$JAVA_HOME/bin:$GOBIN:$PATH
-export LD_LIBRARY_PATH=${GOPATH}/src/github.com/tensorflow/tensorflow/bazel-bin/tensorflow
 export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-# vim snipmate
-export PATH="$HOME/.vim/bundle/vim-snippets:$PATH"
 export GOOGLE_APPLICATION_CREDENTIALS="/home/fita/service-account-keys/text2speech-2931fbd05841.json"
 
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -118,8 +110,8 @@ fi
 
 export EDITOR=nvim
 
-unsetopt share_history
-setopt no_share_history
+# unsetopt share_history
+# setopt no_share_history
 
 # zsh make vim work with <c-s>
 alias vim="stty stop '' -ixoff ; vim"
