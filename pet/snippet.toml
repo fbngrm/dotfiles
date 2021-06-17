@@ -10,7 +10,7 @@
 
 [[snippets]]
   description = "k8s pod logs"
-  command = "k logs -p -c web uk-web-1449-feat-fg-uk-69b65c98c4-lbhmn"
+  command = "k logs -p -c web <target_pod>"
   output = ""
 
 [[snippets]]
@@ -25,7 +25,7 @@
 
 [[snippets]]
   description = "k8s pod shell"
-  command = "kubectl exec -it pizzly-postgres-6b4f89d765-2rzkc -- /bin/bash"
+  command = "kubectl exec -it <target_pod> -- /bin/bash"
   output = ""
 
 [[snippets]]

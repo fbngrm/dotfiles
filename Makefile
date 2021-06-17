@@ -213,6 +213,8 @@ pet-cfg:
 	ln -vsf "${PWD}/pet/config.toml" "${HOME}/.config/pet/config.toml"
 	ln -vsf "${PWD}/pet/snippet.toml" "${HOME}/.config/pet/snippet.toml"
 
+pet: pet-cfg pet-install
+
 
 .PHONY: \
 	zsh \
