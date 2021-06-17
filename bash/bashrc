@@ -87,15 +87,6 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -108,17 +99,13 @@ if ! shopt -oq posix; then
 fi
 
 export GOPATH=$HOME/work
+export GOBIN=$GOPATH/bin
+export GOPRIVATE=github.com/heetch
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
-export PATH=/usr/local/go/bin:/usr/local/lib:$GOPATH/bin:$JAVA_HOME/bin:$PATH
-export LD_LIBRARY_PATH=${GOPATH}/src/github.com/tensorflow/tensorflow/bazel-bin/tensorflow
-
-# autocompletion for git
-source /usr/share/git/completion/git-completion.bash
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+export PATH=/usr/local/go/bin:/usr/local/lib:$GOBIN/bin:$JAVA_HOME/bin:$GOBIN:$PATH
+export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+export GOOGLE_APPLICATION_CREDENTIALS="/home/f/service-account-keys/text2speech-2931fbd05841.json"
+export GCLOUD_CONFIG=$HOME/.config/gcloud
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -128,10 +115,30 @@ if [ -f /etc/bash_completion ]; then
  . /etc/bash_completion
 fi
 
-export EDITOR=vim
+if [ -f /usr/share/git/completion/git-completion.bash ]; then
+ . /usr/share/git/completion/git-completion.bash
+fi
+
+
+export EDITOR=nvim
+
+# pet
+function prev() {
+  PREV=$(fc -lrn | head -n 1)
+  sh -c "pet new `printf %q "$PREV"`"
+}
+function pet-select() {
+  BUFFER=$(pet search --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle redisplay
+}
+zle -N pet-select
+stty -ixon
+bindkey '^s' pet-select
+
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/fita/google-cloud-sdk/path.bash.inc' ]; then . '/home/fita/google-cloud-sdk/path.bash.inc'; fi
+if [ -f '/home/f/google-cloud-sdk/path.bash.inc' ]; then . '/home/f/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/fita/google-cloud-sdk/completion.bash.inc' ]; then . '/home/fita/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f '/home/f/google-cloud-sdk/completion.bash.inc' ]; then . '/home/f/google-cloud-sdk/completion.bash.inc'; fi

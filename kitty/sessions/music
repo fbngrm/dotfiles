@@ -1,0 +1,10 @@
+title music
+
+layout stack
+new_tab zsh
+cd /data/sync/music
+launch zsh
+
+layout stack
+
+

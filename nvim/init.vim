@@ -5,7 +5,6 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'fatih/vim-go'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'bronson/vim-trailing-whitespace'
@@ -18,12 +17,26 @@ Plug 'Townk/vim-autoclose'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'SirVer/ultisnips'
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
+Plug 'sheerun/vim-polyglot'
 Plug 'nazo/pt.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'chriskempson/base16-vim'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'sbdchd/neoformat'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'lervag/vimtex'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-obsession'
+Plug 'preservim/tagbar'
+
+Plug 'joshdick/onedark.vim'
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
@@ -37,7 +50,7 @@ set nonumber
 " indent when moving to the next
 set autoindent
 
-" auto save before builde
+" auto save before build
 set autowrite
 
 " show command in right corner
@@ -66,7 +79,9 @@ set backspace=indent,eol,start
 set foldmethod=syntax
 
 " do not fold on startup
+set nofoldenable
 set foldlevelstart=10
+set foldcolumn=0
 
 " show quotes in json
 set conceallevel=0
@@ -90,7 +105,7 @@ set history=1000 " remember more commands and search history
 set undolevels=1000 " use many much levels of undo
 
 " swap files
-set nobackup " disable
+set nobackup
 set noswapfile " IMPORTANT: comment this line if you are working on a remote host
 set wildignore=*.swp,*.bak,*.pyc,*.class
 
@@ -98,22 +113,31 @@ set wildignore=*.swp,*.bak,*.pyc,*.class
 set wildmode=longest,list,full
 set wildmenu
 
+set noshowmode
+
+set signcolumn=yes
+
+set fillchars+=vert:│
+
 " wrap word in quotes
-nmap <leader>" ysiw"
-nmap <leader>' ysiw'
+nmap <leader>" ysiw"<CR>
+nmap <leader>' ysiw'<CR>
 
 " insert line after the current line in cmd mode
 nmap <CR> o<Esc>
 
 " yank in word
-nmap <leader>w yiw
+nmap <leader>w yiw<CR>
 
 " save file
 inoremap <c-s> <c-o>:update<CR><ESC>
 noremap <c-s> :update<CR><ESC>
+inoremap <c-q> <c-o>:quit<CR><ESC>
+noremap <c-q> :quit<CR><ESC>
 
 " map the leader key \ to ,
-let mapleader = ","
+let mapleader = ";"
+let maplocalleader = " "
 
 " make backspace delete in normal mode
 nnoremap <BS> <BS>x
@@ -123,8 +147,6 @@ inoremap <C-BS> <C-w>
 " toggle linenumbers
 noremap <c-w> :set invnumber<CR>
 inoremap <c-w> :set invnumber<CR>
-noremap <c-e> :set invrelativenumber<CR>
-inoremap <c-e> :set invrelativenumber<CR>
 
 " use spell-checking and column-width for git commits
 autocmd Filetype gitcommit setlocal spell textwidth=72
@@ -137,15 +159,18 @@ for s:c in ['a', 'A', '<Insert>', 'i', 'I', 'gI', 'gi', 'o', 'O']
     exe 'nnoremap ' . s:c . ' :nohlsearch<CR>' . s:c
 endfor
 
-" edit files in the currently opened files directory
-cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
+" edit files in the currently jopened files directory
+" cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 map <leader>e :e %%
 map <leader>es :sp %%
 map <leader>ev :vsp %%
 
 " remap record key to Q
-nnoremap Q q
+" nnoremap Q q
 nnoremap q <Nop>
+
+noremap Zz <c-w>_ \| <c-w>\|
+noremap Zo <c-w>=
 
 " --------------------------------------------------------------------------------
 "  status line
@@ -155,19 +180,19 @@ set laststatus=2                             " always show statusbar
 set statusline=
 set statusline+=%-10.3n\                     " buffer number
 " syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 " fugitive vim
-set statusline+=%{fugitive#statusline()}
+set statusline+=%{FugitiveStatusline()}
 set statusline+=%=                           " right align remainder
 set statusline+=%f\                          " filename
-set statusline+=%h%m%r%w                     " status flags
-set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type
+" set statusline+=%h%m%r%w                     " status flags
+" set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type
 " set statusline+=0x%-8B                       " character value
-" set statusline+=%-14(%l,%c%V%)               " line, character
+set statusline+=%14(%l,%c%V%)               " line, character
 " set statusline+=%<%P                         " file position
-set statusline+=%55(%{strftime('%a\ %b\ %e\ %I:%M\ %p')}\ %5l,%-6(%c%V%)\ %P%)
+" set statusline+=%55(%{strftime('%a\ %b\ %e\ %I:%M\ %p')}\ %5l,%-6(%c%V%)\ %P%)
 
 " --------------------------------------------------------------------------------
 " copy & paste
@@ -198,7 +223,7 @@ endfunction
 
 set wildchar=<Tab> wildmenu wildmode=full
 set wildcharm=<C-Z>
-nnoremap <F11> :b <C-Z>
+nnoremap <F10> :b <C-Z>
 
 " go to buffer number with Ngb
 let c = 1
@@ -223,10 +248,10 @@ set ignorecase " ignore case when searching
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " Pt, the platinum searcher mapping
-nnoremap <silent> ,h :execute "Pt --ignore=vendor --ignore=tags " . expand("<cword>") <CR>
+nnoremap <silent> <leader>h :execute "Pt --ignore=vendor --ignore=tags " . expand("<cword>") <CR>
 
 " search in project PT +Unite
-nnoremap <silent> ,g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> <leader>g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 if executable('pt')
   let g:unite_source_grep_command = 'pt'
   let g:unite_source_grep_default_opts = '--nogroup --nocolor'
@@ -263,18 +288,6 @@ set fileencodings=
 " fonts, see http://vimdoc.sourceforge.net/htmldoc/options.html#%27guifontwide%27
 set guifontwide=MingLiU:h10
 set guifont=Consolas:h11:cANSI
-
-" --------------------------------------------------------------------------------
-" colors
-" --------------------------------------------------------------------------------
-
-" let $nvim_tui_enable_true_color=1
-" let base16colorspace=256
-" colorscheme base16-nord
-" set termguicolors
-
-" enable syntax highlighting
-syntax enable
 
 " --------------------------------------------------------------------------------
 " navigation
@@ -441,6 +454,10 @@ let g:UltiSnipsJumpBackwardTrigger="<a-b>"
 nmap <Esc>p <Plug>yankstack_substitute_older_paste
 nmap <Esc>P <Plug>yankstack_substitute_newer_paste
 
+" delete to the black hole register
+nnoremap <leader>d "_d
+xnoremap <leader>d "_d
+
 " --------------------------------------------------------------------------------
 " nerdtree
 " --------------------------------------------------------------------------------
@@ -464,10 +481,13 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ar'
 "set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_map = '<c-p>'
 
 " ignore files in .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" search word under the cursor
+nn <leader>d :let g:ctrlp_default_input = expand('<cword>')<cr>
+map <leader>k :let g:ctrlp_default_input = 0<cr>:CtrlP<cr>
 
 " exclude files and directories using Vim's wildignore
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*tags   " MacOSX/Linux
@@ -483,14 +503,15 @@ let g:ctrlp_custom_ignore = {
 " syntastic
 " --------------------------------------------------------------------------------
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 " --------------------------------------------------------------------------------
 " tern settings
 " --------------------------------------------------------------------------------
+
 let g:tern_show_argument_hints='on_hold'
 let g:tern_map_keys=1
 
@@ -538,6 +559,9 @@ let g:go_def_mapping_enabled = 0
 let g:go_auto_type_info = 1
 set updatetime=100
 
+" open definition in vsplit using coc
+nnoremap <buffer> <silent> gs :call CocAction('jumpDefinition', 'vsplit')<CR>
+
 " open godoc in browser
 au FileType go nmap <Leader>db <Plug>(go-doc-browser)
 
@@ -552,20 +576,23 @@ let g:go_highlight_methods = 1
 
 " sometimes when using both vim-go and syntastic Vim will start lagging while
 " saving and opening files. The following fixes this:
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " another issue with vim-go and syntastic is that the location list window that
 " contains the output of commands such as :GoBuild and :GoTest might not appear. To resolve this:
 let g:go_list_type = "quickfix"
 " go - map :GoFmt to goimports to auto-import modules
 let g:go_fmt_command = "goimports"
-" let g:go_fmt_command = "goimports -local github.com/upcload"
+" autocmd FileType go autocmd BufWritePre <buffer> !gofmt -s -w %
+au BufWritePost *.go !gofmt -s -w %
+
+let g:go_addtags_transform = "camelcase"
 
 " build and run go files
 au FileType go map <leader>gr :!go run %<CR>
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
-autocmd FileType go nmap <Leader>c  <Plug>(go-coverage-toggle)
+autocmd FileType go nmap <leader>t <Plug>(go-test)
+autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 autocmd FileType go nmap <Leader>b :GoTestCompile <CR>
 au FileType go nmap <Leader>m ]]
 au FileType go nmap <Leader>n [[
@@ -595,11 +622,6 @@ let python_highlight_all = 1
 autocmd FileType python set sw=4
 autocmd FileType python set ts=4
 autocmd FileType python set sts=4
-
-
-" hide column on the left
-set foldcolumn=0
-set signcolumn=no
 
 " --------------------------------------------------------------------------------
 " coc.nvim / language server default settings
@@ -645,7 +667,8 @@ nmap <silent> gr <Plug>(coc-references)
 " Use U to show documentation in preview window
 nnoremap <silent> U :call <SID>show_documentation()<CR>
 
-" Remap for rename current word
+" Remap for :q
+" ename current word
 nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
@@ -673,3 +696,60 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " --------------------------------------------------------------------------------
 
 nmap <silent> <leader>j :CocCommand explorer <CR>
+
+" --------------------------------------------------------------------------------
+" Neoformat / prettier
+" --------------------------------------------------------------------------------
+
+" autocmd BufWritePre *.js Neoformat
+
+" --------------------------------------------------------------------------------
+" vimtex
+" --------------------------------------------------------------------------------
+
+let g:vimtex_compiler_latexmk = {
+    \ 'build_dir' : '',
+    \ 'callback' : 1,
+    \ 'continuous' : 1,
+    \ 'executable' : 'latexmk',
+    \ 'hooks' : [],
+    \ 'options' : [
+    \   '-pdflua',
+    \   '-verbose',
+    \   '-file-line-error',
+    \   '-synctex=1',
+    \   '-interaction=nonstopmode',
+    \ ],
+    \}
+let g:tex_matchcheck= '[{}]'
+nnoremap <leader>xc :VimtexCompile<CR>
+
+" --------------------------------------------------------------------------------
+" onedark color theme
+" --------------------------------------------------------------------------------
+
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let g:onedark_terminal_italics=0
+syntax on
+colorscheme onedark
+
+" Override color scheme to make split the same color as tmux's default
+autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=NONE ctermbg=NONE
+
+" --------------------------------------------------------------------------------
+" tagbar
+" --------------------------------------------------------------------------------
+
+nmap <F8> :TagbarToggle<CR>
+
+" --------------------------------------------------------------------------------
+" tagbar
+" --------------------------------------------------------------------------------
+
+function! CopyMatches(reg)
+  let hits = []
+  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
+  let reg = empty(a:reg) ? '+' : a:reg
+  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+endfunction
+command! -register CopyMatches call CopyMatches(<q-reg>)
