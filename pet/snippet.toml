@@ -252,3 +252,8 @@
   description = "deploy to staging"
   command = "git push origin -f MYBRANCH:stagingX"
   output = ""
+
+[[snippets]]
+  description = "extract links from file"
+  command = "cat <file_path> | grep -o 'http[s]\\?:\\/\\/[[:alnum:]\\%\\/_\\#.-]*'"
+  output = ""
