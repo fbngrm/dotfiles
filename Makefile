@@ -1,15 +1,22 @@
-audio:
+audio-srv:
 	sudo pacman -S --needed --noconfirm \
-		mpv \
 		mpd \
-		playerctl \
 		pulseaudio \
 		pulseaudio-alsa \
 		pulseaudio-bluetooth
 	mkdir -vp "${HOME}/.config/mpd/playlists"
 	ln -vsf "${PWD}/mpd/playlists" "${HOME}/.config/mpd/playlists"
-	ln -vsf "${PWD}/mpd/.config/mpd.conf" "${HOME}/.config/mpd/mpd.conf"
+	ln -vsf "${PWD}/mpd/mpd.conf" "${HOME}/.config/mpd/mpd.conf"
 	systemctl --user enable mpd.service
+
+audio-cli:
+	sudo pacman -S --needed --noconfirm \
+		mpv \
+		ncmpcpp
+	ln -vsf "${PWD}/ncmpcpp" "${HOME}/.config"
+
+
+audio: audio-srv audio-cli
 
 ranger:
 	sudo pacman -S --needed --noconfirm ranger
@@ -248,6 +255,7 @@ nicotine:
 	rofi \
 	git \
 	nicotine \
+	dropbox \
 
 install: \
 	git \
