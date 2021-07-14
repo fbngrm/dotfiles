@@ -1,10 +1,15 @@
 audio:
 	sudo pacman -S --needed --noconfirm \
 		mpv \
+		mpd \
 		playerctl \
 		pulseaudio \
 		pulseaudio-alsa \
 		pulseaudio-bluetooth
+	mkdir -vp "${HOME}/.config/mpd/playlists"
+	ln -vsf "${PWD}/mpd/playlists" "${HOME}/.config/mpd/playlists"
+	ln -vsf "${PWD}/mpd/.config/mpd.conf" "${HOME}/.config/mpd/mpd.conf"
+	systemctl --user enable mpd.service
 
 ranger:
 	sudo pacman -S --needed --noconfirm ranger

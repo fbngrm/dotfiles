@@ -75,7 +75,7 @@ alias cr='cp -R'
 # alias for long running commands.  Use like so:
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias syncAliases='ln -vsf "${HOME}/work/src/github.com/fgrimme/dotfiles/zsh/aliases.sh" "${HOME}/.bash_aliases"'
-alias vd='nvim "${HOME}/work/src/github.com/fgrimme/dotfiles"'
+alias dot='cd "${HOME}/work/src/github.com/fgrimme/dotfiles"'
 v() {
   nvim ${1:-.}
 }

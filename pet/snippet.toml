@@ -292,3 +292,13 @@
   description = "extract P11Db totals"
   command = "sed -n '/P11Db/,/\\/P11Db/{/P11Db\\|\\/P11Db/d;p}' /tmp/t"
   output = ""
+
+[[snippets]]
+  description = "update pacman dbs"
+  command = "sudo pacman -Syy"
+  output = ""
+
+[[snippets]]
+  description = "check service on port"
+  command = "ss -tunelp | grep 6600"
+  output = ""
