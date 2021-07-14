@@ -257,3 +257,38 @@
   description = "extract links from file"
   command = "cat <file_path> | grep -o 'http[s]\\?:\\/\\/[[:alnum:]\\%\\/_\\#.-]*'"
   output = ""
+
+[[snippets]]
+  description = "diff files"
+  command = "diff -y -a <a> <b> | colordiff"
+  output = ""
+
+[[snippets]]
+  description = "diff tmp files"
+  command = "diff -y -a /tmp/a /tmp/b | colordiff"
+  output = ""
+
+[[snippets]]
+  description = "diff csv"
+  command = "git diff --color-words=. /tmp/a /tmp/b"
+  output = ""
+
+[[snippets]]
+  description = "list webcam settings"
+  command = "v4l2-ctl -l"
+  output = ""
+
+[[snippets]]
+  description = "list webcam resolutions"
+  command = "v4l2-ctl --list-formats-ext"
+  output = ""
+
+[[snippets]]
+  description = "list webcam framesizes for outout format"
+  command = "v4l2-ctl --list-framesizes=YUYV"
+  output = ""
+
+[[snippets]]
+  description = "extract P11Db totals"
+  command = "sed -n '/P11Db/,/\\/P11Db/{/P11Db\\|\\/P11Db/d;p}' /tmp/t"
+  output = ""

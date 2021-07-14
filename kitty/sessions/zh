@@ -1,0 +1,20 @@
+title zh
+
+layout stack
+new_tab zsh
+cd ~/work/src/github.com/fgrimme/zh
+launch zsh
+
+layout stack
+new_tab vim
+cd ~/work/src/github.com/fgrimme/zh
+launch nvim .
+
+layout stack
+new_tab data
+cd ~/work/src/github.com/fgrimme/zh
+launch nvim .
+
+layout stack
+
+
