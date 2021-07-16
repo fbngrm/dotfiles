@@ -9,21 +9,24 @@ source ~/.bash_aliases
 layout stack
 new_tab be
 cd ~/work/src/gitlab.com/pentoapp/pento
-launch nvim .
+launch zsh
+source ~/.bash_aliases
 launch zsh
 source ~/.bash_aliases
 
 layout stack
 new_tab fe
 cd ~/work/src/gitlab.com/pentoapp/pento/client
-launch nvim .
+launch zsh
+source ~/.bash_aliases
 launch zsh
 source ~/.bash_aliases
 
 layout stack
 new_tab notes
 cd ~/work/notes/pento
-launch nvim .
+launch zsh
+source ~/.bash_aliases
 
 layout stack
 
