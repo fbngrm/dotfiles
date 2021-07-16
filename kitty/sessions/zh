@@ -8,13 +8,12 @@ launch zsh
 layout stack
 new_tab vim
 cd ~/work/src/github.com/fgrimme/zh
-launch zsh
+launch zsh -c 'nvim .'
 
 layout stack
 new_tab data
 cd ~/work/src/github.com/fgrimme/zh/
-launch zsh
-ranger .
+launch zsh -c 'ranger .'
 
 layout stack
 

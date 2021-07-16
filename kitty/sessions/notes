@@ -2,7 +2,7 @@ title notes
 
 layout stack
 cd /data/sync/Dropbox/notes
-launch nvim .
+launch zsh -c 'nvim .'
 
 layout stack
 
