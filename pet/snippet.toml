@@ -15,7 +15,7 @@
 
 [[snippets]]
   description = "restore kde bar"
-  command = "rm rm ~/.config/plasma-org.kde.plasma.desktop-appletsrc\\n"
+  command = "rm ~/.config/plasma-org.kde.plasma.desktop-appletsrc"
   output = ""
 
 [[snippets]]
@@ -301,4 +301,19 @@
 [[snippets]]
   description = "check service on port"
   command = "ss -tunelp | grep 6600"
+  output = ""
+
+[[snippets]]
+  description = "remove dangling and ununsed docker images"
+  command = "docker image prune -a"
+  output = ""
+
+[[snippets]]
+  description = "delete ALL dangling docker data (i.e. In order: containers stopped, volumes without containers and images with no containers)"
+  command = "docker system prune"
+  output = ""
+
+[[snippets]]
+  description = "delete ALL dangling docker data (i.e. In order: containers stopped, volumes without containers and images with no containers). Even unused data, with -a option"
+  command = "docker system prune -a"
   output = ""
