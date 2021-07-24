@@ -34,6 +34,7 @@ Plug 'lervag/vimtex'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-obsession'
 Plug 'preservim/tagbar'
+Plug 'vim-scripts/scratch.vim'
 
 Plug 'joshdick/onedark.vim'
 Plug 'arcticicestudio/nord-vim'
@@ -130,8 +131,8 @@ nmap <CR> o<Esc>
 nmap <leader>w yiw<CR>
 
 " save file
-inoremap <c-s> <c-o>:update<CR><ESC>
-noremap <c-s> :update<CR><ESC>
+" inoremap <c-s> <c-o>:update<CR><ESC>
+" noremap <c-s> :update<CR><ESC>
 inoremap <c-q> <c-o>:quit<CR><ESC>
 noremap <c-q> :quit<CR><ESC>
 
@@ -585,7 +586,7 @@ let g:go_list_type = "quickfix"
 " go - map :GoFmt to goimports to auto-import modules
 let g:go_fmt_command = "goimports"
 " autocmd FileType go autocmd BufWritePre <buffer> !gofmt -s -w %
-au BufWritePost *.go !gofmt -s -w %
+au BufWritePost *.go silent! !gofmt -s -w %
 
 let g:go_addtags_transform = "camelcase"
 
@@ -753,3 +754,80 @@ function! CopyMatches(reg)
   execute 'let @'.reg.' = join(hits, "\n") . "\n"'
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
+
+" --------------------------------------------------------------------------------
+" gitgutter
+" --------------------------------------------------------------------------------
+
+" This is like :GitGutterNextHunk but when it gets to the last hunk in the buffer 
+" it cycles around to the first.
+function! GitGutterNextHunkCycle()
+  let line = line('.')
+  silent! GitGutterNextHunk
+  if line('.') == line
+    1
+    GitGutterNextHunk
+  endif
+endfunction
+
+nmap ]h <Plug>(GitGutterNextHunkCycle)
+
+function! NextHunkAllBuffers()
+  let line = line('.')
+  GitGutterNextHunk
+  if line('.') != line
+    return
+  endif
+
+  let bufnr = bufnr('')
+  while 1
+    bnext
+    if bufnr('') == bufnr
+      return
+    endif
+    if !empty(GitGutterGetHunks())
+      1
+      GitGutterNextHunk
+      return
+    endif
+  endwhile
+endfunction
+
+function! PrevHunkAllBuffers()
+  let line = line('.')
+  GitGutterPrevHunk
+  if line('.') != line
+    return
+  endif
+
+  let bufnr = bufnr('')
+  while 1
+    bprevious
+    if bufnr('') == bufnr
+      return
+    endif
+    if !empty(GitGutterGetHunks())
+      normal! G
+      GitGutterPrevHunk
+      return
+    endif
+  endwhile
+endfunction
+
+nmap]H :call NextHunkAllBuffers()<CR>
+nmap[H :call PrevHunkAllBuffers()<CR>
+
+" --------------------------------------------------------------------------------
+" diffs
+" --------------------------------------------------------------------------------
+
+function! DiffLines()
+    let f1=tempname()
+    let f2=tempname()
+
+    exec ".write " . f1
+    exec ".+1write " . f2
+
+    exec "tabedit " . f1
+    exec "vert diffsplit " . f2
+endfunction
