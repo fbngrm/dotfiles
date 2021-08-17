@@ -152,7 +152,7 @@ neovim-pkgs:
 neovim-cfg:
 	ln -vsfn "${PWD}/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
 	ln -vsfn "${PWD}/nvim/snippets" "${HOME}/.config/nvim/UltiSnips"
-	sudo ln -vsf "${PWD}/nvim/editor.sh" "/etc/profile.d/"
+	# sudo ln -vsf "${PWD}/nvim/editor.sh" "/etc/profile.d/"
 
 neovim: neovim-pkgs neovim-cfg
 
