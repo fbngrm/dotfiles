@@ -317,3 +317,18 @@
   description = "delete ALL dangling docker data (i.e. In order: containers stopped, volumes without containers and images with no containers). Even unused data, with -a option"
   command = "docker system prune -a"
   output = ""
+
+[[snippets]]
+  description = "find large files; sort by size"
+  command = "sudo find / -xdev -type f -size +100M -exec ls -la {} \\; | sort -nk 5"
+  output = ""
+
+[[snippets]]
+  description = "find large dirs"
+  command = "sudo du -ahx / | sort -rh | head -20"
+  output = ""
+
+[[snippets]]
+  description = "checkout single file from stash"
+  command = "git checkout stash@{0} --  <filename>"
+  output = ""

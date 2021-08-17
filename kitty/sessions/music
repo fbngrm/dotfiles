@@ -3,7 +3,7 @@ title music
 layout stack
 new_tab ncmpcpp
 cd /data/sync/music
-launch zsh -c ncmpcpp'
+launch zsh -c ncmpcpp
 
 layout stack
 new_tab zsh

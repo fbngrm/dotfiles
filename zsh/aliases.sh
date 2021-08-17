@@ -77,6 +77,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias syncAliases='ln -vsf "${HOME}/work/src/github.com/fgrimme/dotfiles/zsh/aliases.sh" "${HOME}/.bash_aliases"'
 alias dot='cd "${HOME}/work/src/github.com/fgrimme/dotfiles"'
 alias bw='nohup /usr/local/bin/Bitwarden-1.27.1-x86_64.AppImage &'
+alias sc='systemctl'
+alias p='python'
 v() {
   nvim ${1:-.}
 }
