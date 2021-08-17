@@ -38,6 +38,10 @@ Plug 'vim-scripts/scratch.vim'
 
 Plug 'joshdick/onedark.vim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'buoto/gotests-vim'
+
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'MaxMEllon/vim-jsx-pretty'
 
 call plug#end()
 
@@ -58,7 +62,7 @@ set autowrite
 set showcmd
 
 " when using the >> or << commands, shift lines by 4 spaces
-set shiftwidth=4
+set shiftwidth=2
 
 " higlight matching parenthesis
 set showmatch
@@ -116,7 +120,7 @@ set wildmenu
 
 set noshowmode
 
-set signcolumn=yes
+" set signcolumn=yes
 
 set fillchars+=vert:│
 
@@ -199,11 +203,21 @@ set statusline+=%14(%l,%c%V%)               " line, character
 " copy & paste
 " --------------------------------------------------------------------------------
 
+" PRIMARY - This is copy-on-select, and can be pasted with the middle mouse button.
+" CLIPBOARD - This is copied with (usually) ^C, and pasted with ^V (It's like MS Windows).
+" * uses PRIMARY; mnemonic: Star is Select (for copy-on-select)
+" + uses CLIPBOARD; mnemonic: CTRL PLUS C (for the common keybind)
+
+" automatically interface with the system's clipboard
+" set it to unnamed to use * (PRIMARY, on select)
+" set it to unnamedplus to use + (CLIPBOARD, ^C)
+" set clipboard=unnamedplus
+
 " faster clipboard copying/pastig
-nnoremap <leader>y "*y
-nnoremap <leader>Y "+Y
-nnoremap <leader>p "*p
-nnoremap <leader>P "+P
+" nnoremap <leader>y "*y
+nnoremap <leader>y "+y
+" nnoremap <leader>p "*p
+nnoremap <leader>p "+p
 
 " automatically enable paste mode before pasting and disable afterwards. this
 " avoids auto indentation for pasted text
@@ -702,7 +716,7 @@ nmap <silent> <leader>j :CocCommand explorer <CR>
 " Neoformat / prettier
 " --------------------------------------------------------------------------------
 
-" autocmd BufWritePre *.js Neoformat
+autocmd BufWritePre *.js Neoformat
 
 " --------------------------------------------------------------------------------
 " vimtex
@@ -831,3 +845,18 @@ function! DiffLines()
     exec "tabedit " . f1
     exec "vert diffsplit " . f2
 endfunction
+
+" --------------------------------------------------------------------------------
+" gotests
+" --------------------------------------------------------------------------------
+
+" let g:gotests_template_dir = '/home/f/work/src/gitlab.com/pentoapp/pento/server/tmpl/gotests/'
+
+" --------------------------------------------------------------------------------
+" ts
+" --------------------------------------------------------------------------------
+
+autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+nmap <leader>i :CocCommand tsserver.organizeImports<cr>
+
+
