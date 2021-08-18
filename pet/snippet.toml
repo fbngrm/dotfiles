@@ -332,3 +332,8 @@
   description = "checkout single file from stash"
   command = "git checkout stash@{0} --  <filename>"
   output = ""
+
+[[snippets]]
+  description = "list files sorted by size"
+  command = "sudo du -hs /home/* | sort -h"
+  output = ""
