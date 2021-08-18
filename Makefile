@@ -4,8 +4,8 @@ audio-srv:
 		pulseaudio \
 		pulseaudio-alsa \
 		pulseaudio-bluetooth
-	mkdir -vp "${HOME}/.config/mpd/playlists"
-	ln -vsf "${PWD}/mpd" "${HOME}/.config/mpd"
+	ln -vsf "${PWD}/mpd/mpd.conf" "${HOME}/.config/mpd/mpd.conf"
+	ln -vsf "${PWD}/mpd/playlists" "${HOME}/.config/mpd/playlists"
 	systemctl --user enable mpd.service
 
 audio-cli:
