@@ -214,9 +214,9 @@ set statusline+=%14(%l,%c%V%)               " line, character
 " set clipboard=unnamedplus
 
 " faster clipboard copying/pastig
-" nnoremap <leader>y "*y
+nnoremap <leader>Y "*y
 nnoremap <leader>y "+y
-" nnoremap <leader>p "*p
+nnoremap <leader>P "*p
 nnoremap <leader>p "+p
 
 " automatically enable paste mode before pasting and disable afterwards. this
