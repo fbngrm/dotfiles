@@ -240,6 +240,9 @@ git: git-pkg git-cfg
 nicotine:
 	sudo pacman -S --needed --noconfirm nicotine+
 
+rsync:
+	sudo pacman -S  --needed --noconfirm rsync
+
 .PHONY: \
 	zsh \
 	capture \
@@ -255,6 +258,7 @@ nicotine:
 	git \
 	nicotine \
 	dropbox \
+    rsync\
 
 install: \
 	git \
@@ -278,3 +282,4 @@ install: \
 	sway \
 	waybar \
 	nicotine \
+    rsync\
