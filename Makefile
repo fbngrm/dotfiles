@@ -1,3 +1,8 @@
+cron:
+	sudo mkdir -p /etc/cronjobs/
+	sudo ln -vsf "${PWD}/cron/cron.d/sync_music" "/etc/cron.d/sync_music.job"
+	sudo ln -vsf "${PWD}/cron/jobs/sync_music.sh" "/etc/cronjobs/sync_music.sh"
+
 audio-srv:
 	sudo pacman -S --needed --noconfirm \
 		mpd \
@@ -13,7 +18,6 @@ audio-cli:
 		mpv \
 		ncmpcpp
 	ln -vsf "${PWD}/ncmpcpp" "${HOME}/.config"
-
 
 audio: audio-srv audio-cli
 
@@ -45,9 +49,9 @@ capture-pkgs:
 		wl-clipboard \
 
 capture-cfg:
-	sudo ln -sf "${PWD}/capture/screen-capture.sh" /usr/local/bin/dotfiles--screen-capture
-	sudo ln -sf "${PWD}/capture/selection-capture.sh" /usr/local/bin/dotfiles--selection-capture
-	sudo ln -sf "${PWD}/capture/selection-record.sh" /usr/local/bin/dotfiles--selection-record
+	sudo ln -svf "${PWD}/capture/screen-capture.sh" /usr/local/bin/dotfiles--screen-capture
+	sudo ln -svf "${PWD}/capture/selection-capture.sh" /usr/local/bin/dotfiles--selection-capture
+	sudo ln -svf "${PWD}/capture/selection-record.sh" /usr/local/bin/dotfiles--selection-record
 
 capture: capture-pkgs capture-cfg
 
@@ -259,6 +263,7 @@ rsync:
 	nicotine \
 	dropbox \
     rsync\
+	cron\
 
 install: \
 	git \
@@ -283,3 +288,4 @@ install: \
 	waybar \
 	nicotine \
     rsync\
+	cron\

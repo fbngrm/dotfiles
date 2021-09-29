@@ -1,0 +1,4 @@
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+
+# Start job every 1 minute
+* * * * * root /etc/cronjobs/sync_music.sh

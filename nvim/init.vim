@@ -171,11 +171,20 @@ map <leader>es :sp %%
 map <leader>ev :vsp %%
 
 " remap record key to Q
-" nnoremap Q q
+nnoremap Q q
 nnoremap q <Nop>
 
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
+
+" --------------------------------------------------------------------------------
+"  macros
+"  --------------------------------------------------------------------------------
+
+let @c='oI- [ xA '
+let @p='o fmt.Println()h'
+let @f='ofmt.Printf("%",)3ha'
+let @l='"xyiwofor _,"xpxa:=range "xpa{}O'
 
 " --------------------------------------------------------------------------------
 "  status line
@@ -211,13 +220,13 @@ set statusline+=%14(%l,%c%V%)               " line, character
 " automatically interface with the system's clipboard
 " set it to unnamed to use * (PRIMARY, on select)
 " set it to unnamedplus to use + (CLIPBOARD, ^C)
-" set clipboard=unnamedplus
+set clipboard=unnamedplus
 
 " faster clipboard copying/pastig
-nnoremap <leader>Y "*y
 nnoremap <leader>y "+y
 nnoremap <leader>P "*p
-nnoremap <leader>p "+p
+" nnoremap <leader>Y "*y
+" nnoremap <leader>p "+p
 
 " automatically enable paste mode before pasting and disable afterwards. this
 " avoids auto indentation for pasted text
@@ -309,27 +318,14 @@ set guifont=Consolas:h11:cANSI
 " --------------------------------------------------------------------------------
 
 " in insert or command mode, move normally by using ctrl
-"inoremap <C-h> <Left>
-"inoremap <C-j> <Down>
-"inoremap <C-k> <Up>
-"inoremap <C-l> <Right>
-"cnoremap <C-h> <Left>
-"cnoremap <C-j> <Down>
-"cnoremap <C-k> <Up>
-"cnoremap <C-l> <Right>
-
-" move lines up and down with Alt+j/k
-nnoremap ê :m .+1<CR>==
-inoremap ê <Esc>:m .+1<CR>==gi
-inoremap ë <Esc>:m .-2<CR>==gi
-vnoremap ê :m '>+1<CR>gv=gv
-vnoremap ë :m '<-2<CR>gv=gv
-nnoremap ë :m .-2<CR>==
-
-" nnoremap fj :m .+1<CR>==
-" nnoremap fk :m .-2<CR>==
-" inoremap fj <Esc>:m .+1<CR>==gi
-" inoremap fk <Esc>:m .-2<CR>==gi
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+cnoremap <C-h> <Left>
+cnoremap <C-j> <Down>
+cnoremap <C-k> <Up>
+cnoremap <C-l> <Right>
 
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
@@ -352,7 +348,7 @@ map bd :bd<cr>
 " --------------------------------------------------------------------------------
 
 " make the Alt key working; requires modifier to be set to Alt in .Xresources to
-" make urxvt send alt as Esc to vim
+" make uralt send alt as Esc to vim
 nnoremap <silent> <Esc-h> <C-w><
 nnoremap <silent> <A-h> <C-w><
 nnoremap <silent> <A-k> <C-w>-
@@ -374,7 +370,7 @@ if $TERM == 'rxvt-unicode'&&!has('gui_running')
   execute 'nnoremap <silent>'.Altmap('l').'<C-w>>'
 endif
 
-" <F2> cursorcolumn
+" <Fa> cursor column
 if version >= 703
   if exists('+colorcolumn')
     highlight ColorColumn ctermbg=DarkGray
@@ -383,11 +379,25 @@ if version >= 703
   endif
 endif
 
-" <F9> explore
+" <Fa> explore
 nnoremap <F9> :Explore . <cr>
 
-" <F5> spell check toggle
-map <F5> :setlocal spell! spelllang=en_us<CR>
+
+" --------------------------------------------------------------------------------
+"  spell checking
+" --------------------------------------------------------------------------------
+
+" <Fa> spell check toggle
+map <F5> :setlocal spell! spelllang=en_gb,de_de<CR>
+
+" limit spelling suggestions
+set spellsuggest+=10
+
+" use first spelling suggestion <c-v> l
+nmap zs 1z=
+nmap zn ]s
+nmap zb [s
+imap <C-z><C-s> <Esc>[s1z=`]a
 
 " --------------------------------------------------------------------------------
 "  helper functions
@@ -415,14 +425,14 @@ function! AutoHighlightToggle()
   endif
 endfunction
 
-" format xml
+" format XML
 function! DoPrettyXML()
-  " save the filetype so we can restore it later
+  " save the file type so we can restore it later
   let l:origft = &ft
   set ft=
-  " delete the xml header if it exists. This will
+  " delete the XML header if it exists. This will
   " permit us to surround the document with fake tags
-  " without creating invalid xml.
+  " without creating invalid XML.
   1s/<?xml .*?>//e
   " insert fake tags around the entire document.
   " This will permit us to pretty-format excerpts of
@@ -430,7 +440,7 @@ function! DoPrettyXML()
   0put ='<PrettyXML>'
   $put ='</PrettyXML>'
   silent %!xmllint --format -
-  " xmllint will insert an <?xml?> header. it's easy enough to delete
+  " XML lint will insert an <?xml?> header. it's easy enough to delete
   " if you don't want it.
   " delete the fake tags
   2d

@@ -33,7 +33,7 @@ mpd_port = 6600
 ##
 mpd_music_dir = /data/sync/music
 #
-#mpd_crossfade_time = 5
+# mpd_crossfade_time = 2
 #
 # Exclude pattern for random song action
 # http://www.boost.org/doc/libs/1_46_1/libs/regex/doc/html/boost_regex/syntax/perl_syntax.html
@@ -73,7 +73,6 @@ visualizer_data_source = "/tmp/mpd.fifo"
 visualizer_output_name = "my_fifo"
 visualizer_in_stereo = "yes"
 visualizer_type = "spectrum" # spectrum/ellipse/wave_filled analyzer/wave
-visualizer_look = "+|"
 #
 ##
 ## Note: Below parameter is needed for ncmpcpp to determine which output
@@ -109,12 +108,13 @@ visualizer_look = "+|"
 #visualizer_autoscale = no
 #
 #visualizer_look = ●▮
+visualizer_look = "--"
 #
-#visualizer_color = blue, cyan, green, yellow, magenta, red
+visualizer_color = red
 #
 ## Alternative subset of 256 colors for terminals that support it.
 ##
-#visualizer_color = 47, 83, 119, 155, 191, 227, 221, 215, 209, 203, 197, 161
+# visualizer_color = 47, 83, 119, 155, 191, 227, 221, 215, 209, 203, 197, 161
 #
 ##
 ## Note: The next few visualization options apply to the spectrum visualizer.
@@ -315,8 +315,11 @@ visualizer_look = "+|"
 ##   available.
 ##
 #
-#song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{l}
-#
+# song_columns_list_format = (20)[]{a} (6f)[white]{NE} (50)[green]{t|f:Title} (20)[cyan]{b} (7f)[red]{lr}
+# song_columns_list_format = (20)[]{a} (6f)[90]{NE} (50)[green]{t|f:Title} (20)[cyan]{b} (7f)[red]{lr}
+# song_columns_list_format = (20)[red]{a} (6f)[red]{NE} (50)[red]{t|f:Title} (20)[red]{b} (7f)[red]{lr}
+song_columns_list_format = (20)[yellow]{a} (6f)[yellow]{NE} (50)[yellow]{t|f:Title} (20)[yellow]{b} (7f)[yellow]{lr}
+# 
 ##### various settings #####
 #
 ##
@@ -396,18 +399,18 @@ visualizer_look = "+|"
 #
 #default_tag_editor_pattern = %n - %t
 #
-#header_visibility = yes
+header_visibility = no
 #
 #statusbar_visibility = yes
 #
 ## Show the "Connected to ..." message on startup
 #connected_message_on_startup = yes
 #
-#titles_visibility = yes
+titles_visibility = yes
 #
 #header_text_scrolling = yes
 #
-#cyclic_scrolling = no
+cyclic_scrolling = yes
 #
 #lyrics_fetchers = azlyrics, genius, musixmatch, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg, internet
 #
@@ -475,7 +478,7 @@ visualizer_look = "+|"
 #
 #display_volume_level = yes
 #
-#display_bitrate = no
+display_bitrate = yes
 #
 #display_remaining_time = no
 #
@@ -487,7 +490,7 @@ visualizer_look = "+|"
 ## Note: if below is enabled, ncmpcpp will ignore leading "The" word while
 ## sorting items in browser, tags in media library, etc.
 ##
-#ignore_leading_the = no
+ignore_leading_the = yes
 #
 ##
 ## Note: if below is enabled, ncmpcpp will ignore diacritics while searching and
@@ -504,7 +507,7 @@ visualizer_look = "+|"
 #
 #lines_scrolled = 5
 #
-#empty_tag_marker = <empty>
+empty_tag_marker = 
 #
 #tags_separator = " | "
 #
@@ -584,11 +587,11 @@ visualizer_look = "+|"
 #
 #color2 = green
 #
-#progressbar_color = black:b
+progressbar_color = 236
 #
-#progressbar_elapsed_color = green:b
+progressbar_elapsed_color = green:b
 #
-#statusbar_color = default
+statusbar_color = red
 #
 #statusbar_time_color = default:b
 #

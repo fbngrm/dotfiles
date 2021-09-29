@@ -337,3 +337,13 @@
   description = "list files sorted by size"
   command = "sudo du -hs /home/* | sort -h"
   output = ""
+
+[[snippets]]
+  description = "reload plasma panel"
+  command = "kquitapp5 plasmashell || killall plasmashell && kstart5 plasmashell"
+  output = ""
+
+[[snippets]]
+  description = "reset file to master"
+  command = "git checkout origin/master -- <filename>"
+  output = ""
