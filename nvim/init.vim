@@ -1,3 +1,4 @@
+
 " --------------------------------------------------------------------------------
 " plugins
 " --------------------------------------------------------------------------------
@@ -42,6 +43,12 @@ Plug 'buoto/gotests-vim'
 
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-github.nvim'
+
 
 call plug#end()
 
@@ -183,8 +190,13 @@ noremap Zo <c-w>=
 
 let @c='oI- [ xA '
 let @p='o fmt.Println()h'
-let @f='ofmt.Printf("%",)3ha'
+let @f='ofmt.Printf("%+v\n",)ha'
 let @l='"xyiwofor _,"xpxa:=range "xpa{}O'
+let @s='"xyiwospew.Dump()b"xp'
+let @d='i=strftime("%d.%m.%y")'
+nmap <F3> i<C-R>=strftime("%d.%m.%y")<CR><Esc>
+imap <F3> <C-R>=strftime("%d.%m.%y")<CR>
+
 
 " --------------------------------------------------------------------------------
 "  status line
@@ -869,4 +881,12 @@ endfunction
 autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 nmap <leader>i :CocCommand tsserver.organizeImports<cr>
 
+" --------------------------------------------------------------------------------
+" telescope
+" --------------------------------------------------------------------------------
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
