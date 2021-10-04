@@ -192,7 +192,7 @@ let @c='oI- [ xA '
 let @p='o fmt.Println()h'
 let @f='ofmt.Printf("%+v\n",)ha'
 let @l='"xyiwofor _,"xpxa:=range "xpa{}O'
-let @s='"xyiwospew.Dump()b"xp'
+let @s='"xyiwospew.Dump()i""xpospew.Dump()b"xp'
 let @d='i=strftime("%d.%m.%y")'
 nmap <F3> i<C-R>=strftime("%d.%m.%y")<CR><Esc>
 imap <F3> <C-R>=strftime("%d.%m.%y")<CR>
