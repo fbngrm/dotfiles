@@ -347,3 +347,18 @@
   description = "reset file to master"
   command = "git checkout origin/master -- <filename>"
   output = ""
+
+[[snippets]]
+  description = "show diff in branch commits"
+  command = "git diff --name-only <branch2> $(git merge-base <branch2> <branch1>)"
+  output = ""
+
+[[snippets]]
+  description = "open diff of all files modified in current branch in nvim"
+  command = "git diff --name-only <branch2> $(git merge-base <branch2> <branch1> ) > /tmp/diff && nvim $(cat /tmp/diff)"
+  output = ""
+
+[[snippets]]
+  description = "search and open results in vim"
+  command = "rg <search-term> **/*.phrases.ts -l -i > /tmp/rg && nvim $(cat /tmp/rg)"
+  output = ""

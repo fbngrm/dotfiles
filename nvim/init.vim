@@ -5,18 +5,23 @@
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'fatih/vim-go'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'maxbrunsfeld/vim-yankstack'
-Plug 'bronson/vim-trailing-whitespace'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-commentary'
-Plug 'easymotion/vim-easymotion'
-Plug 'Townk/vim-autoclose'
+Plug 'tpope/vim-obsession'
+
+Plug 'christoomey/vim-tmux-navigator'
+
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
+Plug 'easymotion/vim-easymotion'
+Plug 'fatih/vim-go'
+Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'Townk/vim-autoclose'
 Plug 'SirVer/ultisnips'
 " Plug 'vim-syntastic/syntastic'
 Plug 'sheerun/vim-polyglot'
@@ -30,15 +35,13 @@ Plug 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'sbdchd/neoformat'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'lervag/vimtex'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-obsession'
 Plug 'preservim/tagbar'
 Plug 'vim-scripts/scratch.vim'
+Plug 'AndrewRadev/splitjoin.vim'
 
 Plug 'joshdick/onedark.vim'
-Plug 'arcticicestudio/nord-vim'
 Plug 'buoto/gotests-vim'
 
 Plug 'HerringtonDarkholme/yats.vim'
@@ -48,6 +51,10 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-github.nvim'
+
+Plug 'pwntester/octo.nvim', {'do': 'octo.setup()'}
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 
 call plug#end()
@@ -184,6 +191,9 @@ nnoremap q <Nop>
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 
+" remove the split line
+set fillchars+=vert:\ 
+
 " --------------------------------------------------------------------------------
 "  macros
 "  --------------------------------------------------------------------------------
@@ -193,7 +203,8 @@ let @p='o fmt.Println()h'
 let @f='ofmt.Printf("%+v\n",)ha'
 let @l='"xyiwofor _,"xpxa:=range "xpa{}O'
 let @s='"xyiwospew.Dump()i""xpa"ospew.Dump()b"xp'
-let @d='i=strftime("%d.%m.%y")'
+let @d='"xyiwo=strftime("%d.%m.%Y")a;"xpa;'
+
 nmap <F3> i<C-R>=strftime("%d.%m.%y")<CR><Esc>
 imap <F3> <C-R>=strftime("%d.%m.%y")<CR>
 
@@ -381,7 +392,7 @@ if $TERM == 'rxvt-unicode'&&!has('gui_running')
   execute 'nnoremap <silent>'.Altmap('l').'<C-w>>'
 endif
 
-" <Fa> cursor column
+" <F2> cursor column
 if version >= 703
   if exists('+colorcolumn')
     highlight ColorColumn ctermbg=DarkGray
@@ -390,8 +401,11 @@ if version >= 703
   endif
 endif
 
-" <Fa> explore
+" <F9> explore
 nnoremap <F9> :Explore . <cr>
+
+" <F4> explore
+nnoremap <expr> <f4> &foldlevel ? 'zM' :'zR'
 
 
 " --------------------------------------------------------------------------------
@@ -764,13 +778,13 @@ nnoremap <leader>xc :VimtexCompile<CR>
 " onedark color theme
 " --------------------------------------------------------------------------------
 
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_TRUE_COLOR=0
 let g:onedark_terminal_italics=0
 syntax on
 colorscheme onedark
 
 " Override color scheme to make split the same color as tmux's default
-autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=NONE ctermbg=NONE
+" autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=NONE ctermbg=NONE
 
 " --------------------------------------------------------------------------------
 " tagbar

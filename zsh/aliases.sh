@@ -41,6 +41,7 @@ alias tf='/opt/terraform'
 alias d='docker '
 alias dc='docker-compose '
 alias dcd='docker-compose down'
+alias dcdv='docker-compose down && docker volume rm pento_pgdata'
 alias dcu='docker-compose up'
 alias ddc='docker rm $(docker ps -a -q)' # Delete all containers
 alias ddi='docker rmi $(docker images -q)' # Delete all images
