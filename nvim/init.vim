@@ -778,10 +778,17 @@ nnoremap <leader>xc :VimtexCompile<CR>
 " onedark color theme
 " --------------------------------------------------------------------------------
 
-let $NVIM_TUI_ENABLE_TRUE_COLOR=0
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:onedark_terminal_italics=0
 syntax on
 colorscheme onedark
+"
+" syntax on
+" set termguicolors
+" colorscheme base16-github
+" set termguicolors
+" let base16colorspace=256  " Access colors present in 256 colorspace
+
 
 " Override color scheme to make split the same color as tmux's default
 " autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=NONE ctermbg=NONE
@@ -819,7 +826,17 @@ function! GitGutterNextHunkCycle()
   endif
 endfunction
 
-nmap ]h <Plug>(GitGutterNextHunkCycle)
+function! GitGutterPrevHunkCycle()
+  let line = line('.')
+  silent! GitGutterPrevHunk
+  if line('.') == line
+    1
+    GitGutterPrevHunk
+  endif
+endfunction
+
+nmap <leader>hn :call GitGutterNextHunkCycle()<CR>
+nmap <leader>hm :call GitGutterPrevHunkCycle()<CR>
 
 function! NextHunkAllBuffers()
   let line = line('.')
