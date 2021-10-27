@@ -815,7 +815,7 @@ command! -register CopyMatches call CopyMatches(<q-reg>)
 " gitgutter
 " --------------------------------------------------------------------------------
 
-" This is like :GitGutterNextHunk but when it gets to the last hunk in the buffer 
+" This is like :GitGutterNextHunk but when it gets to the last hunk in the buffer
 " it cycles around to the first.
 function! GitGutterNextHunkCycle()
   let line = line('.')
@@ -880,8 +880,8 @@ function! PrevHunkAllBuffers()
   endwhile
 endfunction
 
-nmap]H :call NextHunkAllBuffers()<CR>
-nmap[H :call PrevHunkAllBuffers()<CR>
+nmap <leader>hN :call NextHunkAllBuffers()<CR>
+nmap <leader>hM :call PrevHunkAllBuffers()<CR>
 
 " --------------------------------------------------------------------------------
 " diffs
