@@ -376,9 +376,11 @@ nnoremap <silent> <A-h> <C-w><
 nnoremap <silent> <A-k> <C-w>-
 nnoremap <silent> <A-j> <C-w>+
 nnoremap <silent> <A-l> <C-w>>
+
 function! Altmap(char)
   if has('gui_running') | return ' <A-'.a:char.'> ' | else | return ' <Esc>'.a:char.' '|endif
 endfunction
+
 if $TERM == 'rxvt-unicode'&&!has('gui_running')
   set ttimeoutlen=10
   augroup FastEscape
@@ -412,7 +414,7 @@ nnoremap <expr> <f4> &foldlevel ? 'zM' :'zR'
 "  spell checking
 " --------------------------------------------------------------------------------
 
-" <Fa> spell check toggle
+" <F5> spell check toggle
 map <F5> :setlocal spell! spelllang=en_gb,de_de<CR>
 
 " limit spelling suggestions
