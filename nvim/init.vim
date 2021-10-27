@@ -53,8 +53,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-github.nvim'
 
 Plug 'pwntester/octo.nvim', {'do': 'octo.setup()'}
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'ryanoasis/vim-devicons'
 
 
 call plug#end()
