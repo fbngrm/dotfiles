@@ -164,8 +164,8 @@ let maplocalleader = " "
 " inoremap <C-BS> <C-w>
 
 " toggle linenumbers
-noremap <c-a> :set invnumber<CR>
-inoremap <c-a> :set invnumber<CR>
+noremap <c-s> :set invnumber<CR>
+inoremap <c-s> :set invnumber<CR>
 
 " use spell-checking and column-width for git commits
 autocmd Filetype gitcommit setlocal spell textwidth=72
