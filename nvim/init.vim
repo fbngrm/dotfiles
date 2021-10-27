@@ -159,16 +159,17 @@ let mapleader = ";"
 let maplocalleader = " "
 
 " make backspace delete in normal mode
-nnoremap <BS> <BS>x
-xnoremap <BS> x
-inoremap <C-BS> <C-w>
+" nnoremap <BS> <BS>x
+" xnoremap <BS> x
+" inoremap <C-BS> <C-w>
 
 " toggle linenumbers
-noremap <c-w> :set invnumber<CR>
-inoremap <c-w> :set invnumber<CR>
+noremap <c-a> :set invnumber<CR>
+inoremap <c-a> :set invnumber<CR>
 
 " use spell-checking and column-width for git commits
 autocmd Filetype gitcommit setlocal spell textwidth=72
+autocmd Filetype *.md setlocal spell textwidth=72
 
 " activates filetype detection
 filetype plugin indent on
@@ -180,9 +181,6 @@ endfor
 
 " edit files in the currently jopened files directory
 " cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
-map <leader>e :e %%
-map <leader>es :sp %%
-map <leader>ev :vsp %%
 
 " remap record key to Q
 nnoremap Q q
@@ -192,7 +190,7 @@ noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 
 " remove the split line
-set fillchars+=vert:\ 
+" set fillchars+=vert:\ 
 
 " --------------------------------------------------------------------------------
 "  macros
@@ -332,8 +330,8 @@ set fileencodings=
 " --------------------------------------------------------------------------------
 
 " fonts, see http://vimdoc.sourceforge.net/htmldoc/options.html#%27guifontwide%27
-set guifontwide=MingLiU:h10
-set guifont=Consolas:h11:cANSI
+" set guifontwNde=MingLiU:h10
+" set guifont=Consolas:h11:cANSI
 
 " --------------------------------------------------------------------------------
 " navigation
@@ -353,7 +351,7 @@ vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " map the Esc key to jj
-imap jj <Esc>
+" imap jj <Esc>
 
 " jump between errors in quickfix window
 map <C-n> :cnext<CR>
@@ -481,6 +479,21 @@ function! DoPrettyXML()
   exe "set ft=" . l:origft
 endfunction
 command! PrettyXML call DoPrettyXML()
+
+" --------------------------------------------------------------------------------
+" fugitive
+" --------------------------------------------------------------------------------
+
+" silent git commands
+function! s:ftplugin_fugitive() abort
+  nnoremap <buffer> <silent> cc :Git commit --quiet<CR>
+  nnoremap <buffer> <silent> ca :Git commit --quiet --amend<CR>
+  nnoremap <buffer> <silent> ce :Git commit --quiet --amend --no-edit<CR>
+endfunction
+augroup grm_fugitive
+  autocmd!
+  autocmd FileType fugitive call s:ftplugin_fugitive()
+augroup END
 
 " --------------------------------------------------------------------------------
 " markdown
@@ -789,7 +802,7 @@ colorscheme onedark
 " set termguicolors
 " colorscheme base16-github
 " set termguicolors
-" let base16colorspace=256  " Access colors present in 256 colorspace
+let base16colorspace=256  " Access colors present in 256 colorspace
 
 
 " Override color scheme to make split the same color as tmux's default
@@ -800,10 +813,6 @@ colorscheme onedark
 " --------------------------------------------------------------------------------
 
 nmap <F8> :TagbarToggle<CR>
-
-" --------------------------------------------------------------------------------
-" tagbar
-" --------------------------------------------------------------------------------
 
 function! CopyMatches(reg)
   let hits = []
