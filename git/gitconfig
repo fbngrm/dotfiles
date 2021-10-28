@@ -1,6 +1,6 @@
 [user]
-	email = fabian@pento.io
-	name = Fabian
+	email = fbngrm@gmail.com
+	name = fabian
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [diff]
@@ -10,8 +10,7 @@
 [alias]
 	go = log --graph --all --decorate --oneline
 	root = rev-parse --show-toplevel
-[includeIf "gitdir:~/work/src/gitlab.com/pentoapp/pento/"]
-    path = ~/.gitconfig_work
+; [includeIf "gitdir:~/work/src/gitlab.com/pentoapp/pento/"]
+;     path = ~/.gitconfig_work
 [credential "https://github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
