@@ -318,8 +318,16 @@ visualizer_color = red
 # song_columns_list_format = (20)[]{a} (6f)[white]{NE} (50)[green]{t|f:Title} (20)[cyan]{b} (7f)[red]{lr}
 # song_columns_list_format = (20)[]{a} (6f)[90]{NE} (50)[green]{t|f:Title} (20)[cyan]{b} (7f)[red]{lr}
 # song_columns_list_format = (20)[red]{a} (6f)[red]{NE} (50)[red]{t|f:Title} (20)[red]{b} (7f)[red]{lr}
-song_columns_list_format = (20)[yellow]{a} (6f)[yellow]{NE} (50)[yellow]{t|f:Title} (20)[yellow]{b} (7f)[yellow]{lr}
-# 
+# song_columns_list_format = (20)[yellow]{a} (6f)[yellow]{NE} (50)[yellow]{t|f:Title} (20)[yellow]{b} (7f)[yellow]{lr}
+
+playlist_display_mode = "columns"
+# song_list_format = "$(magenta)%t $R$(blue)%a $(magenta)%l "
+# now_playing_prefix = "$b$(blue)> "
+# now_playing_suffix = "$/b$(end)"
+now_playing_prefix = $b$(red)
+now_playing_suffix = $/r$/b$(end)
+song_list_format = "> $2%a$(end) $(245)-$9 $(white)%t$9 $R{ ($4%y$9)}$(white)%l $(end)"
+
 ##### various settings #####
 #
 ##

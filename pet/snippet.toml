@@ -362,3 +362,23 @@
   description = "search and open results in vim"
   command = "rg <search-term> **/*.phrases.ts -l -i > /tmp/rg && nvim $(cat /tmp/rg)"
   output = ""
+
+[[snippets]]
+  description = "list partitions / drives"
+  command = "lsblk"
+  output = ""
+
+[[snippets]]
+  description = "list disks"
+  command = "sudo fdisk -l"
+  output = ""
+
+[[snippets]]
+  description = "how long does dd take"
+  command = "kill -USR1 <pid>; sleep 1;kill <pid>"
+  output = ""
+
+[[snippets]]
+  description = "list devices / usb drives"
+  command = "lsblk"
+  output = ""
