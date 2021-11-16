@@ -22,7 +22,7 @@ Plug 'fatih/vim-go'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'Townk/vim-autoclose'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 " Plug 'vim-syntastic/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'nazo/pt.vim'
@@ -509,9 +509,9 @@ au BufRead,BufNewFile *.md set filetype=markdown
 "  --------------------------------------------------------------------------------
 
 " do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<a-n>"
-let g:UltiSnipsJumpForwardTrigger="<a-m>"
-let g:UltiSnipsJumpBackwardTrigger="<a-b>"
+" let g:UltiSnipsExpandTrigger="<a-n>"
+" let g:UltiSnipsJumpForwardTrigger="<a-m>"
+" let g:UltiSnipsJumpBackwardTrigger="<a-b>"
 
 " --------------------------------------------------------------------------------
 "  yankstack
