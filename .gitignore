@@ -1,2 +1,3 @@
 *.log
 ncmpcpp/lyrics/
+node_modules/

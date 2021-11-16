@@ -68,7 +68,6 @@ alias dcb='docker-compose run web bash'
 alias gg='git log --graph --all --decorate --oneline'
 alias tt='tmux attach -t base || tmux new -s base'
 alias ww='cd ~/work/src/github.com/fgrimme'
-alias vt='nvim /tmp/t'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -76,7 +75,7 @@ alias cr='cp -R'
 # alias for long running commands.  Use like so:
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias syncAliases='ln -vsf "${HOME}/work/src/github.com/fgrimme/dotfiles/zsh/aliases.sh" "${HOME}/.bash_aliases"'
-alias dot='cd "${HOME}/work/src/github.com/fgrimme/dotfiles"'
+alias dot='cd "${HOME}/work/src/github.com/dotfiles"'
 alias bwu='nohup /usr/local/bin/Bitwarden-1.27.1-x86_64.AppImage &'
 alias sc='systemctl'
 alias p='python'
@@ -84,6 +83,9 @@ alias nv='nordvpn'
 alias nvd='nordvpn set killswitch off && nordvpn d'
 alias nvc='nordvpn set killswitch on && nordvpn c belgium'
 alias ncp='ncmpcpp'
+alias yn="/usr/bin/yarnpkg"
+alias vd="pulsemixer --change-volume=-10 --id=sink-3"
+alias vu="pulsemixer --change-volume=+10 --id=sink-3"
 v() {
   nvim ${1:-.}
 }

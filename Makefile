@@ -80,7 +80,7 @@ dunst-pkgs:
 dunst-cfg:
 	mkdir -vp "${HOME}/.config/dunst"
 	ln -vsf "${PWD}/dunst/config.cfg" "${HOME}/.config/dunst/dunstrc"
-	sudo ln -vsf "${PWD}/dunst/notification.sh" /usr/local/bin/dotfiles--notification-play-sound
+	# sudo ln -vsf "${PWD}/dunst/notification.sh" /usr/local/bin/dotfiles--notification-play-sound
 
 dunst-srv:
 	mkdir -vp "${HOME}/.config/systemd/user"
