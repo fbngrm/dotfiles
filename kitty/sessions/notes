@@ -1,9 +1,5 @@
 title notes
 
 layout stack
-cd /data/sync/Dropbox/notes
-launch zsh -c 'nvim .'
-
-layout stack
-
-
+cd /home/fabian/Dropbox/notes
+launch zsh

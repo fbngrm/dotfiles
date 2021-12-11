@@ -2,27 +2,27 @@ title pento
 
 layout stack
 new_tab sh
-cd ~/work/src/github.com/PentoHQ/Pento
+cd ~/work/src/github.com/pentohq/Pento
 launch zsh
 
 layout stack
 new_tab be
-cd ~/work/src/github.com/PentoHQ/Pento
+cd ~/work/src/github.com/pentohq/Pento
 launch zsh -c 'nvim .'
 
 layout stack
 new_tab fe
-cd ~/work/src/github.com/PentoHQ/Pento/client
+cd ~/work/src/github.com/pentohq/Pento/client
 launch zsh -c 'nvim .'
 
 layout stack
 new_tab srv be
-cd ~/work/src/github.com/PentoHQ/Pento
+cd ~/work/src/github.com/pentohq/Pento
 launch zsh
 
 layout stack
 new_tab srv fe
-cd ~/work/src/github.com/PentoHQ/Pento/client
+cd ~/work/src/github.com/pentohq/Pento/client
 launch zsh
 
 layout stack

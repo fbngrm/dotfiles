@@ -382,3 +382,8 @@
   description = "list devices / usb drives"
   command = "lsblk"
   output = ""
+
+[[snippets]]
+  description = "move i3 workspace"
+  command = "i3-msg move workspace to output left"
+  output = ""

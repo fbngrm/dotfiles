@@ -57,6 +57,7 @@ Plug 'nvim-telescope/telescope-github.nvim'
 Plug 'pwntester/octo.nvim', {'do': 'octo.setup()'}
 Plug 'kyazdani42/nvim-web-devicons'
 " Plug 'ryanoasis/vim-devicons'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 
 call plug#end()
@@ -242,7 +243,7 @@ set statusline+=%14(%l,%c%V%)               " line, character
 " automatically interface with the system's clipboard
 " set it to unnamed to use * (PRIMARY, on select)
 " set it to unnamedplus to use + (CLIPBOARD, ^C)
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 
 " faster clipboard copying/pastig
 nnoremap <leader>y "+y
@@ -518,12 +519,15 @@ au BufRead,BufNewFile *.md set filetype=markdown
 "  --------------------------------------------------------------------------------
 
 " Alt p and Alt P
+" nmap <leader>p <Plug>yankstack_substitute_older_paste
+" nmap <leader>P <Plug>yankstack_substitute_newer_paste
+" Map yankstack to Alt p and Alt P
 nmap <Esc>p <Plug>yankstack_substitute_older_paste
 nmap <Esc>P <Plug>yankstack_substitute_newer_paste
 
 " delete to the black hole register
-nnoremap <leader>d "_d
-xnoremap <leader>d "_d
+nnoremap d "_d
+vnoremap d "_d
 
 " --------------------------------------------------------------------------------
 " nerdtree
@@ -544,27 +548,27 @@ xnoremap <leader>d "_d
 " --------------------------------------------------------------------------------
 
 " change default mapping
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ar'
-"set runtimepath^=~/.vim/bundle/ctrlp.vim
+"let g:ctrlp_map = '<c-p>'
+"let g:ctrlp_cmd = 'CtrlP'
+"let g:ctrlp_working_path_mode = 'ar'
+""set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-" ignore files in .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+"" ignore files in .gitignore
+"let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-" search word under the cursor
-nn <leader>d :let g:ctrlp_default_input = expand('<cword>')<cr>
-map <leader>k :let g:ctrlp_default_input = 0<cr>:CtrlP<cr>
+"" search word under the cursor
+"nn <leader>d :let g:ctrlp_default_input = expand('<cword>')<cr>
+"map <leader>k :let g:ctrlp_default_input = 0<cr>:CtrlP<cr>
 
-" exclude files and directories using Vim's wildignore
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*tags   " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+"" exclude files and directories using Vim's wildignore
+"set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*tags   " MacOSX/Linux
+"set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
+"let g:ctrlp_custom_ignore = {
+"  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"  \ 'file': '\v\.(exe|so|dll)$',
+"  \ 'link': 'some_bad_symbolic_links',
+"  \ }
 
 " --------------------------------------------------------------------------------
 " syntastic
