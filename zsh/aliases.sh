@@ -1,3 +1,5 @@
+alias kkd="kitty +kitten diff"
+alias kkg="git difftool --no-symlinks --dir-diff"
 alias g='gs'
 alias gl='git log'
 alias gd='git diff '
@@ -13,6 +15,9 @@ alias s='git stash'
 alias sa='git stash apply'
 alias gcp='git cherry-pick '
 alias fp='git push --force origin'
+alias gmm='git fetch origin master:master; git merge master'
+alias grm='git fetch origin master:master; git rebase master'
+alias gbc='git branch --show-current '
 alias k='kubectl'
 alias ked='kubectl edit deployment'
 alias kes='kubectl edit service'
@@ -49,24 +54,22 @@ alias dds='docker stop $(docker ps -aq)' # Stop all containers
 alias f='fg'
 alias slsk='nohup /usr/bin/slsk &>/dev/null &'
 alias dl="nohup dolphin .  &>/dev/null &"
-alias lock='xscreensaver-command -lock  &>/dev/null'
+alias lock='xscreensaver &; xscreensaver-command -lock  &>/dev/null'
 alias down='sudo shutdown -h now'
-alias cw='cd ~/work/src/github.com/'
-alias av='cw && cd pentohq/Pento && nvim .'
-alias aa='cw && cd pentohq/Pento'
+alias pp='cd ~/work/src/github.com/pentohq/Pento'
+alias pv='cd ~/work/src/github.com/pentohq/Pento && nvim .'
 alias fm='gofmt -s -w'
-alias nn='cd /data/sync/Dropbox/notes && nvim .'
 alias le='npm run lint-eslint $(git diff --name-only | grep '.js' | xargs)'
 alias lp='npm run lint-prettier $(git diff --name-only | grep '.js' | xargs)'
 alias lf='npm run lint-flow $(git diff --name-only | grep '.js' | xargs)'
 alias gg='go generate'
 alias gmv='go mod vendor'
 alias dark='xrdb -merge ~/work/src/github.com/fgrimme/dotfiles/.grayscale.dark.Xresources && exit -f'
+alias dct='docker-compose --profile tracing up'
 alias dcp='docker-compose --profile seed-db-with-uk-production up'
-alias ns='aa && cd client && yarn start'
+alias ys='pp && cd client && yarn start'
 alias dcb='docker-compose run web bash'
 alias gg='git log --graph --all --decorate --oneline'
-alias tt='tmux attach -t base || tmux new -s base'
 alias ww='cd ~/work/src/github.com/fgrimme'
 alias ll='ls -alF'
 alias la='ls -A'
@@ -84,11 +87,19 @@ alias nvd='nordvpn set killswitch off && nordvpn d'
 alias nvc='nordvpn set killswitch on && nordvpn c belgium'
 alias ncp='ncmpcpp'
 alias yn="/usr/bin/yarnpkg"
-alias vd="pulsemixer --change-volume=-10 --id=sink-3"
-alias vu="pulsemixer --change-volume=+10 --id=sink-3"
-v() {
-  nvim ${1:-.}
-}
+alias vd="pulsemixer --change-volume=-10 --id=sink-48"
+alias vu="pulsemixer --change-volume=+10 --id=sink-48"
+alias x='cd ~/Dropbox/notes && nvim .'
+alias ba='nvim ~/.bash_aliases'
+alias sba='source ~/.bash_aliases'
+alias xoff='xrandr --output DP3 --off'
+alias xr='i3-msg move workspace to output right'
+alias xl='i3-msg move workspace to output left'
+alias v='nvim'
+alias kd='today=`date +%d.%m.%Y`;for file in ~/Dropbox/notes/kieser/*.txt; do echo $today";" >> "$file"; done'
+# v() {
+#   nvim ${1:-.}
+# }
 r() {
   ranger ${1:-.}
 }

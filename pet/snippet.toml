@@ -387,3 +387,53 @@
   description = "move i3 workspace"
   command = "i3-msg move workspace to output left"
   output = ""
+
+[[snippets]]
+  description = "i3 turn off laptop display"
+  command = "xrandr --output eDP1 --off"
+  output = ""
+
+[[snippets]]
+  description = "shell into docker-compose"
+  command = "docker-compose run web bash"
+  output = ""
+
+[[snippets]]
+  description = "check port"
+  command = "sudo lsof -i :8000"
+  output = ""
+
+[[snippets]]
+  description = "set additional monitor resolution"
+  command = "xrandr --output DP3 --auto --scale 0.9x0.9 --right-of eDP1"
+  output = ""
+
+[[snippets]]
+  description = "redshift very red"
+  command = "redshift -PO 1000"
+  output = ""
+
+[[snippets]]
+  description = "staging cluster credentials"
+  command = "gcloud container clusters get-credentials pento-stg-europe-west1 --zone europe-west1 --project pento-staging"
+  output = ""
+
+[[snippets]]
+  description = "show dns server"
+  command = "nmcli dev show"
+  output = ""
+
+[[snippets]]
+  description = "lookup ip and show dns server used"
+  command = "nslookup slack.com"
+  output = ""
+
+[[snippets]]
+  description = "run single go test"
+  command = "go test -run "
+  output = ""
+
+[[snippets]]
+  description = "go test update golden files"
+  command = "go test -run TestPayslipCSVHandler_GetPayrollVarianceReport -update_files ./..."
+  output = ""

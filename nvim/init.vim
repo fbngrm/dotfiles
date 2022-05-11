@@ -58,7 +58,9 @@ Plug 'pwntester/octo.nvim', {'do': 'octo.setup()'}
 Plug 'kyazdani42/nvim-web-devicons'
 " Plug 'ryanoasis/vim-devicons'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-
+Plug 'chrisbra/unicode.vim'
+Plug 'chrisbra/csv.vim'
+Plug 'sebdah/vim-delve'
 
 call plug#end()
 
@@ -140,6 +142,8 @@ set noshowmode
 " set signcolumn=yes
 
 set fillchars+=vert:│
+
+set mouse=a
 
 " wrap word in quotes
 nmap <leader>" ysiw"<CR>
@@ -246,8 +250,8 @@ set statusline+=%14(%l,%c%V%)               " line, character
 " set clipboard=unnamedplus
 
 " faster clipboard copying/pastig
-nnoremap <leader>y "+y
-nnoremap <leader>P "*p
+" nnoremap <leader>y "+y
+" nnoremap <leader>P "*p
 " nnoremap <leader>Y "*y
 " nnoremap <leader>p "+p
 
@@ -633,11 +637,24 @@ set updatetime=100
 " open definition in vsplit using coc
 nnoremap <buffer> <silent> gs :call CocAction('jumpDefinition', 'vsplit')<CR>
 
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> gn <Plug>(coc-diagnostic-prev)
+nmap <silent> gm <Plug>(coc-diagnostic-next)
+
+" Use U to show documentation in preview window
+nnoremap <silent> U :call <SID>show_documentation()<CR>
 " open godoc in browser
 au FileType go nmap <Leader>db <Plug>(go-doc-browser)
 
 " show type info for the word under your cursor
 au FileType go nmap <Leader>i <Plug>(go-info)
+
+nmap <leader>gg :!go generate %<cr>
 
 " highlight go
 " let g:go_auto_sameids = 1
@@ -654,7 +671,7 @@ let g:go_highlight_methods = 1
 " contains the output of commands such as :GoBuild and :GoTest might not appear. To resolve this:
 let g:go_list_type = "quickfix"
 " go - map :GoFmt to goimports to auto-import modules
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "gofmt"
 " autocmd FileType go autocmd BufWritePre <buffer> !gofmt -s -w %
 au BufWritePost *.go silent! !gofmt -s -w %
 
@@ -683,6 +700,9 @@ endfunction
 " use gopls language server
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+" disable vim-go :GoDef short cut (gd)
+" this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0
 
 " --------------------------------------------------------------------------------
 " python
@@ -766,6 +786,9 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " CocCommand explorer
 " --------------------------------------------------------------------------------
 
+" " have vim start coc-explorer if vim started with folder
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'CocCommand explorer' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 nmap <silent> <leader>j :CocCommand explorer <CR>
 
 " --------------------------------------------------------------------------------
@@ -778,22 +801,38 @@ autocmd BufWritePre *.js Neoformat
 " vimtex
 " --------------------------------------------------------------------------------
 
-let g:vimtex_compiler_latexmk = {
-    \ 'build_dir' : '',
-    \ 'callback' : 1,
-    \ 'continuous' : 1,
-    \ 'executable' : 'latexmk',
-    \ 'hooks' : [],
-    \ 'options' : [
-    \   '-pdflua',
-    \   '-verbose',
-    \   '-file-line-error',
-    \   '-synctex=1',
-    \   '-interaction=nonstopmode',
-    \ ],
-    \}
+" let g:vimtex_compiler_latexmk = {
+"     \ 'build_dir' : '',
+"     \ 'callback' : 1,
+"     \ 'continuous' : 1,
+"     \ 'executable' : 'xelatex',
+"     \ 'hooks' : [],
+"     \ 'options' : [
+"     \   '-pdflua',
+"     \   '-verbose',
+"     \   '-file-line-error',
+"     \   '-synctex=1',
+"     \   '-interaction=nonstopmode',
+"     \ ],
+"     \}
+let g:vimtex_compiler_latexmk = { 
+        \ 'executable' : 'latexmk',
+        \ 'options' : [ 
+        \   '-xelatex',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
 let g:tex_matchcheck= '[{}]'
 nnoremap <leader>xc :VimtexCompile<CR>
+
+" need xelatex for fontspec compilation
+" nnoremap <leader>xc :execute "!xelatex " . expand('%')<CR>
+
+" Or with a generic interface:
+let g:vimtex_view_general_viewer = 'evince'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 
 " --------------------------------------------------------------------------------
 " onedark color theme

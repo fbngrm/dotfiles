@@ -1,0 +1,6 @@
+title pento
+
+layout stack
+new_tab sh
+cd ~/work/src/github.com/pentohq/Pento
+launch zsh
