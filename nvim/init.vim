@@ -841,14 +841,26 @@ let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:onedark_terminal_italics=0
 syntax on
+" let base16colorspace=256  " Access colors present in 256 colorspace
+
+" onedark.vim override: Don't set a background color when running in a terminal;
+" just use the terminal's background color
+" `gui` is the hex color code used in GUI mode/nvim true-color mode
+" `cterm` is the color code used in 256-color mode
+" `cterm16` is the color code used in 16-color mode
+if (has("autocmd") && !has("gui_running"))
+  augroup colorset
+    autocmd!
+    let s:white = { "gui": "#cccccc", "cterm": "251", "cterm16" : "7" }
+    let s:comment_gray = { "gui": "#cccccc", "cterm": "245", "cterm16" : "7" }
+    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
+    autocmd ColorScheme * call onedark#set_highlight("Comment", { "fg": s:comment_gray })
+  augroup END
+endif
 colorscheme onedark
 "
-" syntax on
 " set termguicolors
 " colorscheme base16-github
-" set termguicolors
-let base16colorspace=256  " Access colors present in 256 colorspace
-
 
 " Override color scheme to make split the same color as tmux's default
 " autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=NONE ctermbg=NONE
