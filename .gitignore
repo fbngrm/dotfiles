@@ -1,3 +1,4 @@
 *.log
 ncmpcpp/lyrics/
 node_modules/
+kitty-themes/

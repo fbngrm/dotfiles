@@ -61,6 +61,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'chrisbra/unicode.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'sebdah/vim-delve'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 call plug#end()
 
@@ -403,8 +404,8 @@ endif
 if version >= 703
   if exists('+colorcolumn')
     highlight ColorColumn ctermbg=DarkGray
-    command! ToggleCC :let &cc = &cc == '' ? '80' : ''
-    nnoremap <F2> :let &cc = &cc == '' ? '80' : ''<CR>
+    command! ToggleCC :let &cc = &cc == '' ? '120' : ''
+    nnoremap <F2> :let &cc = &cc == '' ? '120' : ''<CR>
   endif
 endif
 
@@ -530,8 +531,8 @@ nmap <Esc>p <Plug>yankstack_substitute_older_paste
 nmap <Esc>P <Plug>yankstack_substitute_newer_paste
 
 " delete to the black hole register
-nnoremap d "_d
-vnoremap d "_d
+" nnoremap d "_d
+" vnoremap d "_d
 
 " --------------------------------------------------------------------------------
 " nerdtree

@@ -97,6 +97,7 @@ alias xr='i3-msg move workspace to output right'
 alias xl='i3-msg move workspace to output left'
 alias v='nvim'
 alias kd='today=`date +%d.%m.%Y`;for file in ~/Dropbox/notes/kieser/*.txt; do echo $today";" >> "$file"; done'
+alias cdz='~/work/src/github.com/fgrimme/zh'
 # v() {
 #   nvim ${1:-.}
 # }

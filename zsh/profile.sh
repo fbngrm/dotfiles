@@ -8,3 +8,6 @@
   # exec "systemctl --user import-environment; systemctl --user start sway-session.target"
   # exec sway
 # fi
+# export QT_IM_MODULE=fcitx
+# export XMODIFIERS=@im=fcitx
+# export GTK_IM_MODULE=fcitx
