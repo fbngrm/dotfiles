@@ -155,6 +155,8 @@ nmap <CR> o<Esc>
 
 " yank in word
 nmap <leader>w yiw<CR>
+nmap <leader>w yiw<CR>
+nnoremap YY ^y$
 
 " save file
 " inoremap <c-s> <c-o>:update<CR><ESC>

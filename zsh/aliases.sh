@@ -1,5 +1,8 @@
+# diff
 alias kkd="kitty +kitten diff"
 alias kkg="git difftool --no-symlinks --dir-diff"
+alias confl='nvim $(git diff --name-only --diff-filter=U)'
+
 alias g='gs'
 alias gl='git log'
 alias gd='git diff '
@@ -103,4 +106,24 @@ alias cdz='~/work/src/github.com/fgrimme/zh'
 # }
 r() {
   ranger ${1:-.}
+}
+# view a given git lo, side by side
+ydl() {
+  git log -p -"${1}" | ydiff -s -w0
+}
+# view a given git revision, side by side
+ydr() {
+  git diff "$1" | ydiff -s -w0
+}
+# view a given git commit, side by side
+yds() {
+  git show "$1" | ydiff  -s -w0
+}
+# view diff between two files (note the '-u')
+ydf() {
+  diff -u "$1" "$2" | ydiff  -s -w0
+}
+# view diff between two dirs
+ydd() {
+  diff -ur "$1" "$2"  | ydiff  -s -w0
 }

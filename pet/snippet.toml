@@ -437,3 +437,8 @@
   description = "go test update golden files"
   command = "go test -run TestPayslipCSVHandler_GetPayrollVarianceReport -update_files ./..."
   output = ""
+
+[[snippets]]
+  description = "git, open conflicted files in vim"
+  command = "nvim $(git diff --name-only --diff-filter=U)"
+  output = ""

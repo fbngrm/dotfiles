@@ -3,8 +3,6 @@
 	name = fabian
 [url "git@github.com:"]
 	insteadOf = https://github.com/
-[diff]
-	noprefix = true
 [core]
 	excludesfile = /home/f/.gitignore_global
 [alias]
