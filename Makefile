@@ -1,3 +1,6 @@
+x:
+	sudo ln -vsf "${PWD}/x/.Xresources" "${HOME}/.Xresources"
+
 cron:
 	sudo mkdir -p /etc/cronjobs/
 	sudo ln -vsf "${PWD}/cron/cron.d/sync_music" "/etc/cron.d/sync_music.job"
@@ -9,8 +12,8 @@ audio-srv:
 		pulseaudio \
 		pulseaudio-alsa \
 		pulseaudio-bluetooth
-	ln -vsf "${PWD}/mpd/mpd.conf" "${HOME}/.config/mpd/mpd.conf"
-	ln -vsf "${PWD}/mpd/playlists" "${HOME}/.config/mpd/playlists"
+	# ln -vsf "${PWD}/mpd/mpd.conf" "${HOME}/.config/mpd/mpd.conf"
+	# ln -vsf "${PWD}/mpd/playlists" "${HOME}/.config/mpd/playlists"
 	systemctl --user enable mpd.service
 
 audio-cli:
@@ -29,12 +32,13 @@ zsh-cfg:
 	ln -vsf "${PWD}/zsh/aliases.sh" "${HOME}/.bash_aliases"
 	ln -vsf "${PWD}/zsh/zshrc" "${HOME}/.zshrc"
 	ln -vsf "${PWD}/zsh/profile.sh" "${HOME}/.profile"
-	ln -vsf "${PWD}/zsh/theme" "${HOME}/.grimme.zsh-theme"
+	ln -vsf "${PWD}/zsh/theme" "${HOME}/.oh-my-zsh/themes/grimme.zsh-theme"
 
 zsh-setup:
 	sudo pacman -S --needed --noconfirm zsh
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	sh chsh -s /usr/bin/zsh
+	# sh chsh -s /usr/bin/zsh
+	# chsh -s $(which zsh)
 
 zsh: zsh-cfg zsh-setup
 
@@ -146,6 +150,7 @@ kitty-cfg:
 	mkdir -vp "${HOME}/.config/kitty"
 	ln -vsf "${PWD}/kitty/kitty.conf" "${HOME}/.config/kitty/kitty.conf"
 	ln -vsf "${PWD}/kitty/theme.conf" "${HOME}/.config/kitty/theme.conf"
+	ln -vsf "${PWD}/kitty/themes "${HOME}/.config/kitty/themes"
 	ln -vsfn "${PWD}/kitty/sessions" "${HOME}/.config/kitty/sessions"
 
 kitty: kitty-pkgs kitty-cfg
@@ -273,20 +278,19 @@ install: \
 	brightnessctl \
 	capture \
 	docker \
-	dropbox \
 	dunst \
-	fonts \
 	gammastep \
-	gnupg \
 	guis \
 	hledger \
 	kitty \
 	neovim \
-	network-manager \
 	pipewire \
 	rofi \
-	sway \
-	waybar \
 	nicotine \
     rsync\
-	cron\
+	network-manager \
+	cron
+
+	# dropbox \
+	fonts \
+	gnupg \

@@ -2,13 +2,13 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-ZSH=/home/fabian/.oh-my-zsh
+ZSH=/home/f/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="fgrimme"
+ZSH_THEME="grimme"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -52,7 +52,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode history-substring-search)
+plugins=(git history-substring-search)
 
 
 # User configuration
@@ -97,9 +97,9 @@ fi
 #  . /etc/bash_completion
 # fi
 
-if [ -f /usr/share/git/completion/git-completion.bash ]; then
- . /usr/share/git/completion/git-completion.bash
-fi
+# if [ -f /usr/share/git/completion/git-completion.bash ]; then
+#  . /usr/share/git/completion/git-completion.bash
+# fi
 
 export EDITOR=nvim
 

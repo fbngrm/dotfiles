@@ -839,19 +839,6 @@ let g:vimtex_view_general_viewer = 'evince'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 
 " --------------------------------------------------------------------------------
-" onedark color theme
-" --------------------------------------------------------------------------------
-
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:onedark_terminal_italics=0
-syntax on
-" let base16colorspace=256  " Access colors present in 256 colorspace
-
-" set termguicolors
-" colorscheme github_dark
-colorscheme github_light
-
-" --------------------------------------------------------------------------------
 " tagbar
 " --------------------------------------------------------------------------------
 
@@ -1072,3 +1059,15 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 "  }
 "}
 " EOF
+
+" --------------------------------------------------------------------------------
+" color theme
+" --------------------------------------------------------------------------------
+
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+syntax on
+" let base16colorspace=256  " Access colors present in 256 colorspace
+
+" set termguicolors
+" colorscheme github_dark
+colorscheme github_light
