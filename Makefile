@@ -276,6 +276,7 @@ rsync:
     rsync \
 	cron \
 	i3 \
+	pet \
 	x
 
 install: \
@@ -298,6 +299,7 @@ install: \
 	network-manager \
 	cron \
 	i3 \
+	pet \
 	x
 
 	# dropbox \
