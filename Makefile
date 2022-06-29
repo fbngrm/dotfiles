@@ -1,5 +1,10 @@
 x:
-	sudo ln -vsf "${PWD}/x/.Xresources" "${HOME}/.Xresources"
+	ln -vsf "${PWD}/x/.Xresources" "${HOME}/.Xresources"
+
+i3:
+	mkdir -p "${HOME}/.config/i3"
+	ln -vsf "${PWD}/i3/config" "${HOME}/.config/i3/config"
+	ln -vsf "${PWD}/i3/scripts" "${HOME}/.config/i3/scripts"
 
 cron:
 	sudo mkdir -p /etc/cronjobs/
@@ -268,8 +273,10 @@ rsync:
 	git \
 	nicotine \
 	dropbox \
-    rsync\
-	cron\
+    rsync \
+	cron \
+	i3 \
+	x
 
 install: \
 	git \
@@ -287,9 +294,11 @@ install: \
 	pipewire \
 	rofi \
 	nicotine \
-    rsync\
+    rsync \
 	network-manager \
-	cron
+	cron \
+	i3 \
+	x
 
 	# dropbox \
 	fonts \
