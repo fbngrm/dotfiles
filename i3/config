@@ -35,6 +35,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 exec --no-startup-id gammastep
+exec --no-startup-id dunst
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -160,8 +161,24 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 workspace_auto_back_and_forth yes
 
-assign [class="vivaldi-stable" instance="Vivaldi-stable"] → $web
-assign [class="Mail" instance="Thunderbird"] → $mails
+# apps
+assign [class="vivaldi-stable" instance="Vivaldi-stable"] → $ws1
+assign [class="Mail" instance="thunderbird"] → $ws3
+
+set $mode_open Open (k) kitty, (m) mail, (v) vivaldi, (c) chromium, (n) notes, (d) dbeaver, (t) telegram
+mode "$mode_open" {
+    bindsym k exec --no-startup-id kitty, mode "default"
+    bindsym m exec --no-startup-id thunderbird, mode "default"
+    bindsym v exec --no-startup-id vivaldi-stable, mode "default"
+    bindsym c exec --no-startup-id chromium, mode "default"
+    bindsym d exec --no-startup-id dbeaver, mode "default"
+    bindsym t exec --no-startup-id telegram, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+o mode "$mode_open"
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -255,8 +272,8 @@ for_window [class="Arandr"] floating enable
 
 set $mode_display Config monitor resolution - laptop (l) - laptop+dell (d)
 mode "$mode_display" {
-    bindsym l exec --no-startup-id xrandr --output eDP-1 --primary --mode 2256x1504 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off, mode "default"
-    bindsym d exec --no-startup-id xrandr --output eDP-1 --primary --mode 2256x1504 --pos 0x656 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --mode 3840x2160 --pos 2256x0 --rotate normal
+    bindsym 1 exec --no-startup-id xrandr --output eDP-1 --primary --mode 2256x1504 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off, mode "default"
+    bindsym 2 exec --no-startup-id xrandr --output eDP-1 --primary --mode 2256x1504 --pos 0x656 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --mode 3840x2160 --pos 2256x0 --rotate normal, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -266,6 +283,9 @@ bindsym $mod+x mode "$mode_display"
 
 # swap ESC and Caps Lock
 exec_always --no-startup-id setxkbmap -option "caps:swapescape"
+
+# layout
+hide_edge_borders both
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
