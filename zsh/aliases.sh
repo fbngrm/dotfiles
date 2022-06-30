@@ -3,6 +3,9 @@ alias kkd="kitty +kitten diff"
 alias kkg="git difftool --no-symlinks --dir-diff"
 alias confl='nvim $(git diff --name-only --diff-filter=U)'
 
+# pacman
+alias pi='sudo pacman -S'
+
 alias g='gs'
 alias gl='git log'
 alias gd='git diff '
