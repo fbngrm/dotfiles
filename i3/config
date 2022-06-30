@@ -165,9 +165,10 @@ workspace_auto_back_and_forth yes
 assign [class="vivaldi-stable" instance="Vivaldi-stable"] → $ws1
 assign [class="Mail" instance="thunderbird"] → $ws3
 
-set $mode_open Open (k) kitty, (m) mail, (v) vivaldi, (c) chromium, (n) notes, (d) dbeaver, (t) telegram
+set $mode_open Open (k) kitty, (m) mail, (v) vivaldi, (c) chromium, (n) notes, (d) dbeaver, (t) telegram, (p) kitty+pinyin
 mode "$mode_open" {
     bindsym k exec --no-startup-id kitty, mode "default"
+    bindsym p exec --no-startup-id env GLFW_IM_MODULE=ibus kitty, mode "default"
     bindsym m exec --no-startup-id thunderbird, mode "default"
     bindsym v exec --no-startup-id vivaldi-stable, mode "default"
     bindsym c exec --no-startup-id chromium, mode "default"
