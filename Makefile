@@ -1,3 +1,15 @@
+input-method-pkg:
+	sudo pacman -S fcitx5 fcitx5-im fcitx5-chinese-addons fcitx5-material-color
+
+input-method-cfg:
+	sudo sh -c 'echo GTK_IM_MODULE=fcitx5 >> /etc/environment'
+	sudo sh -c 'echo QT_IM_MODULE=fcitx5 >> /etc/environment'
+	sudo sh -c 'echo XMODIFIERS=@im=fcitx5 >> /etc/environment'
+	ln -vsf "${PWD}/fcitx5/profile" "${HOME}/.config/fcitx5/profile"
+	ln -vsf "${PWD}/fcitx5/classicui.conf" "${HOME}/.config/fcitx5/conf/classicui.conf"
+	# quick phrase db
+	sudo ln -vsf "${PWD}/fcitx5/quick.mb" "/usr/share/fcitx5/data/quickphrase.d/quick.mb"
+
 x:
 	ln -vsf "${PWD}/x/.Xresources" "${HOME}/.Xresources"
 
@@ -277,6 +289,7 @@ rsync:
 	cron \
 	i3 \
 	pet \
+	input-method \
 	x
 
 install: \
@@ -300,6 +313,7 @@ install: \
 	cron \
 	i3 \
 	pet \
+	input-method \
 	x
 
 	# dropbox \
