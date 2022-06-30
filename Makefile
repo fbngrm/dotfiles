@@ -101,9 +101,9 @@ dunst-srv:
 dunst: dunst-pkgs dunst-cfg dunst-srv
 
 fonts:
+	sudo pacman -S ttf-dejavu adobe-source-han-serif-cn-fonts adobe-source-han-sans-cn-fonts noto-fonts-cjk noto-fonts ttf-roboto
 	mkdir -vp "${HOME}/.config/fontconfig"
 	ln -vsf "${PWD}/fonts/config.conf" "${HOME}/.config/fontconfig/fonts.conf"
-	cp -v ${PWD}/fonts/*.ttf "${HOME}/.local/share/fonts/"
 	fc-cache -fv
 
 gammastep-pkgs:
@@ -229,9 +229,9 @@ waybar-cfg:
 waybar: waybar-pkgs waybar-cfg
 
 pet-install:
-	mkdir -p $GOPATH/src/github.com/knqyf263
-	cd $GOPATH/src/github.com/knqyf263
-	git clone https://github.com/knqyf263/pet.git
+	mkdir -p ${HOME}/work/src/github.com
+	cd ${HOME}/work/src/github.com
+	git clone https://github.com/knqyf263/pet.git 
 	cd pet
 	make install
 
