@@ -805,18 +805,18 @@ autocmd BufWritePre *.js Neoformat
 " vimtex
 " --------------------------------------------------------------------------------
 
-let g:vimtex_compiler_latexmk = { 
-        \ 'executable' : 'latexmk',
-        \ 'options' : [ 
-        \   '-xelatex',
-        \   '-file-line-error',
-        \   '-synctex=1',
-        \   '-interaction=nonstopmode',
-        \ ],
-        \}
-" let g:vimtex_compiler_latexmk_engines = {
-"     \ '_'                : '-xelatex',
-"     \}
+" let g:vimtex_compiler_latexmk = { 
+"         \ 'executable' : 'latexmk',
+"         \ 'options' : [ 
+"         \   '-xelatex',
+"         \   '-file-line-error',
+"         \   '-synctex=1',
+"         \   '-interaction=nonstopmode',
+"         \ ],
+"         \}
+let g:vimtex_compiler_latexmk_engines = {
+    \ '_'                : '-xelatex',
+    \}
 let g:tex_matchcheck= '[{}]'
 nnoremap <leader>xc :VimtexCompile<CR>
 
