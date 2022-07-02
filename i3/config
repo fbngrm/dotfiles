@@ -125,13 +125,13 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "web"
-set $ws2 "term"
-set $ws3 "mails"
-set $ws4 "db"
-set $ws5 "notes"
-set $ws6 "music"
-set $ws7 "files"
+set $ws1 "1:web"
+set $ws2 "2:term"
+set $ws3 "3:mails"
+set $ws4 "4:db"
+set $ws5 "5:notes"
+set $ws6 "6:music"
+set $ws7 "7:files"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
@@ -159,6 +159,9 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
+
+bindsym $mod+Shift+m move workspace to output right
+bindsym $mod+Shift+n move workspace to output left
 
 workspace_auto_back_and_forth yes
 
