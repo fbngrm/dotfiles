@@ -43,6 +43,7 @@ audio: audio-srv audio-cli
 
 ranger:
 	sudo pacman -S --needed --noconfirm ranger
+	mkdir -p "${HOME}/.config/ranger"
 	ln -vsf "${PWD}/ranger/rc.conf" "${HOME}/.config/ranger/rc.conf"
 
 zsh-cfg:
@@ -290,6 +291,7 @@ rsync:
 	i3 \
 	pet \
 	input-method \
+	ranger \
 	x
 
 install: \
@@ -314,6 +316,7 @@ install: \
 	i3 \
 	pet \
 	input-method \
+	ranger \
 	x
 
 	# dropbox \
