@@ -177,7 +177,9 @@ neovim-pkgs:
 	sudo pacman -S --needed --noconfirm neovim
 
 neovim-cfg:
+	mkdir -p ${HOME}/.config/nvim/lua
 	ln -vsfn "${PWD}/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
+	ln -vsfn "${PWD}/nvim/lua/lsp_config.lua" "${HOME}/.config/nvim/lua/lsp_config.lua"
 	ln -vsfn "${PWD}/nvim/after" "${HOME}/.config/nvim/after"
 	ln -vsfn "${PWD}/nvim/snippets" "${HOME}/.config/nvim/UltiSnips"
 	# sudo ln -vsf "${PWD}/nvim/editor.sh" "/etc/profile.d/"
