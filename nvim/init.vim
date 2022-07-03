@@ -27,7 +27,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'nazo/pt.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
-Plug 'chriskempson/base16-vim'
+" Plug 'chriskempson/base16-vim'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
@@ -301,12 +301,12 @@ set ignorecase " ignore case when searching
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " Pt, the platinum searcher mapping
-nnoremap <silent> <leader>h :execute "Pt --ignore=vendor --ignore=tags " . expand("<cword>") <CR>
+nnoremap <silent> <leader>h :execute "rg --ignore=vendor --ignore=tags " . expand("<cword>") <CR>
 
 " search in project PT +Unite
 nnoremap <silent> <leader>g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 if executable('pt')
-  let g:unite_source_grep_command = 'pt'
+  let g:unite_source_grep_command = 'rg'
   let g:unite_source_grep_default_opts = '--nogroup --nocolor'
   let g:unite_source_grep_recursive_opt = ''
   let g:unite_source_grep_encoding = 'utf-8'
@@ -835,100 +835,17 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " nvim-tree
 " --------------------------------------------------------------------------------
 
-"let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
-"let g:nvim_tree_quit_on_open = 0 "0 by default, closes the tree when you open a file
-"let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
-"let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
-"let g:nvim_tree_root_folder_modifier = ':~' "This is the default. See :help filename-modifiers for more options
-"let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
-"let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
-"let g:nvim_tree_disable_window_picker = 0 "0 by default, will disable the window picker.
-"let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
-"" let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
-"let g:nvim_tree_respect_buf_cwd = 0 "0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
-"let g:nvim_tree_create_in_closed_folder = 0 "1 by default, When creating files, sets the path of a file when cursor is on a closed folder to the parent folder when 0, and inside the folder when 1.
-"let g:nvim_tree_refresh_wait = 500 "1000 by default, control how often the tree can be refreshed, 1000 means the tree can be refresh once per 1000ms.
-"let g:nvim_tree_window_picker_exclude = {
-"    \   'filetype': [
-"    \     'notify',
-"    \     'packer',
-"    \     'qf'
-"    \   ],
-"    \   'buftype': [
-"    \     'terminal'
-"    \   ]
-"    \ }
-"" Dictionary of buffer option names mapped to a list of option values that
-"" indicates to the window picker that the buffer's window should not be
-"" selectable.
-"let g:nvim_tree_special_files = { 'README.md': 1, 'Makefile': 1, 'MAKEFILE': 1 } " List of filenames that gets highlighted with NvimTreeSpecialFile
-"let g:nvim_tree_show_icons = {
-"    \ 'git': 1,
-"    \ 'folders': 0,
-"    \ 'files': 0,
-"    \ 'folder_arrows': 0,
-"    \ }
-""If 0, do not show the icons for one of 'git' 'folder' and 'files'
-""1 by default, notice that if 'files' is 1, it will only display
-""if nvim-web-devicons is installed and on your runtimepath.
-""if folder is 1, you can also tell folder_arrows 1 to show small arrows next to the folder icons.
-""but this will not work when you set indent_markers (because of UI conflict)
+" default will show icon by default if no icon is provided
+" default shows no icon by default
+nnoremap <leader>j :NvimTreeToggle<CR>
+nnoremap <A-r> :NvimTreeRefresh<CR>
+nnoremap <A-f> :NvimTreeFindFile<CR>
 
-"" default will show icon by default if no icon is provided
-"" default shows no icon by default
-"let g:nvim_tree_icons = {
-"    \ 'default': '',
-"    \ 'symlink': '->',
-"    \ 'git': {
-"    \   'unstaged': "✗",
-"    \   'staged': "✓",
-"    \   'unmerged': "",
-"    \   'renamed': "➜",
-"    \   'untracked': "★",
-"    \   'deleted': "",
-"    \   'ignored': "◌"
-"    \   },
-"    \ 'folder': {
-"    \   'arrow_open': "+",
-"    \   'arrow_closed': "",
-"    \   'default': "",
-"    \   'open': "",
-"    \   'empty': "",
-"    \   'empty_open': "",
-"    \   'symlink': "",
-"    \   'symlink_open': "",
-"    \   }
-"    \ }
-"nnoremap <A-n> :NvimTreeToggle<CR>
-"nnoremap <A-r> :NvimTreeRefresh<CR>
-"nnoremap <A-f> :NvimTreeFindFile<CR>
-
-"" a list of groups can be found at `:help nvim_tree_highlight`
-"" highlight NvimTreeFolderIcon guibg=blue
-
-"lua << EOF
-"-- following options are the default
-"-- each of these are documented in `:help nvim-tree.OPTION_NAME`
-"require'nvim-tree'.setup {
-"  update_cwd          = false,
-"  diagnostics = {
-"    enable = true,
-"    icons = {
-"      hint = "",
-"      info = "",
-"      warning = "",
-"      error = "",
-"    }
-"  },
-"  view = {
-"    width = 40,
-"    height = 30,
-"    hide_root_folder = false,
-"    side = 'left',
-"    auto_resize = false,
-"  }
-"}
-" EOF
+lua << EOF
+-- empty setup using defaults
+require("nvim-tree").setup({
+})
+EOF
 
 " --------------------------------------------------------------------------------
 " color theme
