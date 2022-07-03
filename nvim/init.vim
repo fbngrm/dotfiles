@@ -668,15 +668,6 @@ autocmd FileType python set ts=4
 autocmd FileType python set sts=4
 
 " --------------------------------------------------------------------------------
-" CocCommand explorer
-" --------------------------------------------------------------------------------
-
-" " have vim start coc-explorer if vim started with folder
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'CocCommand explorer' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-nmap <silent> <leader>j :CocCommand explorer <CR>
-
-" --------------------------------------------------------------------------------
 " Neoformat / prettier
 " --------------------------------------------------------------------------------
 
@@ -814,13 +805,6 @@ endfunction
 " --------------------------------------------------------------------------------
 
 " let g:gotests_template_dir = '/home/f/work/src/gitlab.com/pentoapp/pento/server/tmpl/gotests/'
-
-" --------------------------------------------------------------------------------
-" ts
-" --------------------------------------------------------------------------------
-
-autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
-nmap <leader>i :CocCommand tsserver.organizeImports<cr>
 
 " --------------------------------------------------------------------------------
 " telescope
