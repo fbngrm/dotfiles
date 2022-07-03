@@ -111,7 +111,7 @@ set foldcolumn=0
 set conceallevel=0
 
 " omni-completion - we use lsp for this
-" set omnifunc=syntaxcomplete#Complete
+set omnifunc=syntaxcomplete#Complete
 
 " ignore .csv file in autocomplete
 set include=^\\s*#\\s*include\ \\(.csv\\)\\@!
@@ -146,8 +146,8 @@ set fillchars+=vert:│
 set mouse=a
 
 " wrap word in quotes
-nmap <leader>" ysiw"<CR>
-nmap <leader>' ysiw'<CR>
+nmap "" ysiw"
+nmap '' ysiw'
 
 " insert line after the current line in cmd mode
 nmap <CR> o<Esc>
@@ -176,12 +176,14 @@ let maplocalleader = " "
 noremap <c-s> :set invnumber<CR>
 inoremap <c-s> :set invnumber<CR>
 
+" activates filetype detection
+filetype plugin indent on
+
+autocmd FileType go inoremap '<C-x><C-o>' : '<Tab>'
+
 " use spell-checking and column-width for git commits
 autocmd Filetype gitcommit setlocal spell textwidth=72
 autocmd Filetype *.md setlocal spell textwidth=72
-
-" activates filetype detection
-filetype plugin indent on
 
 " stop highlighting when switching to insert mode
 for s:c in ['a', 'A', '<Insert>', 'i', 'I', 'gI', 'gi', 'o', 'O']
