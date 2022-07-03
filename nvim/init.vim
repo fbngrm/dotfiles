@@ -12,10 +12,10 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-obsession'
 
-Plug 'christoomey/vim-tmux-navigator'
-
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
+Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'easymotion/vim-easymotion'
 Plug 'fatih/vim-go'
@@ -23,10 +23,8 @@ Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'Townk/vim-autoclose'
 " Plug 'SirVer/ultisnips'
-" Plug 'vim-syntastic/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'nazo/pt.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'chriskempson/base16-vim'
@@ -40,7 +38,6 @@ Plug 'preservim/tagbar'
 Plug 'vim-scripts/scratch.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 
-Plug 'joshdick/onedark.vim'
 Plug 'buoto/gotests-vim'
 
 Plug 'HerringtonDarkholme/yats.vim'
@@ -598,54 +595,20 @@ let g:tern_map_keys=1
 " --------------------------------------------------------------------------------
 " golang
 " --------------------------------------------------------------------------------
-
-" generate ctags when saving go files exclude js files
-" au BufWritePost *.go silent! !ctags -R --exclude='*node_modules' --exclude='*vendor' &
-
-" " ctags for go
-" let g:tagbar_type_go = {
-"     \ 'ctagstype' : 'go',
-"     \ 'kinds'     : [
-"         \ 'p:package',
-"         \ 'i:imports:1',
-"         \ 'c:constants',
-"         \ 'v:variables',
-"         \ 't:types',
-"         \ 'n:interfaces',
-"         \ 'w:fields',
-"         \ 'e:embedded',
-"         \ 'm:methods',
-"         \ 'r:constructor',
-"         \ 'f:functions'
-"     \ ],
-"     \ 'sro' : '.',
-"     \ 'kind2scope' : {
-"         \ 't' : 'ctype',
-"         \ 'n' : 'ntype'
-"     \ },
-"     \ 'scope2kind' : {
-"         \ 'ctype' : 't',
-"         \ 'ntype' : 'n'
-"     \ },
-"     \ 'ctagsbin'  : 'gotags',
-"     \ 'ctagsargs' : '-sort -silent'
-" \ }
-
-" disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
 let g:go_def_mapping_enabled = 0
 
 " update the status bar with the type info of the identifier under the cursor every 100ms
-let g:go_auto_type_info = 1
-set updatetime=100
+" let g:go_auto_type_info = 1
+" set updatetime=100
 
 " Use U to show documentation in preview window
-nnoremap <silent> U :call <SID>show_documentation()<CR>
+" nnoremap <silent> U :call <SID>show_documentation()<CR>
 " open godoc in browser
-au FileType go nmap <Leader>db <Plug>(go-doc-browser)
+" au FileType go nmap <Leader>db <Plug>(go-doc-browser)
 
 " show type info for the word under your cursor
-au FileType go nmap <Leader>i <Plug>(go-info)
+" au FileType go nmap <Leader>i <Plug>(go-info)
 
 nmap <leader>gg :!go generate %<cr>
 
@@ -662,11 +625,11 @@ let g:go_highlight_methods = 1
 
 " another issue with vim-go and syntastic is that the location list window that
 " contains the output of commands such as :GoBuild and :GoTest might not appear. To resolve this:
-let g:go_list_type = "quickfix"
+" let g:go_list_type = "quickfix"
 " go - map :GoFmt to goimports to auto-import modules
-let g:go_fmt_command = "gofmt"
+" let g:go_fmt_command = "gofmt"
 " autocmd FileType go autocmd BufWritePre <buffer> !gofmt -s -w %
-au BufWritePost *.go silent! !gofmt -s -w %
+" au BufWritePost *.go silent! !gofmt -s -w %
 
 let g:go_addtags_transform = "camelcase"
 
@@ -675,8 +638,8 @@ au FileType go map <leader>gr :!go run %<CR>
 autocmd FileType go nmap <leader>t <Plug>(go-test)
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 autocmd FileType go nmap <Leader>b :GoTestCompile <CR>
-au FileType go nmap <Leader>m ]]
-au FileType go nmap <Leader>n [[
+" au FileType go nmap <Leader>m ]]
+" au FileType go nmap <Leader>n [[
 au FileType go nmap <Leader>d :GoAlternate <CR>
 au FileType go nmap <Leader>tf :GoTestFunc <CR>
 
@@ -693,9 +656,6 @@ endfunction
 " use gopls language server
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
-" disable vim-go :GoDef short cut (gd)
-" this is handled by LanguageClient [LC]
-let g:go_def_mapping_enabled = 0
 
 " --------------------------------------------------------------------------------
 " python
