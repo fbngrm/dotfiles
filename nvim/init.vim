@@ -830,20 +830,148 @@ nnoremap <A-f> :NvimTreeFindFile<CR>
 lua << EOF
 -- empty setup using defaults
 require("nvim-tree").setup({
-})
+      create_in_closed_folder = true,
+      view = {
+        adaptive_size = true,
+        width = 30,
+        height = 30,
+        side = "left",
+        hide_root_folder = true,
+        signcolumn = "yes",
+        mappings = {
+          custom_only = false,
+          list = {
+            -- user mappings go here
+          },
+        },
+      },
+      renderer = {
+        icons = {
+          webdev_colors = true,
+          git_placement = "before",
+          padding = "",
+          symlink_arrow = "→",
+          show = {
+            file = false,
+            folder = true,
+            folder_arrow = true,
+            git = true,
+          },
+          glyphs = {
+            default = " ",
+            symlink = "➛ ",
+            folder = {
+              arrow_closed = "›",
+              arrow_open = "⌄",
+              default = "",
+              open = "",
+              empty = ".",
+              empty_open = ".",
+              symlink = "→ ",
+              symlink_open = "↓ ",
+            },
+            git = {
+              unstaged = "✗ ",
+              staged = "✓ ",
+              unmerged = "! ",
+              renamed = "➜ ",
+              untracked = "★ ",
+              deleted = "x ",
+              ignored = "◌ ",
+            },
+          },
+        },
+        special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+      },
+      hijack_directories = {
+        enable = true,
+        auto_open = true,
+      },
+      update_focused_file = {
+        enable = false,
+        update_root = false,
+        ignore_list = {},
+      },
+      ignore_ft_on_setup = {},
+      system_open = {
+        cmd = "",
+        args = {},
+      },
+      diagnostics = {
+        enable = false,
+        show_on_dirs = false,
+        icons = {
+          hint = "",
+          info = "",
+          warning = "",
+          error = "",
+        },
+      },
+      filters = {
+        dotfiles = false,
+        custom = {},
+        exclude = {},
+      },
+      filesystem_watchers = {
+        enable = false,
+        interval = 100,
+        debounce_delay = 50,
+      },
+      git = {
+        enable = true,
+        ignore = true,
+        timeout = 400,
+      },
+      actions = {
+        use_system_clipboard = true,
+        change_dir = {
+          enable = true,
+          global = false,
+          restrict_above_cwd = false,
+        },
+        expand_all = {
+          max_folder_discovery = 300,
+        },
+        open_file = {
+          quit_on_open = false,
+          resize_window = true,
+          window_picker = {
+            enable = true,
+            chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+            exclude = {
+              filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
+              buftype = { "nofile", "terminal", "help" },
+            },
+          },
+        },
+        remove_file = {
+          close_window = true,
+        },
+      },
+      trash = {
+        cmd = "gio trash",
+        require_confirm = true,
+      },
+      live_filter = {
+        prefix = "[FILTER]: ",
+        always_show_folders = true,
+      },
+      log = {
+        enable = false,
+        truncate = false,
+        types = {
+          all = false,
+          config = false,
+          copy_paste = false,
+          diagnostics = false,
+          git = false,
+          profile = false,
+          watcher = false,
+        },
+      },
+    } -- END_DEFAULT_OPTS
+)
 EOF
-
-" --------------------------------------------------------------------------------
-" color theme
-" --------------------------------------------------------------------------------
-
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-syntax on
-" let base16colorspace=256  " Access colors present in 256 colorspace
-
-" set termguicolors
-" colorscheme github_dark
-colorscheme github_light
 
 " --------------------------------------------------------------------------------
 " lsp
@@ -911,3 +1039,15 @@ require('lspconfig')['gopls'].setup{
     flags = lsp_flags,
 }
 EOF
+
+" --------------------------------------------------------------------------------
+" color theme
+" --------------------------------------------------------------------------------
+
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+syntax on
+" let base16colorspace=256  " Access colors present in 256 colorspace
+
+" set termguicolors
+colorscheme github_dark
+" colorscheme github_light
