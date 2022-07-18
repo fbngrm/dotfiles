@@ -41,6 +41,17 @@ audio-cli:
 
 audio: audio-srv audio-cli
 
+bluetooth-srv:
+	sudo pacman -S --noconfirm \
+		bluez \
+		bluez-utils
+	sudo systemctl enable bluetooth.service
+
+bluetooth-cli:
+	sudo pacman -S --noconfirm blueman
+
+bluetooth: bluetooth-cli bluetooth-srv
+
 ranger:
 	sudo pacman -S --needed --noconfirm ranger
 	mkdir -p "${HOME}/.config/ranger"
@@ -294,6 +305,7 @@ rsync:
 	pet \
 	input-method \
 	ranger \
+	bluetooth \
 	x
 
 install: \
@@ -319,6 +331,7 @@ install: \
 	pet \
 	input-method \
 	ranger \
+	bluetooth \
 	x
 
 	# dropbox \
