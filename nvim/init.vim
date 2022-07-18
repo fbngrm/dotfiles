@@ -52,8 +52,10 @@ Plug 'nvim-telescope/telescope-github.nvim'
 
 Plug 'pwntester/octo.nvim', {'do': 'octo.setup()'}
 Plug 'kyazdani42/nvim-web-devicons'
-" Plug 'ryanoasis/vim-devicons'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'ryanoasis/vim-devicons'
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
 Plug 'chrisbra/unicode.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'sebdah/vim-delve'
@@ -302,17 +304,26 @@ set ignorecase " ignore case when searching
 " search with ctrl+s
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
+set grepprg=rg\ --vimgrep
+set grepformat^=%f:%l:%c:%m
+
+augroup autoquickfix
+    autocmd!
+    autocmd QuickFixCmdPost [^l]* cwindow
+    autocmd QuickFixCmdPost    l* lwindow
+augroup END
+
 " Pt, the platinum searcher mapping
-nnoremap <silent> <leader>h :execute "rg --ignore=vendor --ignore=tags " . expand("<cword>") <CR>
+" nnoremap <silent> <leader>h :execute "rg --ignore=vendor --ignore=tags " . expand("<cword>") <CR>
 
 " search in project PT +Unite
-nnoremap <silent> <leader>g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-if executable('pt')
-  let g:unite_source_grep_command = 'rg'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor'
-  let g:unite_source_grep_recursive_opt = ''
-  let g:unite_source_grep_encoding = 'utf-8'
-endif
+" nnoremap <silent> <leader>g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+" if executable('rg')
+"   let g:unite_source_grep_command = 'rg'
+"   let g:unite_source_grep_default_opts = '--nogroup --nocolor'
+"   let g:unite_source_grep_recursive_opt = ''
+"   let g:unite_source_grep_encoding = 'utf-8'
+" endif
 
 " make search results appear in the middle of the screen
 nnoremap n nzz
@@ -832,8 +843,8 @@ lua << EOF
 require("nvim-tree").setup({
       create_in_closed_folder = true,
       view = {
-        adaptive_size = true,
-        width = 30,
+        adaptive_size = false,
+        width = 40,
         height = 30,
         side = "left",
         hide_root_folder = true,
@@ -846,6 +857,7 @@ require("nvim-tree").setup({
         },
       },
       renderer = {
+        highlight_opened_files = "name",
         icons = {
           webdev_colors = true,
           git_placement = "before",
@@ -858,15 +870,15 @@ require("nvim-tree").setup({
             git = true,
           },
           glyphs = {
-            default = " ",
+            default = "",
             symlink = "➛ ",
             folder = {
               arrow_closed = "›",
               arrow_open = "⌄",
               default = "",
               open = "",
-              empty = ".",
-              empty_open = ".",
+              empty = "",
+              empty_open = "",
               symlink = "→ ",
               symlink_open = "↓ ",
             },
@@ -883,28 +895,18 @@ require("nvim-tree").setup({
         },
         special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
       },
-      hijack_directories = {
-        enable = true,
-        auto_open = true,
-      },
-      update_focused_file = {
-        enable = false,
-        update_root = false,
-        ignore_list = {},
-      },
-      ignore_ft_on_setup = {},
       system_open = {
-        cmd = "",
+        cmd = "xdg-open",
         args = {},
       },
       diagnostics = {
-        enable = false,
-        show_on_dirs = false,
+        enable = true,
+        show_on_dirs = true,
         icons = {
-          hint = "",
-          info = "",
-          warning = "",
-          error = "",
+          hint = "H",
+          info = "I",
+          warning = "W",
+          error = "E",
         },
       },
       filters = {
@@ -913,7 +915,7 @@ require("nvim-tree").setup({
         exclude = {},
       },
       filesystem_watchers = {
-        enable = false,
+        enable = true,
         interval = 100,
         debounce_delay = 50,
       },
@@ -932,45 +934,13 @@ require("nvim-tree").setup({
         expand_all = {
           max_folder_discovery = 300,
         },
-        open_file = {
-          quit_on_open = false,
-          resize_window = true,
-          window_picker = {
-            enable = true,
-            chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-            exclude = {
-              filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
-              buftype = { "nofile", "terminal", "help" },
-            },
-          },
-        },
         remove_file = {
           close_window = true,
         },
       },
-      trash = {
-        cmd = "gio trash",
-        require_confirm = true,
-      },
-      live_filter = {
-        prefix = "[FILTER]: ",
-        always_show_folders = true,
-      },
-      log = {
-        enable = false,
-        truncate = false,
-        types = {
-          all = false,
-          config = false,
-          copy_paste = false,
-          diagnostics = false,
-          git = false,
-          profile = false,
-          watcher = false,
-        },
-      },
     } -- END_DEFAULT_OPTS
 )
+
 EOF
 
 " --------------------------------------------------------------------------------
@@ -978,11 +948,10 @@ EOF
 " --------------------------------------------------------------------------------
 
 " format
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
-autocmd BufWritePre *.go lua goimports(1000)
+" autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+" autocmd BufWritePre *.go lua goimports(1000)
 
 lua << EOF
-require("lsp_config")
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -1044,10 +1013,11 @@ EOF
 " color theme
 " --------------------------------------------------------------------------------
 
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 syntax on
 " let base16colorspace=256  " Access colors present in 256 colorspace
 
-" set termguicolors
-colorscheme github_dark
-" colorscheme github_light
+" colorscheme github_dark
+colorscheme github_light
+set termguicolors
+highlight NvimTreeWindowPicker ctermbg=blue guibg=blue

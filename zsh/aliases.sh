@@ -82,7 +82,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias syncAliases='ln -vsf "${HOME}/work/src/github.com/fgrimme/dotfiles/zsh/aliases.sh" "${HOME}/.bash_aliases"'
 alias dot='cd "${HOME}/work/src/github.com/fbngrm/dotfiles"'
 alias bwu='nohup /usr/local/bin/Bitwarden-1.27.1-x86_64.AppImage &'
-alias sc='systemctl'
 alias p='python'
 alias nv='nordvpn'
 alias nvd='nordvpn set killswitch off && nordvpn d'
@@ -98,9 +97,12 @@ alias xoff='xrandr --output DP3 --off'
 alias xr='i3-msg move workspace to output right'
 alias xl='i3-msg move workspace to output left'
 alias v='nvim'
-alias kd='today=`date +%d.%m.%Y`;for file in ~/Dropbox/notes/kieser/*.txt; do echo $today";" >> "$file"; done'
+alias kdu='today=`date +%d.%m.%Y`;for file in ~/Dropbox/notes/kieser/up/*.txt; do echo $today";" >> "$file"; done'
+alias kdl='today=`date +%d.%m.%Y`;for file in ~/Dropbox/notes/kieser/low/*.txt; do echo $today";" >> "$file"; done'
 alias cdz='~/work/src/github.com/fbngrm/zh'
 alias audio='pavucontrol'
+alias ssc='sudo systemctl'
+alias sc='systemctl'
 # v() {
 #   nvim ${1:-.}
 # }

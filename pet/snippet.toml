@@ -442,3 +442,8 @@
   description = "git, open conflicted files in vim"
   command = "nvim $(git diff --name-only --diff-filter=U)"
   output = ""
+
+[[snippets]]
+  description = "grep/search word in files and open in vim"
+  command = "rg --vimgrep 'hao' | vim -q /dev/stdin"
+  output = ""
