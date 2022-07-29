@@ -123,7 +123,7 @@ set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:↲
 
 " tabs
 set ts=4 " 4 spaces tabs
-set expandtab " expand tabs into spaces
+" set expandtab " expand tabs into spaces
 set smarttab " insert tabs on the start of a line according to shiftwidth, not tabstop
 
 " history
@@ -131,9 +131,29 @@ set history=1000 " remember more commands and search history
 set undolevels=1000 " use many much levels of undo
 
 " swap files
-set nobackup
-set noswapfile " IMPORTANT: comment this line if you are working on a remote host
 set wildignore=*.swp,*.bak,*.pyc,*.class
+" Protect changes between writes. Default values of
+" updatecount (200 keystrokes) and updatetime
+" (4 seconds) are fine
+set swapfile
+set directory^=~/.vim/swap//
+
+" protect against crash-during-write
+set writebackup
+" but do not persist backup after successful write
+set nobackup
+" use rename-and-write-new method whenever safe
+set backupcopy=auto
+" patch required to honor double slash at end
+if has("patch-8.1.0251")
+	" consolidate the writebackups -- not a big
+	" deal either way, since they usually get deleted
+	set backupdir^=~/.vim/backup//
+end
+
+" persist the undo tree for each file
+set undofile
+set undodir^=~/.vim/undo//
 
 " autocompletion with tabs
 set wildmode=longest,list,full
@@ -1017,7 +1037,7 @@ EOF
 syntax on
 " let base16colorspace=256  " Access colors present in 256 colorspace
 
-" colorscheme github_dark
-colorscheme github_light
+colorscheme github_dark
+" colorscheme github_light
 set termguicolors
 highlight NvimTreeWindowPicker ctermbg=blue guibg=blue
