@@ -1,10 +1,10 @@
-
 " --------------------------------------------------------------------------------
 " plugins
 " --------------------------------------------------------------------------------
-
 call plug#begin('~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-fugitive'
@@ -16,13 +16,16 @@ Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
 Plug 'easymotion/vim-easymotion'
 Plug 'fatih/vim-go'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'Townk/vim-autoclose'
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
+Plug  'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'sheerun/vim-polyglot'
 Plug 'nazo/pt.vim'
 Plug 'kien/ctrlp.vim'
@@ -44,17 +47,15 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'kyazdani42/nvim-web-devicons' " for file icons
-Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-github.nvim'
 
 Plug 'pwntester/octo.nvim', {'do': 'octo.setup()'}
-Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'adelarsq/vim-devicons-emoji'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
 
 Plug 'chrisbra/unicode.vim'
 Plug 'chrisbra/csv.vim'
@@ -62,6 +63,7 @@ Plug 'sebdah/vim-delve'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 Plug 'projekt0n/github-nvim-theme'
+Plug 'pbrisbin/vim-colors-off'
 
 call plug#end()
 
@@ -113,7 +115,7 @@ set foldcolumn=0
 set conceallevel=0
 
 " omni-completion - we use lsp for this
-set omnifunc=syntaxcomplete#Complete
+" set omnifunc=syntaxcomplete#Complete
 
 " ignore .csv file in autocomplete
 set include=^\\s*#\\s*include\ \\(.csv\\)\\@!
@@ -160,12 +162,13 @@ set wildmode=longest,list,full
 set wildmenu
 
 set noshowmode
-
 " set signcolumn=yes
-
 set fillchars+=vert:│
 
 set mouse=a
+
+" move the cursor anywhere in the window. If you enter characters or insert a visual block, Vim will add whatever spaces are required
+" set virtualedit=all
 
 " wrap word in quotes
 nmap "" ysiw"
@@ -273,13 +276,14 @@ set statusline+=%14(%l,%c%V%)               " line, character
 " automatically interface with the system's clipboard
 " set it to unnamed to use * (PRIMARY, on select)
 " set it to unnamedplus to use + (CLIPBOARD, ^C)
-" set clipboard=unnamedplus
+set clipboard=unnamedplus
 
 " faster clipboard copying/pastig
-" nnoremap <leader>y "+y
-" nnoremap <leader>P "*p
-" nnoremap <leader>Y "*y
-" nnoremap <leader>p "+p
+nnoremap <leader>y "+y
+nnoremap <leader>p "+p
+
+nnoremap <leader>Y "*y
+nnoremap <leader>P "*p
 
 " automatically enable paste mode before pasting and disable afterwards. this
 " avoids auto indentation for pasted text
@@ -310,7 +314,7 @@ while c <= 99
 endwhile
 
 " faster buffer switching
-nnoremap <leader>l :ls<cr>:b<space>
+nnoremap <leader>l :ls<cr>:bu<space>
 
 " --------------------------------------------------------------------------------
 " search
@@ -632,8 +636,8 @@ let g:tern_map_keys=1
 let g:go_def_mapping_enabled = 0
 
 " update the status bar with the type info of the identifier under the cursor every 100ms
-" let g:go_auto_type_info = 1
-" set updatetime=100
+let g:go_auto_type_info = 1
+set updatetime=100
 
 " Use U to show documentation in preview window
 " nnoremap <silent> U :call <SID>show_documentation()<CR>
@@ -641,7 +645,7 @@ let g:go_def_mapping_enabled = 0
 " au FileType go nmap <Leader>db <Plug>(go-doc-browser)
 
 " show type info for the word under your cursor
-" au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>i <Plug>(go-info)
 
 nmap <leader>gg :!go generate %<cr>
 
@@ -852,116 +856,8 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " nvim-tree
 " --------------------------------------------------------------------------------
 
-" default will show icon by default if no icon is provided
-" default shows no icon by default
-nnoremap <leader>j :NvimTreeToggle<CR>
-nnoremap <A-r> :NvimTreeRefresh<CR>
-nnoremap <A-f> :NvimTreeFindFile<CR>
-
-lua << EOF
--- empty setup using defaults
-require("nvim-tree").setup({
-      create_in_closed_folder = true,
-      view = {
-        adaptive_size = false,
-        width = 40,
-        height = 30,
-        side = "left",
-        hide_root_folder = true,
-        signcolumn = "yes",
-        mappings = {
-          custom_only = false,
-          list = {
-            -- user mappings go here
-          },
-        },
-      },
-      renderer = {
-        highlight_opened_files = "name",
-        icons = {
-          webdev_colors = true,
-          git_placement = "before",
-          padding = "",
-          symlink_arrow = "→",
-          show = {
-            file = false,
-            folder = true,
-            folder_arrow = true,
-            git = true,
-          },
-          glyphs = {
-            default = "",
-            symlink = "➛ ",
-            folder = {
-              arrow_closed = "›",
-              arrow_open = "⌄",
-              default = "",
-              open = "",
-              empty = "",
-              empty_open = "",
-              symlink = "→ ",
-              symlink_open = "↓ ",
-            },
-            git = {
-              unstaged = "✗ ",
-              staged = "✓ ",
-              unmerged = "! ",
-              renamed = "➜ ",
-              untracked = "★ ",
-              deleted = "x ",
-              ignored = "◌ ",
-            },
-          },
-        },
-        special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
-      },
-      system_open = {
-        cmd = "xdg-open",
-        args = {},
-      },
-      diagnostics = {
-        enable = true,
-        show_on_dirs = true,
-        icons = {
-          hint = "H",
-          info = "I",
-          warning = "W",
-          error = "E",
-        },
-      },
-      filters = {
-        dotfiles = false,
-        custom = {},
-        exclude = {},
-      },
-      filesystem_watchers = {
-        enable = true,
-        interval = 100,
-        debounce_delay = 50,
-      },
-      git = {
-        enable = true,
-        ignore = true,
-        timeout = 400,
-      },
-      actions = {
-        use_system_clipboard = true,
-        change_dir = {
-          enable = true,
-          global = false,
-          restrict_above_cwd = false,
-        },
-        expand_all = {
-          max_folder_discovery = 300,
-        },
-        remove_file = {
-          close_window = true,
-        },
-      },
-    } -- END_DEFAULT_OPTS
-)
-
-EOF
+nnoremap <leader>j <cmd>CHADopen<cr>
+let g:chadtree_settings = { 'theme': { 'text_colour_set': 'nerdtree_syntax_light', 'icon_glyph_set': 'ascii' } }
 
 " --------------------------------------------------------------------------------
 " lsp
@@ -970,6 +866,7 @@ EOF
 " format
 " autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 " autocmd BufWritePre *.go lua goimports(1000)
+set completeopt=menu,menuone,noselect
 
 lua << EOF
 
@@ -1011,21 +908,55 @@ local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150,
 }
-require('lspconfig')['pyright'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
+
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup {
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        cmp_ultisnips_mappings.jump_backwards(fallback)
+      end
+    end, { 'i', 's' }),
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'ultisnips' }, -- For ultisnips users.
+  }, {
+    { name = 'buffer' },
+  })
 }
-require('lspconfig')['rust_analyzer'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-    -- Server-specific settings...
-    settings = {
-      ["rust-analyzer"] = {}
-    }
-}
+
+
+-- Setup lspconfig.
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 require('lspconfig')['gopls'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
+    capabilities = capabilities
 }
 EOF
 
@@ -1037,7 +968,10 @@ EOF
 syntax on
 " let base16colorspace=256  " Access colors present in 256 colorspace
 
-colorscheme github_dark
+" colorscheme github_dark
 " colorscheme github_light
+"
+colorscheme off
+let g:colors_off_a_little = 1
+
 set termguicolors
-highlight NvimTreeWindowPicker ctermbg=blue guibg=blue
