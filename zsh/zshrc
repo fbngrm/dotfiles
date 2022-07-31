@@ -86,7 +86,7 @@ export GOPATH=$HOME/work
 export GOBIN=$GOPATH/bin
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 export PATH=/usr/local/go/bin:/usr/local/lib:$GOBIN/bin:$JAVA_HOME/bin:$GOBIN:$PATH
-export PATH=/home/fabian/.local/bin:$PATH
+export PATH=/home/f/.local/bin:$PATH
 export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 
 if [ -f ~/.bash_aliases ]; then
