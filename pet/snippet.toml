@@ -447,3 +447,8 @@
   description = "grep/search word in files and open in vim"
   command = "rg --vimgrep 'hao' | vim -q /dev/stdin"
   output = ""
+
+[[snippets]]
+  description = "list audio sources"
+  command = "pacmd list-sources"
+  output = ""
