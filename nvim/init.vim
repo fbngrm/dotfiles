@@ -170,6 +170,16 @@ set mouse=a
 " move the cursor anywhere in the window. If you enter characters or insert a visual block, Vim will add whatever spaces are required
 " set virtualedit=all
 
+" switch back to insert mode and trigger InsertLeave autocommand
+inoremap jj <C-[>
+
+" save file
+nmap <silent> <leader>k :w<CR>
+inoremap ;; <c-o>:w<CR>
+" switch to normal mode and save file, stay in normal mode
+inoremap ;k <C-[>:w<CR>
+
+
 " wrap word in quotes
 nmap "" ysiw"
 nmap '' ysiw'
@@ -178,7 +188,6 @@ nmap '' ysiw'
 nmap <CR> o<Esc>
 
 " yank in word
-nmap <leader>w yiw<CR>
 nmap <leader>w yiw<CR>
 nnoremap YY ^y$
 
@@ -665,8 +674,8 @@ let g:go_highlight_methods = 1
 " let g:go_list_type = "quickfix"
 " go - map :GoFmt to goimports to auto-import modules
 " let g:go_fmt_command = "gofmt"
-" autocmd FileType go autocmd BufWritePre <buffer> !gofmt -s -w %
-" au BufWritePost *.go silent! !gofmt -s -w %
+" autocmd FileType go autocmd BufWritePre <buffer> silent! !gofmt -s -w %
+" au BufWritePre *.go silent! !gofmt -s -w %
 
 let g:go_addtags_transform = "camelcase"
 
@@ -866,6 +875,7 @@ let g:chadtree_settings = { 'theme': { 'text_colour_set': 'nerdtree_syntax_light
 " format
 " autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 " autocmd BufWritePre *.go lua goimports(1000)
+let g:go_fmt_command = "goimports"
 set completeopt=menu,menuone,noselect
 
 lua << EOF
@@ -966,12 +976,12 @@ EOF
 
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 syntax on
-" let base16colorspace=256  " Access colors present in 256 colorspace
+let base16colorspace=256  " Access colors present in 256 colorspace
 
 " colorscheme github_dark
-" colorscheme github_light
+colorscheme github_light
 "
-colorscheme off
+" colorscheme off
 let g:colors_off_a_little = 1
 
 set termguicolors

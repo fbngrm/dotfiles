@@ -126,6 +126,8 @@ dunst: dunst-pkgs dunst-cfg dunst-srv
 
 fonts:
 	sudo pacman -S ttf-dejavu adobe-source-han-serif-cn-fonts adobe-source-han-sans-cn-fonts noto-fonts-cjk noto-fonts ttf-roboto
+	mkdir -p ~/.local/share/fonts
+    cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
 	mkdir -vp "${HOME}/.config/fontconfig"
 	ln -vsf "${PWD}/fonts/config.conf" "${HOME}/.config/fontconfig/fonts.conf"
 	fc-cache -fv

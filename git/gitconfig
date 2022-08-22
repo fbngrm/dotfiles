@@ -8,8 +8,6 @@
 [alias]
 	go = log --graph --all --decorate --oneline
 	root = rev-parse --show-toplevel
-; [includeIf "gitdir:~/work/src/gitlab.com/pentoapp/pento/"]
-;     path = ~/.gitconfig_work
 [credential "https://github.com"]
 	helper = !/usr/bin/gh auth git-credential
 [diff]
@@ -22,3 +20,10 @@
     cmd = kitty +kitten diff $LOCAL $REMOTE
 [difftool "kitty.gui"]
     cmd = kitty kitty +kitten diff $LOCAL $REMOTE
+[mergetool]
+	prompt = false
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[init]
+	defaultBranch = master

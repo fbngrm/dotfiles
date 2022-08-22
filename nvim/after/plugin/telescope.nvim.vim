@@ -12,7 +12,7 @@ require('telescope').setup({
       }
       -- other layout configuration here
     },
-    border = false,
+    border = true,
     -- other defaults configuration here
   },
   -- other configuration values here

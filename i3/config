@@ -277,8 +277,8 @@ for_window [class="Arandr"] floating enable
 
 set $mode_display Config monitor resolution - laptop (l) - laptop+dell (d)
 mode "$mode_display" {
-    bindsym 1 exec --no-startup-id xrandr --output eDP-1 --primary --mode 2256x1504 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off, mode "default"
-    bindsym 2 exec --no-startup-id xrandr --output eDP-1 --primary --mode 2256x1504 --pos 0x656 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --mode 3840x2160 --pos 2256x0 --rotate normal, mode "default"
+    bindsym l exec --no-startup-id xrandr --output eDP-1 --primary --mode 2256x1504 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off, mode "default"
+    bindsym d exec --no-startup-id xrandr --output eDP-1 --primary --mode 2256x1504 --pos 0x656 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --mode 3840x2160 --pos 2256x0 --rotate normal, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
