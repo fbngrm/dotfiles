@@ -7,7 +7,7 @@ cursor #044289
 cursor_text_color background
 
 # Tabs
-active_tab_background #0969da
+active_tab_background #6495ED # kornblumenblau
 active_tab_foreground #f6f8fa
 inactive_tab_background #424242
 inactive_tab_foreground #f6f8fa
