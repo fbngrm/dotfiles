@@ -16,7 +16,7 @@ x:
 i3:
 	mkdir -p "${HOME}/.config/i3"
 	ln -vsf "${PWD}/i3/config" "${HOME}/.config/i3/config"
-	ln -vsf "${PWD}/i3/scripts" "${HOME}/.config/i3/scripts"
+	ln -vsf ${PWD}/i3/scripts/* "${HOME}/.config/i3/scripts"
 
 cron:
 	sudo mkdir -p /etc/cronjobs/
@@ -287,6 +287,17 @@ nicotine:
 rsync:
 	sudo pacman -S  --needed --noconfirm rsync
 
+darkman-cfg:
+	mkdir -p ${HOME}/.config/darkman
+	ln -vsf "${PWD}/darkman/config.yaml" "${HOME}/.config/darkman/config.yaml"
+
+	# sudo sh -c 'echo XDG_DATA_DIRS=/usr/local/share:/usr/share >> /etc/environment'
+
+	sudo mkdir -p "/usr/local/share/dark-mode.d"
+	sudo ln -vsf ${PWD}/darkman/scripts/dark-mode.d/* /usr/local/share/dark-mode.d/
+	sudo mkdir -p "/usr/local/share/light-mode.d"
+	sudo ln -vsf ${PWD}/darkman/scripts/light-mode.d/* /usr/local/share/light-mode.d/
+
 .PHONY: \
 	zsh \
 	capture \
@@ -309,7 +320,8 @@ rsync:
 	input-method \
 	ranger \
 	bluetooth \
-	x
+	x \
+	darkman-cfg
 
 install: \
 	git \
@@ -336,7 +348,7 @@ install: \
 	ranger \
 	bluetooth \
 	x
-
 	# dropbox \
 	fonts \
 	gnupg \
+	darkman-cfg
