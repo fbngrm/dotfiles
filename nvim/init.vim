@@ -64,6 +64,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 Plug 'projekt0n/github-nvim-theme'
 Plug 'pbrisbin/vim-colors-off'
+Plug 'altercation/vim-colors-solarized'
 
 call plug#end()
 
@@ -975,13 +976,32 @@ EOF
 " --------------------------------------------------------------------------------
 
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-syntax on
-let base16colorspace=256  " Access colors present in 256 colorspace
 
 " colorscheme github_dark
-colorscheme github_light
-"
-" colorscheme off
-let g:colors_off_a_little = 1
+" colorscheme github_light
 
+let base16colorspace=256  " Access colors present in 256 colorspace
+
+" no colors but solarized light background
+" writing
+syntax on
+colorscheme off
+let g:colors_off_a_little = 1
 set termguicolors
+autocmd ColorScheme * highlight! Normal ctermbg=none guibg=none
+
+" black on white with a little color
+" writing
+" syntax on
+" colorscheme off
+" let g:colors_off_a_little = 1
+" autocmd ColorScheme * highlight! Normal ctermfg=black
+
+" solarized light
+" coding
+ " syntax enable
+ " colorscheme solarized
+ " highlight clear SignColumn
+ " set background=light
+ " set background=dark
+
