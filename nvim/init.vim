@@ -933,8 +933,7 @@ cmp.setup {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
+    ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
     ['<Tab>'] = cmp.mapping(function(fallback)
@@ -969,6 +968,11 @@ require('lspconfig')['gopls'].setup{
     flags = lsp_flags,
     capabilities = capabilities
 }
+require('lspconfig')['pyright'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+}
 EOF
 
 " --------------------------------------------------------------------------------
@@ -980,15 +984,15 @@ EOF
 " colorscheme github_dark
 " colorscheme github_light
 
-let base16colorspace=256  " Access colors present in 256 colorspace
+" let base16colorspace=256  " Access colors present in 256 colorspace
 
 " no colors but solarized light background
 " writing
-syntax on
-colorscheme off
-let g:colors_off_a_little = 1
-set termguicolors
-autocmd ColorScheme * highlight! Normal ctermbg=none guibg=none
+" syntax on
+" colorscheme off
+" let g:colors_off_a_little = 1
+" set termguicolors
+" autocmd ColorScheme * highlight! Normal ctermbg=none guibg=none
 
 " black on white with a little color
 " writing
@@ -999,9 +1003,8 @@ autocmd ColorScheme * highlight! Normal ctermbg=none guibg=none
 
 " solarized light
 " coding
- " syntax enable
- " colorscheme solarized
- " highlight clear SignColumn
- " set background=light
- " set background=dark
-
+syntax enable
+colorscheme solarized
+set background=light
+highlight clear SignColumn
+" set background=dark
