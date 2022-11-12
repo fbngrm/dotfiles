@@ -452,3 +452,23 @@
   description = "list audio sources"
   command = "pacmd list-sources"
   output = ""
+
+[[snippets]]
+  description = "update signatures and system"
+  command = "sudo pacman -Sy archlinux-keyring && sudo pacman -Su"
+  output = ""
+
+[[snippets]]
+  description = "mount usb drive"
+  command = "sudo mkdir /mnt/usb && sudo mount /dev/... /mnt/usb && umount /mnt/usb"
+  output = ""
+
+[[snippets]]
+  description = "batch clean audio with noise sample"
+  command = "ls -r -1 *.mp3 | xargs -L1 -I{} sox {}  {}_noise_reduced.mp3  noisered ../../noise_profile_file 0.30"
+  output = ""
+
+[[snippets]]
+  description = "check RAM size"
+  command = "grep MemTotal /proc/meminfo"
+  output = ""

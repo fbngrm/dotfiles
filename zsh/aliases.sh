@@ -6,6 +6,9 @@ alias confl='nvim $(git diff --name-only --diff-filter=U)'
 # pacman
 alias pi='sudo pacman -S'
 
+# terraform
+alias tf='/usr/bin/terraform'
+
 alias g='gs'
 alias gl='git log'
 alias gd='git diff '
@@ -46,7 +49,6 @@ alias md='mkdir -p'
 alias rd=rmdir
 alias d='dirs -v'
 alias db='nohup /usr/share/dbeaver/dbeaver &>/dev/null &'
-alias tf='/opt/terraform'
 alias d='docker '
 alias dc='docker-compose '
 alias dcd='docker-compose down'
@@ -103,6 +105,10 @@ alias audio='pavucontrol'
 alias ssc='sudo systemctl'
 alias sc='systemctl'
 alias xo='xdg-open'
+
+alias cz='cd ~/go/src/github.com/zededa'
+alias z='./zmanage'
+alias rmvol='docker volume rm local_cert-store local_esdata1 local_image-store local_influxdb-data local_kafka-data01 local_postgresql-data local_vault-data01 local_vault-secrets local_zk-data01 local_zk-txn-logs01 local_zredis01-data local_zsentinel01-data'
 # v() {
 #   nvim ${1:-.}
 # }

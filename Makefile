@@ -29,15 +29,18 @@ audio-srv:
 		pulseaudio \
 		pulseaudio-alsa \
 		pulseaudio-bluetooth
-	# ln -vsf "${PWD}/mpd/mpd.conf" "${HOME}/.config/mpd/mpd.conf"
-	# ln -vsf "${PWD}/mpd/playlists" "${HOME}/.config/mpd/playlists"
+	mkdir -p "${HOME}/.config/mpd/"
+	ln -vsf "${PWD}/mpd/mpd.conf" "${HOME}/.config/mpd/mpd.conf"
+	ln -vsf "${PWD}/mpd/playlists" "${HOME}/.config/mpd/playlists"
 	systemctl --user enable mpd.service
 
 audio-cli:
 	sudo pacman -S --needed --noconfirm \
 		mpv \
+		mpc \
 		ncmpcpp
-	ln -vsf "${PWD}/ncmpcpp" "${HOME}/.config"
+	mkdir -p "${HOME}/.config/ncmpcpp/"
+	ln -vsf "${PWD}/ncmpcpp/config" "${HOME}/.config/ncmpcpp/config"
 
 audio: audio-srv audio-cli
 

@@ -27,3 +27,5 @@
 	conflictstyle = diff3
 [init]
 	defaultBranch = master
+[includeIf "gitdir:~/go/src/github.com/zededa/"]
+    path = .gitconfig_zededa

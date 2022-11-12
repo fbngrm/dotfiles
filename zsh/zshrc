@@ -82,12 +82,13 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-export GOPATH=$HOME/work
+export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 export PATH=/usr/local/go/bin:/usr/local/lib:$GOBIN/bin:$JAVA_HOME/bin:$GOBIN:$PATH
 export PATH=/home/f/.local/bin:$PATH
 export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+export PATH=$HOME/work/bin:$PATH
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -143,3 +144,10 @@ if [ -f '/home/f/downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/f/dow
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/f/downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/f/downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# zh service account key
+export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/credentials/zhong-366420-2deae11a74e0.json
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
+source ~/.zcredentials

@@ -40,6 +40,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'preservim/tagbar'
 Plug 'vim-scripts/scratch.vim'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'jvirtanen/vim-hcl'
 
 Plug 'buoto/gotests-vim'
 
@@ -175,10 +176,10 @@ set mouse=a
 inoremap jj <C-[>
 
 " save file
-nmap <silent> <leader>k :w<CR>
+nmap <silent> <space> :w<CR>
 inoremap ;; <c-o>:w<CR>
 " switch to normal mode and save file, stay in normal mode
-inoremap ;k <C-[>:w<CR>
+inoremap vv <C-[>:w<CR>
 
 
 " wrap word in quotes
@@ -187,6 +188,8 @@ nmap '' ysiw'
 
 " insert line after the current line in cmd mode
 nmap <CR> o<Esc>
+" open files in quickfix list with enter key
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
 " yank in word
 nmap <leader>w yiw<CR>
@@ -229,7 +232,7 @@ endfor
 " cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 
 " remap record key to Q
-nnoremap Q q
+" nnoremap Q q
 nnoremap q <Nop>
 
 noremap Zz <c-w>_ \| <c-w>\|
@@ -462,6 +465,13 @@ nnoremap <F9> :Explore . <cr>
 
 " <F4> explore
 nnoremap <expr> <f4> &foldlevel ? 'zM' :'zR'
+" zo opens a fold at the cursor.
+" zShift+o opens all folds at the cursor.
+" zc closes a fold at the cursor.
+" zm increases the foldlevel by one.
+" zShift+m closes all open folds.
+" zr decreases the foldlevel by one.
+" zShift+r decreases the foldlevel to zero -- all folds will be open.
 
 
 " --------------------------------------------------------------------------------
@@ -828,7 +838,6 @@ function! PrevHunkAllBuffers()
     endif
   endwhile
 endfunction
-
 nmap <leader>hN :call NextHunkAllBuffers()<CR>
 nmap <leader>hM :call PrevHunkAllBuffers()<CR>
 
@@ -867,7 +876,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " --------------------------------------------------------------------------------
 
 nnoremap <leader>j <cmd>CHADopen<cr>
-let g:chadtree_settings = { 'theme': { 'text_colour_set': 'nerdtree_syntax_light', 'icon_glyph_set': 'ascii' } }
+let g:chadtree_settings = { 'theme': { 'text_colour_set': 'env', 'icon_glyph_set': 'ascii' } }
 
 " --------------------------------------------------------------------------------
 " lsp
@@ -939,15 +948,11 @@ cmp.setup {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      else
-        cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
       end
     end, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      else
-        cmp_ultisnips_mappings.jump_backwards(fallback)
       end
     end, { 'i', 's' }),
   }),
@@ -981,6 +986,7 @@ EOF
 
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
+syntax on
 " colorscheme github_dark
 " colorscheme github_light
 
@@ -1005,6 +1011,7 @@ EOF
 " coding
 syntax enable
 colorscheme solarized
-set background=light
+" set background=light
+set background=dark
 highlight clear SignColumn
-" set background=dark
+
