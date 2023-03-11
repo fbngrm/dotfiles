@@ -472,3 +472,23 @@
   description = "check RAM size"
   command = "grep MemTotal /proc/meminfo"
   output = ""
+
+[[snippets]]
+  description = "mount ntfs with rw permission"
+  command = "sudo mount -o rw,auto,user,fmask=0022,dmask=0000  /dev/sdb2 /mnt/usb "
+  output = ""
+
+[[snippets]]
+  description = "add network to wpa_supplicant"
+  command = "wpa_passphrase MYSSID passphrase > /etc/wpa_supplicant/wpa_supplicant.conf"
+  output = ""
+
+[[snippets]]
+  description = "ripgrep ignore dir and glob by fileextension"
+  command = "rg csrf -g '!vendor/' -g '!tests' -g '*.go'"
+  output = ""
+
+[[snippets]]
+  description = "safely remove/unmount usb drive"
+  command = "sudo udisksctl unmount -b /dev/sda1 && sudo udisksctl power-off -b /dev/sda\\n\\n"
+  output = ""

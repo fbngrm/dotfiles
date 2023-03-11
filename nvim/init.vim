@@ -5,6 +5,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-fugitive'
@@ -64,6 +66,7 @@ Plug 'sebdah/vim-delve'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 Plug 'projekt0n/github-nvim-theme'
+Plug 'nordtheme/vim'
 Plug 'pbrisbin/vim-colors-off'
 Plug 'altercation/vim-colors-solarized'
 
@@ -173,13 +176,13 @@ set mouse=a
 " set virtualedit=all
 
 " switch back to insert mode and trigger InsertLeave autocommand
-inoremap jj <C-[>
+" inoremap jj <C-[>
 
 " save file
 nmap <silent> <space> :w<CR>
-inoremap ;; <c-o>:w<CR>
+inoremap jj <c-o>:w<CR>
 " switch to normal mode and save file, stay in normal mode
-inoremap vv <C-[>:w<CR>
+inoremap kk <C-[>:w<CR>
 
 
 " wrap word in quotes
@@ -200,6 +203,9 @@ nnoremap YY ^y$
 " noremap <c-s> :update<CR><ESC>
 inoremap <c-q> <c-o>:quit<CR><ESC>
 noremap <c-q> :quit<CR><ESC>
+
+noremap <c-y> DjA;<Esc>pa;<Esc>j0Dk$pdd<CR>
+noremap <c-x> jjj0DkkkA <Esc>pjjjdd0DkkA <Esc>pjjdd0DkA <Esc>pjddkkk
 
 " map the leader key \ to ,
 let mapleader = ";"
@@ -328,6 +334,9 @@ endwhile
 
 " faster buffer switching
 nnoremap <leader>l :ls<cr>:bu<space>
+nnoremap <leader>k :b#<cr>
+nnoremap <leader>p :bp<cr>
+nnoremap <leader>n :bn<cr>
 
 " --------------------------------------------------------------------------------
 " search
@@ -560,6 +569,8 @@ augroup grm_fugitive
   autocmd!
   autocmd FileType fugitive call s:ftplugin_fugitive()
 augroup END
+
+nnoremap <leader>gh :0Gclog<CR>
 
 " --------------------------------------------------------------------------------
 " markdown
@@ -959,9 +970,16 @@ cmp.setup {
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'ultisnips' }, -- For ultisnips users.
-  }, {
-    { name = 'buffer' },
-  })
+    {
+      name = 'buffer',
+      option = {
+        keyword_length = 2,
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end
+      },
+    },
+  }),
 }
 
 
@@ -998,7 +1016,7 @@ syntax on
 " colorscheme off
 " let g:colors_off_a_little = 1
 " set termguicolors
-" autocmd ColorScheme * highlight! Normal ctermbg=none guibg=none
+" autocmd ColorScheme * highlight! Normal ctermbg=none guibg=none ctermfg=black
 
 " black on white with a little color
 " writing
@@ -1010,8 +1028,9 @@ syntax on
 " solarized light
 " coding
 syntax enable
-colorscheme solarized
+" colorscheme solarized
 " set background=light
-set background=dark
+" set background=dark
+colorscheme nord
 highlight clear SignColumn
 

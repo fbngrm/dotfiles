@@ -132,7 +132,7 @@ set $ws4 "4:db"
 set $ws5 "5:notes"
 set $ws6 "6:music"
 set $ws7 "7:files"
-set $ws8 "8"
+set $ws8 "8:telegram"
 set $ws9 "9"
 set $ws10 "10"
 
@@ -169,13 +169,12 @@ workspace_auto_back_and_forth yes
 assign [class="vivaldi-stable" instance="Vivaldi-stable"] → $ws1
 assign [class="Mail" instance="thunderbird"] → $ws3
 
-set $mode_open Open (k) kitty, (m) mail, (v) vivaldi, (c) chromium, (n) notes, (d) dbeaver, (t) telegram, (p) kitty+pinyin
+set $mode_open Open (k) kitty, (m) mail, (v) vivaldi, (f) firefox, (n) notes, (d) dbeaver, (t) telegram, (p) kitty+pinyin
 mode "$mode_open" {
     bindsym k exec --no-startup-id kitty, mode "default"
     bindsym p exec --no-startup-id env GLFW_IM_MODULE=ibus kitty, mode "default"
     bindsym m exec --no-startup-id thunderbird, mode "default"
     bindsym v exec --no-startup-id vivaldi-stable, mode "default"
-    bindsym c exec --no-startup-id chromium, mode "default"
     bindsym d exec --no-startup-id dbeaver, mode "default"
     bindsym t exec --no-startup-id telegram, mode "default"
     bindsym f exec --no-startup-id firefox, mode "default"
@@ -188,7 +187,8 @@ mode "$mode_open" {
 bindsym $mod+o mode "$mode_open"
 
 # rofi
-bindsym $mod+space exec --no-startup-id rofi -show combi -run-command "i3-msg exec '{cmd}'" -show-icons
+# bindsym $mod+space exec --no-startup-id rofi -show combi -run-command "i3-msg exec '{cmd}'" -show-icons
+bindsym $mod+space exec rofi -show drun
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -246,36 +246,68 @@ focus_follows_mouse no
 set $i3lockwall sh ~/.config/i3/scripts/lock.sh
 bindsym $mod+Ctrl+Shift+l exec --no-startup-id $i3lockwall
 
-# get color from XResource config - variable_name XResource fallback
-# special
-set_from_resource $foreground foreground #C6C6C6
-set_from_resource $background background #1C1C1C
-set_from_resource $cursorColor cursor_color #C6C6C6
-# black
-set_from_resource $black1 color0 #303030
-set_from_resource $black2 color8 #444444
-set $trueblack #000000
-# red
-set_from_resource $red1 color1 #d75f5f
-set_from_resource $red2 color9 #d75f5f
-# green
-set_from_resource $green1 color2 #87AF87
-set_from_resource $green2 color10 #87AF87
-# yellow
-set_from_resource $yellow1 color3 #ffd75f
-set_from_resource $yellow2 color11 #ffd75f
-# blue
-set_from_resource $blue1 color4 #87afd7
-set_from_resource $blue2 color12 #87afd7
-# magenta
-set_from_resource $cyan1 color5 #afafd7
-set_from_resource $cyan2 color13 #afafd7
-# cyan
-set_from_resource $cyan1 color6 #afd7ff
-set_from_resource $cyan2 color14 #afd7ff
-# white
-set_from_resource $white1 color7 #4E4E4E
-set_from_resource $white2 color15 #ffffff
+# # get color from XResource config - variable_name XResource fallback
+# # special
+# set_from_resource $foreground foreground #C6C6C6
+# set_from_resource $background background #1C1C1C
+# set_from_resource $cursorColor cursor_color #C6C6C6
+# # black
+# set_from_resource $black1 color0 #303030
+# set_from_resource $black2 color8 #444444
+# set $trueblack #000000
+# # red
+# set_from_resource $red1 color1 #d75f5f
+# set_from_resource $red2 color9 #d75f5f
+# # green
+# set_from_resource $green1 color2 #87AF87
+# set_from_resource $green2 color10 #87AF87
+# # yellow
+# set_from_resource $yellow1 color3 #ffd75f
+# set_from_resource $yellow2 color11 #ffd75f
+# # blue
+# set_from_resource $blue1 color4 #87afd7
+# set_from_resource $blue2 color12 #87afd7
+# # magenta
+# set_from_resource $cyan1 color5 #afafd7
+# set_from_resource $cyan2 color13 #afafd7
+# # cyan
+# set_from_resource $cyan1 color6 #afd7ff
+# set_from_resource $cyan2 color14 #afd7ff
+# # white
+# set_from_resource $white1 color7 #4E4E4E
+# set_from_resource $white2 color15 #ffffff
+
+# nord theme
+set_from_resource $base03   i3wm.color8     #002b36
+set_from_resource $base02   i3wm.color0     #073642
+set_from_resource $base01   i3wm.color10    #586e75
+set_from_resource $base00   i3wm.color11    #657b83
+set_from_resource $base0    i3wm.color12    #839496
+set_from_resource $base1    i3wm.color14    #93a1a1
+set_from_resource $base2    i3wm.color7     #eee8d5
+set_from_resource $base3    i3wm.color15    #fdf6e3
+
+set_from_resource $yellow   i3wm.color3     #b58900
+set_from_resource $orange   i3wm.color9     #cb4b16
+set_from_resource $red      i3wm.color1     #dc322f
+set_from_resource $magenta  i3wm.color5     #d33682
+set_from_resource $violet   i3wm.color13    #6c71c4
+set_from_resource $blue     i3wm.color4     #268bd2
+set_from_resource $cyan     i3wm.color6     #2aa198
+set_from_resource $green    i3wm.color2     #859900
+
+set_from_resource $background i3wm.background $base3
+set_from_resource $foreground i3wm.foreground $base00
+
+set_from_resource $lighterbg  i3wm.lighterbg  $base02
+set_from_resource $separator  i3wm.separator  $lighterbg
+
+#class                      border         backgr	  text	   indicator
+client.focused		        #8dab43        #8dab43        $base3  $background
+client.focused_inactive	    #2C313D        #303743        $background  $background
+client.unfocused	        #2C313D        #303743        $background  $background
+client.urgent		        $background    #282d37    $background  $background
+client.placeholder	        $background    #282D37    $background  $background
 
 # configure screens
 for_window [class="Arandr"] floating enable
@@ -294,6 +326,8 @@ bindsym $mod+x mode "$mode_display"
 
 # swap ESC and Caps Lock
 exec_always --no-startup-id setxkbmap -option "caps:swapescape"
+
+bindsym Print exec flameshot gui
 
 # layout
 hide_edge_borders both

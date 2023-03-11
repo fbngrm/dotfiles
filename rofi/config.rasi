@@ -1,3 +1,17 @@
+configuration {
+  show-icons: false;
+  modi: "window,drun,ssh,combi";
+  /* combi-modi: "window,drun,ssh"; */
+  lines: 7;
+  font: "sans-serif 14";
+  line-padding: 8;
+  matching: "fuzzy";
+  bw: 0;
+  padding: 0;
+  separator-style: none;
+  hide-scrollbar: true;
+  line-margin: 0;
+}
 * {
   bg: #282c34;
   fg: #d8dee9;
@@ -5,6 +19,7 @@
   cyan: #88c0d0;
   red: #bf616a;
   magenta: #c678dd;
+  green: #8dab43;
 
   background: @bg;
   foreground: @fg;
@@ -15,88 +30,88 @@
 
   normal-background: @background;
   normal-foreground: @foreground;
-  active-background: @magenta;
+  active-background: @green;
   active-foreground: @foreground;
   urgent-background: @red;
   urgent-foreground: @foreground;
 
   alternate-normal-background: @background;
   alternate-normal-foreground: @foreground;
-  alternate-active-background: @magenta;
+  alternate-active-background: @green;
   alternate-active-foreground: @foreground;
   alternate-urgent-background: @red;
   alternate-urgent-foreground: @foreground;
 
-  selected-normal-background: @magenta;
+  selected-normal-background: @green;
   selected-normal-foreground: @foreground;
-  selected-active-background: @magenta;
+  selected-active-background: @green;
   selected-active-foreground: @foreground;
   selected-urgent-background: @red;
   selected-urgent-foreground: @foreground;
 }
 
-element {
+#element {
   padding: 1px;
   spacing: 5px;
   border: 0;
 }
 
-element normal.normal {
+#element normal.normal {
   background-color: @normal-background;
   text-color: @normal-foreground;
 }
 
-element normal.urgent {
+#element normal.urgent {
   background-color: @urgent-background;
   text-color: @urgent-foreground;
 }
 
-element normal.active {
+#element normal.active {
   background-color: @active-background;
   text-color: @active-foreground;
 }
 
-element selected.normal {
+#element selected.normal {
   background-color: @selected-normal-background;
   text-color: @selected-normal-foreground;
 }
 
-element selected.urgent {
+#element selected.urgent {
   background-color: @selected-urgent-background;
   text-color: @selected-urgent-foreground;
 }
 
-element selected.active {
+#element selected.active {
   background-color: @selected-active-background;
   text-color: @selected-active-foreground;
 }
 
-element alternate.normal {
+#element alternate.normal {
   background-color: @alternate-normal-background;
   text-color: @alternate-normal-foreground;
 }
 
-element alternate.urgent {
+#element alternate.urgent {
   background-color: @alternate-urgent-background;
   text-color: @alternate-urgent-foreground;
 }
 
-element alternate.active {
+#element alternate.active {
   background-color: @alternate-active-background;
   text-color: @alternate-active-foreground;
 }
 
-element-text {
+#element-text {
   text-color: inherit;
   highlight: inherit;
 }
 
-element-icon {
+#element-icon {
   size: 1.0000em;
   text-color: inherit;
 }
 
-window {
+#window {
   padding: 5;
   background-color: @background;
   border: 1;
@@ -174,6 +189,7 @@ case-indicator {
 
 entry {
   spacing: 0;
+  padding: 16;
   text-color: @normal-foreground;
   placeholder-color: @grey;
   placeholder: "Type to filter";
@@ -181,6 +197,7 @@ entry {
 
 prompt {
   spacing: 0;
+  padding: 16;
   text-color: @normal-foreground;
 }
 

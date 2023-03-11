@@ -70,7 +70,6 @@ alias gg='go generate'
 alias gmv='go mod vendor'
 alias dct='docker-compose --profile tracing up'
 alias dcp='docker-compose --profile seed-db-with-uk-production up'
-alias ys='pp && cd client && yarn start'
 alias dcb='docker-compose run web bash'
 alias gg='git log --graph --all --decorate --oneline'
 alias ww='cd ~/work/src/github.com/fbngrm'
@@ -92,6 +91,7 @@ alias yn="/usr/bin/yarnpkg"
 alias vd="pulsemixer --change-volume=-10 --id=sink-48"
 alias vu="pulsemixer --change-volume=+10 --id=sink-48"
 alias x='cd ~/Dropbox/notes && nvim .'
+alias xw='cd ~/Dropbox/notes && nvim ./writing/w/scratch.md'
 alias ba='nvim ~/.bash_aliases'
 alias sba='source ~/.bash_aliases'
 alias xoff='xrandr --output DP3 --off'
@@ -107,6 +107,8 @@ alias sc='systemctl'
 alias xo='xdg-open'
 
 alias cz='cd ~/go/src/github.com/zededa'
+alias czz='cd ~/go/src/github.com/zededa/zedcloud'
+alias czt='cd ~/go/src/github.com/zededa/terraform-provider-zedcloud'
 alias z='./zmanage'
 alias rmvol='docker volume rm local_cert-store local_esdata1 local_image-store local_influxdb-data local_kafka-data01 local_postgresql-data local_vault-data01 local_vault-secrets local_zk-data01 local_zk-txn-logs01 local_zredis01-data local_zsentinel01-data'
 # v() {
