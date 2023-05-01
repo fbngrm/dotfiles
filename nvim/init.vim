@@ -64,11 +64,15 @@ Plug 'chrisbra/unicode.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'sebdah/vim-delve'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 Plug 'projekt0n/github-nvim-theme'
 Plug 'nordtheme/vim'
 Plug 'pbrisbin/vim-colors-off'
 Plug 'altercation/vim-colors-solarized'
+
+Plug 'vimwiki/vimwiki'
+Plug 'michal-h21/vim-zettel'
 
 call plug#end()
 
@@ -247,6 +251,8 @@ noremap Zo <c-w>=
 " remove the split line
 " set fillchars+=vert:\ 
 
+set guicursor+=a:-blinkwait175-blinkoff150-blinkon175
+
 " --------------------------------------------------------------------------------
 "  macros
 "  --------------------------------------------------------------------------------
@@ -347,7 +353,7 @@ set hlsearch " highlight search terms
 set smartcase " ignore case if search pattern is all lowercase, case-sensitive otherwise
 set ignorecase " ignore case when searching
 
-" search with ctrl+s
+" search and replace with ctrl+s
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 set grepprg=rg\ --vimgrep
@@ -985,7 +991,7 @@ cmp.setup {
 
 -- Setup lspconfig.
 -- Add additional capabilities supported by nvim-cmp
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 require('lspconfig')['gopls'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
@@ -997,6 +1003,12 @@ require('lspconfig')['pyright'].setup{
     capabilities = capabilities
 }
 EOF
+
+" --------------------------------------------------------------------------------
+" vim-wiki
+" --------------------------------------------------------------------------------
+
+let g:vimwiki_list = [{'path':'~/work/src/github.com/fbngrm/vimwiki/markdown/','ext':'.md','syntax':'markdown'}, {"path":"~/work/src/github.com/fbngrm/vimwiki/wiki/"}]
 
 " --------------------------------------------------------------------------------
 " color theme
@@ -1028,9 +1040,8 @@ syntax on
 " solarized light
 " coding
 syntax enable
-" colorscheme solarized
-" set background=light
+colorscheme solarized
+set background=light
 " set background=dark
-colorscheme nord
+" colorscheme nord
 highlight clear SignColumn
-

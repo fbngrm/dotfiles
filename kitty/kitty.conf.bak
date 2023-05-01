@@ -72,8 +72,9 @@ map ctrl+f launch --type=overlay --stdin-source=@screen_scrollback /usr/bin/fzf 
 # include ./themes/github_dark_default.conf
 # include ./themes/github_light_default.conf
 
-
 # BEGIN_KITTY_THEME
-# Solarized Light
+# Belafonte Night
 include current-theme.conf
 # END_KITTY_THEME
+# cursor #e702f7
+

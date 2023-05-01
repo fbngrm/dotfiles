@@ -151,3 +151,5 @@ export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/credentials/zhong-366420-
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 source ~/.zcredentials
+
+[ -f "/home/f/.ghcup/env" ] && source "/home/f/.ghcup/env" # ghcup-env

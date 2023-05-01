@@ -18,6 +18,11 @@ i3:
 	ln -vsf "${PWD}/i3/config" "${HOME}/.config/i3/config"
 	ln -vsf ${PWD}/i3/scripts/* "${HOME}/.config/i3/scripts"
 
+polybar:
+	mkdir -p "${HOME}/.config/polybar"
+	ln -vsf "${PWD}/polybar/config" "${HOME}/.config/polybar/config"
+	ln -vsf "${PWD}/polybar/launch.sh" "${HOME}/.config/polybar/launch.sh"
+
 cron:
 	sudo mkdir -p /etc/cronjobs/
 	sudo ln -vsf "${PWD}/cron/cron.d/sync_music" "/etc/cron.d/sync_music.job"
@@ -319,6 +324,7 @@ darkman-cfg:
     rsync \
 	cron \
 	i3 \
+    polybar \
 	pet \
 	input-method \
 	ranger \
@@ -346,6 +352,7 @@ install: \
 	network-manager \
 	cron \
 	i3 \
+    polybar \
 	pet \
 	input-method \
 	ranger \

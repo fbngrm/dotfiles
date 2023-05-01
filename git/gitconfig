@@ -29,3 +29,5 @@
 	defaultBranch = master
 [includeIf "gitdir:~/go/src/github.com/zededa/"]
     path = .gitconfig_zededa
+[includeIf "gitdir:~/work/src/github.com/fbngrm/unknown.flowers/"]
+    path = .gitconfig_franky
