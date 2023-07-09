@@ -492,3 +492,18 @@
   description = "safely remove/unmount usb drive"
   command = "sudo udisksctl unmount -b /dev/sda1 && sudo udisksctl power-off -b /dev/sda\\n\\n"
   output = ""
+
+[[snippets]]
+  description = "find process running on port"
+  command = "sudo ss -lptn 'sport = :8888'"
+  output = ""
+
+[[snippets]]
+  description = "gtk 3 settings"
+  command = "nvim .config/gtk-3.0/settings.ini"
+  output = ""
+
+[[snippets]]
+  description = "vim bookmarks"
+  command = "ma mA `a `A"
+  output = ""

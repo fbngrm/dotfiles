@@ -1,5 +1,9 @@
-input-method-pkg:
-	sudo pacman -S fcitx5 fcitx5-im fcitx5-chinese-addons fcitx5-material-color
+# .PHONY gtk
+# gtk:
+# 	ln -vsf "${PWD}/gtk/settings.ini" "${HOME}/.config/gtk-3.0/settings.ini"
+
+# input-method-pkg:
+# 	sudo pacman -S fcitx5 fcitx5-im fcitx5-chinese-addons fcitx5-material-color
 
 input-method-cfg:
 	sudo sh -c 'echo GTK_IM_MODULE=fcitx5 >> /etc/environment'
@@ -135,10 +139,18 @@ dunst: dunst-pkgs dunst-cfg dunst-srv
 fonts:
 	sudo pacman -S ttf-dejavu adobe-source-han-serif-cn-fonts adobe-source-han-sans-cn-fonts noto-fonts-cjk noto-fonts ttf-roboto
 	mkdir -p ~/.local/share/fonts
-    cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+	cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
 	mkdir -vp "${HOME}/.config/fontconfig"
 	ln -vsf "${PWD}/fonts/config.conf" "${HOME}/.config/fontconfig/fonts.conf"
 	fc-cache -fv
+
+redshift-pkgs:
+	sudo pacman -S --needed --noconfirm \
+		redshift \
+
+redshift-cfg:
+	mkdir -vp "${HOME}/.config/redshift"
+	ln -vsf "${PWD}/redshift/redshift.conf" "${HOME}/.config/redshift/redshift.conf"
 
 gammastep-pkgs:
 	sudo pacman -S --needed --noconfirm \

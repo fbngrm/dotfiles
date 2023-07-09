@@ -32,6 +32,12 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+export QT_STYLE_OVERIDE=GTK+
+# export QT_SCALE_FACTOR=1.5
+export QT_SCREEN_SCALE_FACTORS=1.3;1.75
+
+dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+
 twm &
 xclock -geometry 50x50-1+1 &
 xterm -geometry 80x50+494+51 &
@@ -39,5 +45,6 @@ xterm -geometry 80x20+494-0 &
 xscreensaver &
 fcitx5 &
 blueman-applet &
+flameshot &
 # exec xterm -geometry 80x66+0+0 -name login
 exec i3
