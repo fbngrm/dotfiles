@@ -72,10 +72,12 @@ Plug 'pbrisbin/vim-colors-off'
 Plug 'altercation/vim-colors-solarized'
 
 Plug 'vimwiki/vimwiki'
-Plug 'michal-h21/vim-zettel'
+" Plug 'michal-h21/vim-zettel'
+"
+" On-demand lazy load
+Plug 'liuchengxu/vim-which-key'
 
 call plug#end()
-
 
 " --------------------------------------------------------------------------------
 " settings
@@ -242,14 +244,14 @@ endfor
 " cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 
 " remap record key to Q
-" nnoremap Q q
+nnoremap Q q
 nnoremap q <Nop>
 
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 
 " remove the split line
-" set fillchars+=vert:\ 
+" set fillchars+=vert:\
 
 set guicursor+=a:-blinkwait175-blinkoff150-blinkon175
 
@@ -269,6 +271,49 @@ let @d='"xyiwo=strftime("%d.%m.%Y")a;"xpa;'
 
 nmap <F3> i<C-R>=strftime("%d.%m.%y")<CR><Esc>
 imap <F3> <C-R>=strftime("%d.%m.%y")<CR>
+
+" --------------------------------------------------------------------------------
+" which-key
+" --------------------------------------------------------------------------------
+
+nnoremap <silent> <leader>      :<c-u>WhichKey ';'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ' '<CR>
+let g:which_key_map = {}
+let g:which_key_map['wi'] = {
+      \ 'name' : '+windows' ,
+      \ 'w' : ['<C-W>w'     , 'other-window']          ,
+      \ 'd' : ['<C-W>c'     , 'delete-window']         ,
+      \ '-' : ['<C-W>s'     , 'split-window-below']    ,
+      \ '|' : ['<C-W>v'     , 'split-window-right']    ,
+      \ '2' : ['<C-W>v'     , 'layout-double-columns'] ,
+      \ 'h' : ['<C-W>h'     , 'window-left']           ,
+      \ 'j' : ['<C-W>j'     , 'window-below']          ,
+      \ 'l' : ['<C-W>l'     , 'window-right']          ,
+      \ 'k' : ['<C-W>k'     , 'window-up']             ,
+      \ 'H' : ['<C-W>5<'    , 'expand-window-left']    ,
+      \ 'J' : [':resize +5'  , 'expand-window-below']   ,
+      \ 'L' : ['<C-W>5>'    , 'expand-window-right']   ,
+      \ 'K' : [':resize -5'  , 'expand-window-up']      ,
+      \ '=' : ['<C-W>='     , 'balance-window']        ,
+      \ 's' : ['<C-W>s'     , 'split-window-below']    ,
+      \ 'v' : ['<C-W>v'     , 'split-window-below']    ,
+      \ '?' : ['Windows'    , 'fzf-window']            ,
+      \ }
+call which_key#register(';', "g:which_key_map")
+nmap <silent> <space> :w<CR>
+
+" --------------------------------------------------------------------------------
+"  whitespaces
+"  --------------------------------------------------------------------------------
+
+" :TrimWhitespace
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+noremap <Leader>w :call TrimWhitespace()<CR>
 
 " --------------------------------------------------------------------------------
 "  status line
@@ -375,8 +420,8 @@ function! LoadSession()
   endif
 endfunction
 
-au VimEnter * nested :call LoadSession()
-au VimLeave * :call MakeSession()
+" au VimEnter * nested :call LoadSession()
+" au VimLeave * :call MakeSession()
 
 " --------------------------------------------------------------------------------
 " search
@@ -785,9 +830,9 @@ autocmd BufWritePre *.js Neoformat
 " vimtex
 " --------------------------------------------------------------------------------
 
-" let g:vimtex_compiler_latexmk = { 
+" let g:vimtex_compiler_latexmk = {
 "         \ 'executable' : 'latexmk',
-"         \ 'options' : [ 
+"         \ 'options' : [
 "         \   '-xelatex',
 "         \   '-file-line-error',
 "         \   '-synctex=1',
@@ -1074,8 +1119,8 @@ syntax on
 " solarized light
 " coding
 syntax enable
-colorscheme solarized
-set background=light
+" colorscheme solarized
+" set background=light
 " set background=dark
-" colorscheme nord
+colorscheme nord
 highlight clear SignColumn
