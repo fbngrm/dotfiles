@@ -355,7 +355,7 @@
 
 [[snippets]]
   description = "open diff of all files modified in current branch in nvim"
-  command = "git diff --name-only <branch2> $(git merge-base <branch2> <branch1> ) > /tmp/diff && nvim $(cat /tmp/diff)"
+  command = "git diff --name-only <feature> $(git merge-base <feature> <base> ) > /tmp/diff && nvim $(cat /tmp/diff)"
   output = ""
 
 [[snippets]]
@@ -506,4 +506,104 @@
 [[snippets]]
   description = "vim bookmarks"
   command = "ma mA `a `A"
+  output = ""
+
+[[snippets]]
+  description = "show wifi networks"
+  command = "nmcli connection show | grep wifi"
+  output = ""
+
+[[snippets]]
+  description = "show running systemd units"
+  command = "sudo systemctl --type=service --state=running"
+  output = ""
+
+[[snippets]]
+  description = "show wifi pass"
+  command = "sudo nmcli connection show void -s | grep psk"
+  output = ""
+
+[[snippets]]
+  description = "delete docker images where name matches zededa"
+  command = "docker rmi $(docker images | grep 'zededa')"
+  output = ""
+
+[[snippets]]
+  description = "prevent NetworkManager from overwriting resolv.conf"
+  command = "sudo tee -a /etc/NetworkManager/NetworkManager.conf > /dev/null <<EOT\\n[main]\\ndns=none\\nrc-manager=unmanaged\\nEOT"
+  output = ""
+
+[[snippets]]
+  description = "remove duplicate lines from file"
+  command = "awk -i inplace '!seen[$0]++' data/tatoeba/01/input/merge"
+  output = ""
+
+[[snippets]]
+  description = "Clear /var/lib/docker/overlay2. Docker uses /var/lib/docker to store your images, containers, and local named volumes. Deleting this can result in data loss and possibly stop the engine from running. The overlay2 subdirectory specifically contains the various filesystem layers for images and containers. To cleanup unused containers and images, use docker system prune."
+  command = "docker system prune --all"
+  output = ""
+
+[[snippets]]
+  description = "segment chinese text"
+  command = "./segment.sh pku ./input UTF-8 0 > ./segmented"
+  output = ""
+
+[[snippets]]
+  description = "theme"
+  command = "lxappearance"
+  output = ""
+
+[[snippets]]
+  description = "qt layout"
+  command = "qt5ct"
+  output = ""
+
+[[snippets]]
+  description = "QT scale factor"
+  command = "export QT_SCALE_FACTOR=1.5 thunar"
+  output = ""
+
+[[snippets]]
+  description = "make gitconfig's InsteadOf work with Cargo"
+  command = "export CARGO_NET_GIT_FETCH_WITH_CLI=true"
+  output = ""
+
+[[snippets]]
+  description = "zip dir"
+  command = "zip -r "
+  output = ""
+
+[[snippets]]
+  description = "search git commit and ignore case"
+  command = "git log --all -i --grep='grammar'\\n"
+  output = ""
+
+[[snippets]]
+  description = "find process on port number"
+  command = "sudo lsof -i :3000"
+  output = ""
+
+[[snippets]]
+  description = "find 10 largest directories / disk space"
+  command = "sudo du -h --max-depth=1 / | sort -hr | head -10\\n"
+  output = ""
+
+[[snippets]]
+  description = "Clear package cache and remove all cached versions except the three most recent ones / disk space"
+  command = "sudo paccache -r\\n"
+  output = ""
+
+[[snippets]]
+  description = "Remove orphaned packages / disk space"
+  command = "sudo pacman -Rns $(pacman -Qtdq)\\n"
+  output = ""
+
+[[snippets]]
+  description = "Remove journal logs / disk space"
+  command = "sudo journalctl --vacuum-size=50M"
+  output = ""
+
+[[snippets]]
+  description = "check for large core dump files / disk space"
+  command = "sudo find / -type f -name \"core\" -exec du -h {} + | sort -hr\\n"
   output = ""

@@ -196,12 +196,12 @@ guis: guis-pkgs guis-pkgs-aur
 kitty-pkgs:
 	sudo pacman -S --needed --noconfirm \
 		kitty \
+	git clone https://github.com/dexpota/kitty-themes ~/.config/kitty/kitty-themes
 
 kitty-cfg:
 	mkdir -vp "${HOME}/.config/kitty"
 	ln -vsf "${PWD}/kitty/kitty.conf" "${HOME}/.config/kitty/kitty.conf"
-	ln -vsf "${PWD}/kitty/theme.conf" "${HOME}/.config/kitty/theme.conf"
-	ln -vsf "${PWD}/kitty/themes "${HOME}/.config/kitty/themes"
+	ln -vsf "${PWD}/kitty/switch-theme.sh" "${HOME}/.config/kitty/switch-theme.sh"
 	ln -vsfn "${PWD}/kitty/sessions" "${HOME}/.config/kitty/sessions"
 
 kitty: kitty-pkgs kitty-cfg
@@ -213,6 +213,7 @@ neovim-cfg:
 	mkdir -p ${HOME}/.config/nvim/lua
 	mkdir -p ${HOME}/.config/nvim/{swap,undodir,backup}
 	ln -vsfn "${PWD}/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
+	ln -vsfn "${PWD}/nvim/vimrc.color" "${HOME}/.vimrc.color"
 	ln -vsfn "${PWD}/nvim/lua/lsp_config.lua" "${HOME}/.config/nvim/lua/lsp_config.lua"
 	ln -vsfn "${PWD}/nvim/after" "${HOME}/.config/nvim/after"
 	ln -vsfn "${PWD}/nvim/snippets" "${HOME}/.config/nvim/UltiSnips"
@@ -280,7 +281,7 @@ waybar: waybar-pkgs waybar-cfg
 pet-install:
 	mkdir -p ${HOME}/work/src/github.com
 	cd ${HOME}/work/src/github.com
-	git clone https://github.com/knqyf263/pet.git 
+	git clone https://github.com/knqyf263/pet.git
 	cd pet
 	make install
 
@@ -308,8 +309,13 @@ rsync:
 	sudo pacman -S  --needed --noconfirm rsync
 
 darkman-cfg:
-	mkdir -p ${HOME}/.config/darkman
+	mkdir -p "${HOME}/.config/darkman"
 	ln -vsf "${PWD}/darkman/config.yaml" "${HOME}/.config/darkman/config.yaml"
+
+	# ln -vsf "${PWD}/darkman/hooks/gtk-theme" "${HOME}/.config/darkman/hooks/gtk-theme"
+	# chmod +x "${HOME}/.config/darkman/hooks/gtk-theme"
+	# ln -vsf "${PWD}/darkman/hooks/qt-theme" "${HOME}/.config/darkman/hooks/qt-theme"
+	# chmod +x "${HOME}/.config/darkman/hooks/qt-theme"
 
 	# sudo sh -c 'echo XDG_DATA_DIRS=/usr/local/share:/usr/share >> /etc/environment'
 

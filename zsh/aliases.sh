@@ -90,7 +90,7 @@ alias yn="/usr/bin/yarnpkg"
 alias vd="pulsemixer --change-volume=-10 --id=sink-48"
 alias vu="pulsemixer --change-volume=+10 --id=sink-48"
 alias x='cd ~/Dropbox/notes && nvim .'
-alias xw='cd ~/Dropbox/notes && nvim ./writing/w/scratch.md'
+alias xw='cd ~/work/src/github.com/fbngrm/notes && nvim .'
 alias ba='nvim ~/.bash_aliases'
 alias sba='source ~/.bash_aliases'
 alias xoff='xrandr --output DP3 --off'
@@ -98,8 +98,8 @@ alias xr='i3-msg move workspace to output right'
 alias xl='i3-msg move workspace to output left'
  alias v='nvim'
 alias kdu='today=`date +%d.%m.%Y`;find ~/Dropbox/notes/kieser/up -type f -name "*.txt" -print0 | xargs -0 sed -i "/===/a $today;"'
-# alias kdl='today=`date +%d.%m.%Y`;find ~/Dropbox/notes/kieser/low -type f -name "*.txt" -print0 | xargs -0 sed -i "8i $today;" "$file"'
-alias kdl='today=`date +%d.%m.%Y`;for file in ~/Dropbox/notes/kieser/low/*.txt; do echo $today";" >> "$file"; done'
+alias kdl='today=`date +%d.%m.%Y`;find ~/Dropbox/notes/kieser/low -type f -name "*.txt" -print0 | xargs -0 sed -i "/===/a $today;"'
+# alias kdl='today=`date +%d.%m.%Y`;for file in ~/Dropbox/notes/kieser/low/*.txt; do echo $today";" >> "$file"; done'
 alias cdz='~/work/src/github.com/fbngrm/zh-anki'
 alias audio='pavucontrol'
 alias ssc='sudo systemctl'
@@ -108,11 +108,6 @@ alias xo='xdg-open'
 
 alias nt='sudo cat "nameserver 1.1.1.1" > /etc/resolv.conf && sudo systemctl restart systemd-resolved.service systemd-networkd.service'
 
-alias cz='cd ~/go/src/github.com/zededa'
-alias czz='cd ~/go/src/github.com/zededa/zedcloud'
-alias czt='cd ~/go/src/github.com/zededa/terraform-provider-zedcloud'
-alias z='./zmanage'
-alias rmvol='docker volume rm local_cert-store local_esdata1 local_image-store local_influxdb-data local_kafka-data01 local_postgresql-data local_vault-data01 local_vault-secrets local_zk-data01 local_zk-txn-logs01 local_zredis01-data local_zsentinel01-data'
 # v() {
 #   nvim ${1:-.}
 # }

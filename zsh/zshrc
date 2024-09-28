@@ -90,6 +90,8 @@ export PATH=/home/f/.local/bin:$PATH
 export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 export PATH=$HOME/work/bin:$PATH
 
+export CARGO_NET_GIT_FETCH_WITH_CLI=true
+
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -152,3 +154,4 @@ if [ -f '/home/f/work/src/github.com/fbngrm/zh-anki/google-cloud-sdk/path.zsh.in
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/f/work/src/github.com/fbngrm/zh-anki/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/f/work/src/github.com/fbngrm/zh-anki/google-cloud-sdk/completion.zsh.inc'; fi
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh

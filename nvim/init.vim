@@ -1,5 +1,5 @@
-" --------------------------------------------------------------------------------
-" plugins
+  " --------------------------------------------------------------------------------
+  " plugins
 " --------------------------------------------------------------------------------
 call plug#begin('~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
@@ -54,7 +54,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-github.nvim'
 
-Plug 'pwntester/octo.nvim', {'do': 'octo.setup()'}
+" Plug 'pwntester/octo.nvim', {'do': 'octo.setup()'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'adelarsq/vim-devicons-emoji'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -70,12 +70,14 @@ Plug 'projekt0n/github-nvim-theme'
 Plug 'nordtheme/vim'
 Plug 'pbrisbin/vim-colors-off'
 Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 
-Plug 'vimwiki/vimwiki'
-" Plug 'michal-h21/vim-zettel'
-"
+Plug 'zk-org/zk-nvim'
+
 " On-demand lazy load
 Plug 'liuchengxu/vim-which-key'
+
+Plug 'alx741/vim-rustfmt'
 
 call plug#end()
 
@@ -279,7 +281,7 @@ imap <F3> <C-R>=strftime("%d.%m.%y")<CR>
 nnoremap <silent> <leader>      :<c-u>WhichKey ';'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ' '<CR>
 let g:which_key_map = {}
-let g:which_key_map['wi'] = {
+let g:which_key_map['v'] = {
       \ 'name' : '+windows' ,
       \ 'w' : ['<C-W>w'     , 'other-window']          ,
       \ 'd' : ['<C-W>c'     , 'delete-window']         ,
@@ -1090,37 +1092,76 @@ EOF
 let g:vimwiki_list = [{'path':'~/work/src/github.com/fbngrm/vimwiki/markdown/','ext':'.md','syntax':'markdown'}, {"path":"~/work/src/github.com/fbngrm/vimwiki/wiki/"}]
 
 " --------------------------------------------------------------------------------
+" rust
+" --------------------------------------------------------------------------------
+g:rustfmt_on_save = 1
+
+" --------------------------------------------------------------------------------
+" zk
+" --------------------------------------------------------------------------------
+lua << EOF
+require("zk").setup({
+  -- can be "telescope", "fzf", "fzf_lua", "minipick", or "select" (`vim.ui.select`)
+  -- it's recommended to use "telescope", "fzf", "fzf_lua", or "minipick"
+  picker = "telescope",
+
+  lsp = {
+    -- `config` is passed to `vim.lsp.start_client(config)`
+    config = {
+      cmd = { "zk", "lsp" },
+      name = "zk",
+      -- on_attach = ...
+      -- etc, see `:h vim.lsp.start_client()`
+    },
+
+    -- automatically attach buffers in a zk notebook that match the given filetypes
+    auto_attach = {
+      enabled = true,
+      filetypes = { "markdown" },
+    },
+  },
+})
+EOF
+
+" --------------------------------------------------------------------------------
 " color theme
 " --------------------------------------------------------------------------------
 
-" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
 syntax on
-" colorscheme github_dark
-" colorscheme github_light
 
-" let base16colorspace=256  " Access colors present in 256 colorspace
+lua << EOF
+local colorFile = vim.fn.expand('~/.vimrc.color')
+local function reload()
+	vim.cmd("source ".. colorFile)
+end
 
-" no colors but solarized light background
-" writing
-" syntax on
-" colorscheme off
-" let g:colors_off_a_little = 1
-" set termguicolors
-" autocmd ColorScheme * highlight! Normal ctermbg=none guibg=none ctermfg=black
+local w = vim.loop.new_fs_event()
+local on_change
+local function watch_file(fname)
+	w:start(fname, {}, vim.schedule_wrap(on_change))
+end
+on_change = function()
+	reload()
+	-- Debounce: stop/start.
+	w:stop()
+	watch_file(colorFile)
+end
 
-" black on white with a little color
-" writing
-" syntax on
-" colorscheme off
-" let g:colors_off_a_little = 1
-" autocmd ColorScheme * highlight! Normal ctermfg=black
+-- reload vim config when background changes
+watch_file(colorFile)
+reload()
 
-" solarized light
-" coding
-syntax enable
-" colorscheme solarized
+vim.cmd("colorscheme gruvbox")
+EOF
+
+
 " set background=light
-" set background=dark
-colorscheme nord
+
+" Optional customizations
+let g:gruvbox_contrast_light = 'hard'
+" let g:gruvbox_italic = 1
+" Map <F5> to toggle between Gruvbox light and dark themes
+nnoremap <F5> :if &background == 'dark' <Bar> set background=light <Bar> else <Bar> set background=dark <Bar> endif<CR>
+
 highlight clear SignColumn
+
