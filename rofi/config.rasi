@@ -3,7 +3,7 @@ configuration {
   modi: "window,drun,ssh,combi";
   /* combi-modi: "window,drun,ssh"; */
   lines: 7;
-  font: "sans-serif 14";
+  font: "sans-serif 16";
   line-padding: 8;
   matching: "fuzzy";
   bw: 0;

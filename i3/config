@@ -287,6 +287,10 @@ client.placeholder	        $background    #282D37    $background  $background
 
 # configure screens
 for_window [class="Arandr"] floating enable
+for_window [class="firefox"] floating disable, border pixel 0
+for_window [class="kitty"] floating disable, border pixel 0
+for_window [class="Thunar"] floating disable, border pixel 0
+for_window [class="Audacious"] floating disable, border pixel 0
 
 set $mode_display Config monitor resolution - laptop (1) - laptop+DP-1 (2) - laptop+DP-4 (3)
 mode "$mode_display" {

@@ -92,6 +92,8 @@ export PATH=$HOME/work/bin:$PATH
 
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
+export XDG_CURRENT_DESKTOP=KDE
+
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi

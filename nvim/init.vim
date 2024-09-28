@@ -1161,7 +1161,7 @@ EOF
 let g:gruvbox_contrast_light = 'hard'
 " let g:gruvbox_italic = 1
 " Map <F5> to toggle between Gruvbox light and dark themes
-nnoremap <F5> :if &background == 'dark' <Bar> set background=light <Bar> else <Bar> set background=dark <Bar> endif<CR>
+" nnoremap <F5> :if &background == 'dark' <Bar> set background=light <Bar> else <Bar> set background=dark <Bar> endif<CR>
 
 highlight clear SignColumn
 

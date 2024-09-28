@@ -607,3 +607,8 @@
   description = "check for large core dump files / disk space"
   command = "sudo find / -type f -name \"core\" -exec du -h {} + | sort -hr\\n"
   output = ""
+
+[[snippets]]
+  description = "find class of i3 window"
+  command = "xprop | grep WM_CLASS"
+  output = ""
