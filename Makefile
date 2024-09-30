@@ -23,8 +23,8 @@ i3:
 	ln -vsf ${PWD}/i3/scripts/* "${HOME}/.config/i3/scripts"
 
 polybar:
-	mkdir -p "${HOME}/.config/polybar"
-	ln -vsf "${PWD}/polybar/config" "${HOME}/.config/polybar/config"
+	mkdir -p "${HOME}/.config/polybar/scripts"
+	ln -vsf "${PWD}/polybar/config.ini" "${HOME}/.config/polybar/config.ini"
 	ln -vsf "${PWD}/polybar/launch.sh" "${HOME}/.config/polybar/launch.sh"
 
 cron:
