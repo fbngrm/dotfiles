@@ -26,6 +26,7 @@ polybar:
 	mkdir -p "${HOME}/.config/polybar/scripts"
 	ln -vsf "${PWD}/polybar/config.ini" "${HOME}/.config/polybar/config.ini"
 	ln -vsf "${PWD}/polybar/launch.sh" "${HOME}/.config/polybar/launch.sh"
+	ln -vsf ${PWD}/polybar/scripts/* "${HOME}/.config/polybar/scripts"
 
 cron:
 	sudo mkdir -p /etc/cronjobs/
