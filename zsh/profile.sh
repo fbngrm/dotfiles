@@ -11,4 +11,6 @@
 # export QT_IM_MODULE=fcitx
 # export XMODIFIERS=@im=fcitx
 # export GTK_IM_MODULE=fcitx
+# export QT_STYLE_OVERRIDE=adwaita
+export QT_QPA_PLATFORMTHEME=qt5ct:qt6ct
 . "$HOME/.cargo/env"

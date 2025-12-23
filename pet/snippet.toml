@@ -612,3 +612,28 @@
   description = "find class of i3 window"
   command = "xprop | grep WM_CLASS"
   output = ""
+
+[[snippets]]
+  description = "xrandr set brightness"
+  command = "xrandr --output DP-1 --brightness 1.0"
+  output = ""
+
+[[snippets]]
+  description = "get GPU info"
+  command = "lspci | grep -i vga"
+  output = ""
+
+[[snippets]]
+  description = "curl azure audio api"
+  command = "curl --location --request POST \"https://germanywestcentral.tts.speech.microsoft.com/cognitiveservices/v0\" \\\\n    --header \"Ocp-Apim-Subscription-Key: 8e1e1b7d9fa34fc8b25fcf7995746e61\" \\\\n    --header \"Content-Type: application/ssml+xml\" \\\\n    --header \"X-Microsoft-OutputFormat: audio-16khz-128kbitrate-mono-mp3\" \\\\n    --header \"User-Agent: curl\" \\\\n    --data-raw '<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xmlns:mstts=\"https://www.w3.org/2001/mstts\" xml:lang=\"zh-CN\">\\n<voice name=\"zh-CN-YunyiMultilingualNeural\">\\n        <mstts:silence  type=\"Tailing-exact\" value=\"1000ms\"/>\\n        <prosody rate=\"0.7\">\\n                   解释\\n        </prosody>\\n    </voice>\\n</speak>' > o.mp3\\n"
+  output = ""
+
+[[snippets]]
+  description = "find my ip in local network"
+  command = "ip addr show\\n"
+  output = ""
+
+[[snippets]]
+  description = "check what's running on port 80"
+  command = "sudo netstat -tlnp | grep :80\\nsudo ss -tlnp | grep :80\\nsudo lsof -i :80"
+  output = ""

@@ -72,8 +72,6 @@ Plug 'pbrisbin/vim-colors-off'
 Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 
-Plug 'zk-org/zk-nvim'
-
 " On-demand lazy load
 Plug 'liuchengxu/vim-which-key'
 
@@ -475,7 +473,7 @@ nnoremap * :keepjumps normal! mi*`i<CR>
 
 " use utf-8 encoding
 set encoding=utf8
-set termencoding=utf-8
+" set termencoding=utf-8
 
 " don't do any encoding conversion
 set fileencodings=
@@ -1074,7 +1072,15 @@ cmp.setup {
 -- Setup lspconfig.
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local lspconfig = require("lspconfig")
 require('lspconfig')['gopls'].setup{
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      gofumpt = true,
+    },
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities
@@ -1100,29 +1106,29 @@ let g:vimwiki_list = [{'path':'~/work/src/github.com/fbngrm/vimwiki/markdown/','
 " --------------------------------------------------------------------------------
 " zk
 " --------------------------------------------------------------------------------
-lua << EOF
-require("zk").setup({
-  -- can be "telescope", "fzf", "fzf_lua", "minipick", or "select" (`vim.ui.select`)
-  -- it's recommended to use "telescope", "fzf", "fzf_lua", or "minipick"
-  picker = "telescope",
+" lua << EOF
+" require("zk").setup({
+"   -- can be "telescope", "fzf", "fzf_lua", "minipick", or "select" (`vim.ui.select`)
+"   -- it's recommended to use "telescope", "fzf", "fzf_lua", or "minipick"
+"   picker = "telescope",
 
-  lsp = {
-    -- `config` is passed to `vim.lsp.start_client(config)`
-    config = {
-      cmd = { "zk", "lsp" },
-      name = "zk",
-      -- on_attach = ...
-      -- etc, see `:h vim.lsp.start_client()`
-    },
+"   lsp = {
+"     -- `config` is passed to `vim.lsp.start_client(config)`
+"     config = {
+"       cmd = { "zk", "lsp" },
+"       name = "zk",
+"       -- on_attach = ...
+"       -- etc, see `:h vim.lsp.start_client()`
+"     },
 
-    -- automatically attach buffers in a zk notebook that match the given filetypes
-    auto_attach = {
-      enabled = true,
-      filetypes = { "markdown" },
-    },
-  },
-})
-EOF
+"     -- automatically attach buffers in a zk notebook that match the given filetypes
+"     auto_attach = {
+"       enabled = true,
+"       filetypes = { "markdown" },
+"     },
+"   },
+" })
+" EOF
 
 " --------------------------------------------------------------------------------
 " color theme
