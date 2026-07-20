@@ -1,0 +1,10 @@
+[Unit]
+Description=Check battery level every 60s and suspend if critical
+
+[Timer]
+OnBootSec=60
+OnUnitActiveSec=60
+AccuracySec=5
+
+[Install]
+WantedBy=timers.target

@@ -259,13 +259,38 @@ sway-pkgs:
 	sudo pacman -S --needed --noconfirm \
 		wayland \
 		xorg-xwayland \
-		sway \
+		swaylock \
+		grim \
+		imagemagick \
+
+sway-pkgs-aur:
+	yay -S --needed --noconfirm \
+		swayfx \
 
 sway-cfg:
 	mkdir -vp "${HOME}/.config/sway"
 	ln -vsf "${PWD}/sway/config.cfg" "${HOME}/.config/sway/config"
+	mkdir -vp "${HOME}/.config/sway/scripts"
+	ln -vsf "${PWD}/sway/scripts/battery_check.sh" "${HOME}/.config/sway/scripts/battery_check.sh"
+	chmod +x "${HOME}/.config/sway/scripts/battery_check.sh"
+	ln -vsf "${PWD}/sway/scripts/lock.sh" "${HOME}/.config/sway/scripts/lock.sh"
+	chmod +x "${HOME}/.config/sway/scripts/lock.sh"
 
-sway: rofi sway-pkgs sway-cfg
+sway-battery-srv:
+	mkdir -vp "${HOME}/.config/systemd/user"
+	cp -v "${PWD}/sway/battery-check.service" "${HOME}/.config/systemd/user/battery-check.service"
+	cp -v "${PWD}/sway/battery-check.timer" "${HOME}/.config/systemd/user/battery-check.timer"
+	systemctl --user daemon-reload
+	systemctl --user enable --now battery-check.timer
+
+sway: rofi sway-pkgs sway-pkgs-aur sway-cfg sway-battery-srv
+
+power-cfg:
+	sudo mkdir -vp /etc/systemd/logind.conf.d
+	sudo ln -vsf "${PWD}/power/logind.conf.d/lid.conf" "/etc/systemd/logind.conf.d/lid.conf"
+	sudo systemctl restart systemd-logind
+
+power: power-cfg
 
 waybar-pkgs:
 	sudo pacman -S --needed --noconfirm \

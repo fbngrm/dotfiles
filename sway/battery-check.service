@@ -1,0 +1,6 @@
+[Unit]
+Description=Suspend the system when battery is critically low
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/sway/scripts/battery_check.sh
