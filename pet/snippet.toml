@@ -1,639 +1,786 @@
-[[snippets]]
-  description = "enable wifi interface"
+
+[[Snippets]]
+  Description = "enable wifi interface"
+  Output = ""
+  Tag = []
   command = "sudo ip link set wlp4s0 up"
-  output = ""
 
-[[snippets]]
-  description = "bash in docker image"
+[[Snippets]]
+  Description = "bash in docker image"
+  Output = ""
+  Tag = []
   command = "docker run -it --entrypoint bash "
-  output = ""
 
-[[snippets]]
-  description = "k8s pod logs"
+[[Snippets]]
+  Description = "k8s pod logs"
+  Output = ""
+  Tag = []
   command = "k logs -p -c web <target_pod>"
-  output = ""
 
-[[snippets]]
-  description = "restore kde bar"
+[[Snippets]]
+  Description = "restore kde bar"
+  Output = ""
+  Tag = []
   command = "rm ~/.config/plasma-org.kde.plasma.desktop-appletsrc"
-  output = ""
 
-[[snippets]]
-  description = "random password"
+[[Snippets]]
+  Description = "random password"
+  Output = ""
+  Tag = []
   command = "< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32"
-  output = ""
 
-[[snippets]]
-  description = "k8s pod shell"
+[[Snippets]]
+  Description = "k8s pod shell"
+  Output = ""
+  Tag = []
   command = "kubectl exec -it <target_pod> -- /bin/bash"
-  output = ""
 
-[[snippets]]
-  description = "get k8s cluster credentials"
+[[Snippets]]
+  Description = "get k8s cluster credentials"
+  Output = ""
+  Tag = []
   command = "gcloud container clusters get-credentials --region=europe-west1-c eu-prod"
-  output = ""
 
-[[snippets]]
-  description = "remove docker-compose images"
+[[Snippets]]
+  Description = "remove docker-compose images"
+  Output = ""
+  Tag = []
   command = "docker-compose stop && docker-compose rm -f"
-  output = ""
 
-[[snippets]]
-  description = "forward to k8s db"
+[[Snippets]]
+  Description = "forward to k8s db"
+  Output = ""
+  Tag = []
   command = "kubectl port-forward <target_pod> <port=5432>:5432"
-  output = ""
 
-[[snippets]]
-  description = "git last branches worked on"
+[[Snippets]]
+  Description = "git last branches worked on"
+  Output = ""
+  Tag = []
   command = "git for-each-ref --sort=-committerdate refs/heads/"
-  output = ""
 
-[[snippets]]
-  description = "git show filenames of changed files between HEAD and master"
+[[Snippets]]
+  Description = "git show filenames of changed files between HEAD and master"
+  Output = ""
+  Tag = []
   command = "git diff --name-only HEAD master"
-  output = ""
 
-[[snippets]]
-  description = "git show diff of file between HEAD and master"
+[[Snippets]]
+  Description = "git show diff of file between HEAD and master"
+  Output = ""
+  Tag = []
   command = "git diff HEAD master -- "
-  output = ""
 
-[[snippets]]
-  description = "log into k8s container"
+[[Snippets]]
+  Description = "log into k8s container"
+  Output = ""
+  Tag = []
   command = "kubectl exec --stdin --tty <container> -- /bin/bash"
-  output = ""
 
-[[snippets]]
-  description = "import postgres backup"
+[[Snippets]]
+  Description = "import postgres backup"
+  Output = ""
+  Tag = []
   command = "psql -a -b -e -h localhost --username postgres -d uk_pento < /data/prod-db"
-  output = ""
 
-[[snippets]]
-  description = "create postgres db in docker"
+[[Snippets]]
+  Description = "create postgres db in docker"
+  Output = ""
+  Tag = []
   command = "docker exec -it 24f09dc29ae7 psql -U postgres -d postgres -c \"CREATE DATABASE uk_pento;\""
-  output = ""
 
-[[snippets]]
-  description = "backup postgres from docker container"
+[[Snippets]]
+  Description = "backup postgres from docker container"
+  Output = ""
+  Tag = []
   command = "docker exec -t 2e3578f231de pg_dumpall -c -U postgres | gzip > /data/dump_`date +%d-%m-%Y\"_\"%H_%M_%S`.gz"
-  output = ""
 
-[[snippets]]
-  description = "diskspace"
+[[Snippets]]
+  Description = "diskspace"
+  Output = ""
+  Tag = []
   command = "df -h"
-  output = ""
 
-[[snippets]]
-  description = "file size"
+[[Snippets]]
+  Description = "file size"
+  Output = ""
+  Tag = []
   command = "du -sh ../pentoapp"
-  output = ""
 
-[[snippets]]
-  description = "pacman list orphan packages"
+[[Snippets]]
+  Description = "pacman list orphan packages"
+  Output = ""
+  Tag = []
   command = "sudo pacman -Qtdq"
-  output = ""
 
-[[snippets]]
-  description = "pacman remove orphan packages"
+[[Snippets]]
+  Description = "pacman remove orphan packages"
+  Output = ""
+  Tag = []
   command = "sudo pacman -Rns $(pacman -Qtdq)"
-  output = ""
 
-[[snippets]]
-  description = "pacman remove cached packages that not currently installed"
+[[Snippets]]
+  Description = "pacman remove cached packages that not currently installed"
+  Output = ""
+  Tag = []
   command = "sudo pacman -Sc"
-  output = ""
 
-[[snippets]]
-  description = "pacman dry run cache pruning"
+[[Snippets]]
+  Description = "pacman dry run cache pruning"
+  Output = ""
+  Tag = []
   command = "paccache -d"
-  output = ""
 
-[[snippets]]
-  description = "clean systemd journal"
+[[Snippets]]
+  Description = "clean systemd journal"
+  Output = ""
+  Tag = []
   command = "sudo journalctl --vacuum-size=50M\\n"
-  output = ""
 
-[[snippets]]
-  description = "connect wifi with wpa_supplicant"
+[[Snippets]]
+  Description = "connect wifi with wpa_supplicant"
+  Output = ""
+  Tag = []
   command = "sudo wpa_supplicant -B -i wlp4s0 -c /etc/wpa_supplicant/wpa_supplicant.conf"
-  output = ""
 
-[[snippets]]
-  description = "colortest"
+[[Snippets]]
+  Description = "colortest"
+  Output = ""
+  Tag = []
   command = "msgcat --color=test"
-  output = ""
 
-[[snippets]]
-  description = "list network adapters"
+[[Snippets]]
+  Description = "list network adapters"
+  Output = ""
+  Tag = []
   command = "rfkill list all"
-  output = ""
 
-[[snippets]]
-  description = "unblock network adapter"
+[[Snippets]]
+  Description = "unblock network adapter"
+  Output = ""
+  Tag = []
   command = "rfkill unblock 1"
-  output = ""
 
-[[snippets]]
-  description = "wifi blocked?"
+[[Snippets]]
+  Description = "wifi blocked?"
+  Output = ""
+  Tag = []
   command = "sudo rfkill list all"
-  output = ""
 
-[[snippets]]
-  description = "unblock wifi"
+[[Snippets]]
+  Description = "unblock wifi"
+  Output = ""
+  Tag = []
   command = "rfkill unblock 1"
-  output = ""
 
-[[snippets]]
-  description = "find duplicate lines in a file"
+[[Snippets]]
+  Description = "find duplicate lines in a file"
+  Output = ""
+  Tag = []
   command = "sort sl-employee-emails.txt | uniq -c"
-  output = ""
 
-[[snippets]]
-  description = "mysql monitor connections"
+[[Snippets]]
+  Description = "mysql monitor connections"
+  Output = ""
+  Tag = []
   command = "mysqladmin -u root -p -i 1 processlist"
-  output = ""
 
-[[snippets]]
-  description = "wifi"
+[[Snippets]]
+  Description = "wifi"
+  Output = ""
+  Tag = []
   command = "sudo dhcpcd enp2s0"
-  output = ""
 
-[[snippets]]
-  description = "load xresources"
+[[Snippets]]
+  Description = "load xresources"
+  Output = ""
+  Tag = []
   command = "xrdb -merge ~/.Xresources"
-  output = ""
 
-[[snippets]]
-  description = "start local mysql/mariadb"
+[[Snippets]]
+  Description = "start local mysql/mariadb"
+  Output = ""
+  Tag = []
   command = "systemctl start mariadb"
-  output = ""
 
-[[snippets]]
-  description = "extract a k8s secret"
+[[Snippets]]
+  Description = "extract a k8s secret"
+  Output = ""
+  Tag = []
   command = "kubectl get secret similar-products-env-v6 -o json | grep -E '\"\\.?env\":' | sed 's/^.* \"\\(.*\\)\"$/\\1/' | base64 -d"
-  output = ""
 
-[[snippets]]
-  description = "filter top by process"
+[[Snippets]]
+  Description = "filter top by process"
+  Output = ""
+  Tag = []
   command = "top -p $(pgrep -d',' proxy)"
-  output = ""
 
-[[snippets]]
-  description = "mount usb drive to /media/usb-dive"
+[[Snippets]]
+  Description = "mount usb drive to /media/usb-dive"
+  Output = ""
+  Tag = []
   command = "sudo mount -t ntfs-3g -o uid=1000,gid=1000 /dev/sdb1 /media/usb-drive"
-  output = ""
 
-[[snippets]]
-  description = "ssh gnome-keyring-bug workaround"
+[[Snippets]]
+  Description = "ssh gnome-keyring-bug workaround"
+  Output = ""
+  Tag = []
   command = "SSH_AUTH_SOCK=0 ssh SERVER_ADDR"
-  output = ""
 
-[[snippets]]
-  description = "photo to video"
+[[Snippets]]
+  Description = "photo to video"
+  Output = ""
+  Tag = []
   command = "ffmpeg -r 15 -pattern_type glob -i '*.JPG' -c:v libx264 -vf fps=25 -pix_fmt yuv420p out.mp4"
-  output = ""
 
-[[snippets]]
-  description = "gcloud switch cluster"
+[[Snippets]]
+  Description = "gcloud switch cluster"
+  Output = ""
+  Tag = []
   command = "gcloud container clusters get-credentials staging --zone europe-west1-d --project fitanalytics-staging"
-  output = ""
 
-[[snippets]]
-  description = "kubectl use context"
+[[Snippets]]
+  Description = "kubectl use context"
+  Output = ""
+  Tag = []
   command = "kubectl config use-context "
-  output = ""
 
-[[snippets]]
-  description = "get gke contexts"
+[[Snippets]]
+  Description = "get gke contexts"
+  Output = ""
+  Tag = []
   command = "kubectl config get-contexts"
-  output = ""
 
-[[snippets]]
-  description = "get job"
+[[Snippets]]
+  Description = "get job"
+  Output = ""
+  Tag = []
   command = "kubectl --context=gke_fitanalytics-staging_europe-west1-d_staging -n feed-import get jobs -l release=in-stock-norm-all-1541427261-ms"
-  output = ""
 
-[[snippets]]
-  description = "Create mysql 5.7 container"
+[[Snippets]]
+  Description = "Create mysql 5.7 container"
+  Output = ""
+  Tag = []
   command = "docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_USER=reader -e MYSQL_PASSWORD=\"$MYSQL_PASS\" -v /var/lib/mysql:/var/lib/mysql -d mysql:5.7"
-  output = ""
 
-[[snippets]]
-  description = "Start a mysql server instance"
+[[Snippets]]
+  Description = "Start a mysql server instance"
+  Output = ""
+  Tag = []
   command = "docker run --rm --name mysql-local -v /data/fita/db/mysql:/var/lib/mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d mysql:5.7"
-  output = ""
 
-[[snippets]]
-  description = "Connect to MySQL from the MySQL command line client"
+[[Snippets]]
+  Description = "Connect to MySQL from the MySQL command line client"
+  Output = ""
+  Tag = []
   command = "docker run -it --link mysql-local:mysql --rm mysql sh -c 'exec mysql -h\"$MYSQL_PORT_3306_TCP_ADDR\" -P\"$MYSQL_PORT_3306_TCP_PORT\" -ureader -p'"
-  output = ""
 
-[[snippets]]
-  description = "Connect to MySQL from an application in another Docker container"
+[[Snippets]]
+  Description = "Connect to MySQL from an application in another Docker container"
+  Output = ""
+  Tag = []
   command = "docker run --name some-app --link some-mysql:mysql -d application-that-uses-mysql"
-  output = ""
 
-[[snippets]]
-  description = "check wifi connection status"
+[[Snippets]]
+  Description = "check wifi connection status"
+  Output = ""
+  Tag = []
   command = "iw wlp4s0 link"
-  output = ""
 
-[[snippets]]
-  description = "scan networks"
+[[Snippets]]
+  Description = "scan networks"
+  Output = ""
+  Tag = []
   command = "sudo wpa_cli -i wlp4s0 "
-  output = ""
 
-[[snippets]]
-  description = "kubetcl port forwarding"
+[[Snippets]]
+  Description = "kubetcl port forwarding"
+  Output = ""
+  Tag = []
   command = "kubectl -n staging8 port-forward staging8-gocload-5cc7cb6b45-hnk8m 9000:9000"
-  output = ""
 
-[[snippets]]
-  description = "deploy to staging"
+[[Snippets]]
+  Description = "deploy to staging"
+  Output = ""
+  Tag = []
   command = "git push origin -f MYBRANCH:stagingX"
-  output = ""
 
-[[snippets]]
-  description = "extract links from file"
+[[Snippets]]
+  Description = "extract links from file"
+  Output = ""
+  Tag = []
   command = "cat <file_path> | grep -o 'http[s]\\?:\\/\\/[[:alnum:]\\%\\/_\\#.-]*'"
-  output = ""
 
-[[snippets]]
-  description = "diff files"
+[[Snippets]]
+  Description = "diff files"
+  Output = ""
+  Tag = []
   command = "diff -y -a <a> <b> | colordiff"
-  output = ""
 
-[[snippets]]
-  description = "diff tmp files"
+[[Snippets]]
+  Description = "diff tmp files"
+  Output = ""
+  Tag = []
   command = "diff -y -a /tmp/a /tmp/b | colordiff"
-  output = ""
 
-[[snippets]]
-  description = "diff csv"
+[[Snippets]]
+  Description = "diff csv"
+  Output = ""
+  Tag = []
   command = "git diff --color-words=. /tmp/a /tmp/b"
-  output = ""
 
-[[snippets]]
-  description = "list webcam settings"
+[[Snippets]]
+  Description = "list webcam settings"
+  Output = ""
+  Tag = []
   command = "v4l2-ctl -l"
-  output = ""
 
-[[snippets]]
-  description = "list webcam resolutions"
+[[Snippets]]
+  Description = "list webcam resolutions"
+  Output = ""
+  Tag = []
   command = "v4l2-ctl --list-formats-ext"
-  output = ""
 
-[[snippets]]
-  description = "list webcam framesizes for outout format"
+[[Snippets]]
+  Description = "list webcam framesizes for outout format"
+  Output = ""
+  Tag = []
   command = "v4l2-ctl --list-framesizes=YUYV"
-  output = ""
 
-[[snippets]]
-  description = "extract P11Db totals"
+[[Snippets]]
+  Description = "extract P11Db totals"
+  Output = ""
+  Tag = []
   command = "sed -n '/P11Db/,/\\/P11Db/{/P11Db\\|\\/P11Db/d;p}' /tmp/t"
-  output = ""
 
-[[snippets]]
-  description = "update pacman dbs"
+[[Snippets]]
+  Description = "update pacman dbs"
+  Output = ""
+  Tag = []
   command = "sudo pacman -Syy"
-  output = ""
 
-[[snippets]]
-  description = "check service on port"
+[[Snippets]]
+  Description = "check service on port"
+  Output = ""
+  Tag = []
   command = "ss -tunelp | grep 6600"
-  output = ""
 
-[[snippets]]
-  description = "remove dangling and ununsed docker images"
+[[Snippets]]
+  Description = "remove dangling and ununsed docker images"
+  Output = ""
+  Tag = []
   command = "docker image prune -a"
-  output = ""
 
-[[snippets]]
-  description = "delete ALL dangling docker data (i.e. In order: containers stopped, volumes without containers and images with no containers)"
+[[Snippets]]
+  Description = "delete ALL dangling docker data (i.e. In order: containers stopped, volumes without containers and images with no containers)"
+  Output = ""
+  Tag = []
   command = "docker system prune"
-  output = ""
 
-[[snippets]]
-  description = "delete ALL dangling docker data (i.e. In order: containers stopped, volumes without containers and images with no containers). Even unused data, with -a option"
+[[Snippets]]
+  Description = "delete ALL dangling docker data (i.e. In order: containers stopped, volumes without containers and images with no containers). Even unused data, with -a option"
+  Output = ""
+  Tag = []
   command = "docker system prune -a"
-  output = ""
 
-[[snippets]]
-  description = "find large files; sort by size"
+[[Snippets]]
+  Description = "find large files; sort by size"
+  Output = ""
+  Tag = []
   command = "sudo find / -xdev -type f -size +100M -exec ls -la {} \\; | sort -nk 5"
-  output = ""
 
-[[snippets]]
-  description = "find large dirs"
+[[Snippets]]
+  Description = "find large dirs"
+  Output = ""
+  Tag = []
   command = "sudo du -ahx / | sort -rh | head -20"
-  output = ""
 
-[[snippets]]
-  description = "checkout single file from stash"
+[[Snippets]]
+  Description = "checkout single file from stash"
+  Output = ""
+  Tag = []
   command = "git checkout stash@{0} --  <filename>"
-  output = ""
 
-[[snippets]]
-  description = "list files sorted by size"
+[[Snippets]]
+  Description = "list files sorted by size"
+  Output = ""
+  Tag = []
   command = "sudo du -hs /home/* | sort -h"
-  output = ""
 
-[[snippets]]
-  description = "reload plasma panel"
+[[Snippets]]
+  Description = "reload plasma panel"
+  Output = ""
+  Tag = []
   command = "kquitapp5 plasmashell || killall plasmashell && kstart5 plasmashell"
-  output = ""
 
-[[snippets]]
-  description = "reset file to master"
+[[Snippets]]
+  Description = "reset file to master"
+  Output = ""
+  Tag = []
   command = "git checkout origin/master -- <filename>"
-  output = ""
 
-[[snippets]]
-  description = "show diff in branch commits"
+[[Snippets]]
+  Description = "show diff in branch commits"
+  Output = ""
+  Tag = []
   command = "git diff --name-only <branch2> $(git merge-base <branch2> <branch1>)"
-  output = ""
 
-[[snippets]]
-  description = "open diff of all files modified in current branch in nvim"
+[[Snippets]]
+  Description = "open diff of all files modified in current branch in nvim"
+  Output = ""
+  Tag = []
   command = "git diff --name-only <feature> $(git merge-base <feature> <base> ) > /tmp/diff && nvim $(cat /tmp/diff)"
-  output = ""
 
-[[snippets]]
-  description = "search and open results in vim"
+[[Snippets]]
+  Description = "search and open results in vim"
+  Output = ""
+  Tag = []
   command = "rg <search-term> **/*.phrases.ts -l -i > /tmp/rg && nvim $(cat /tmp/rg)"
-  output = ""
 
-[[snippets]]
-  description = "list partitions / drives"
+[[Snippets]]
+  Description = "list partitions / drives"
+  Output = ""
+  Tag = []
   command = "lsblk"
-  output = ""
 
-[[snippets]]
-  description = "list disks"
+[[Snippets]]
+  Description = "list disks"
+  Output = ""
+  Tag = []
   command = "sudo fdisk -l"
-  output = ""
 
-[[snippets]]
-  description = "how long does dd take"
+[[Snippets]]
+  Description = "how long does dd take"
+  Output = ""
+  Tag = []
   command = "kill -USR1 <pid>; sleep 1;kill <pid>"
-  output = ""
 
-[[snippets]]
-  description = "list devices / usb drives"
+[[Snippets]]
+  Description = "list devices / usb drives"
+  Output = ""
+  Tag = []
   command = "lsblk"
-  output = ""
 
-[[snippets]]
-  description = "move i3 workspace"
+[[Snippets]]
+  Description = "move i3 workspace"
+  Output = ""
+  Tag = []
   command = "i3-msg move workspace to output left"
-  output = ""
 
-[[snippets]]
-  description = "i3 turn off laptop display"
+[[Snippets]]
+  Description = "i3 turn off laptop display"
+  Output = ""
+  Tag = []
   command = "xrandr --output eDP1 --off"
-  output = ""
 
-[[snippets]]
-  description = "shell into docker-compose"
+[[Snippets]]
+  Description = "shell into docker-compose"
+  Output = ""
+  Tag = []
   command = "docker-compose run web bash"
-  output = ""
 
-[[snippets]]
-  description = "check port"
+[[Snippets]]
+  Description = "check port"
+  Output = ""
+  Tag = []
   command = "sudo lsof -i :8000"
-  output = ""
 
-[[snippets]]
-  description = "set additional monitor resolution"
+[[Snippets]]
+  Description = "set additional monitor resolution"
+  Output = ""
+  Tag = []
   command = "xrandr --output DP3 --auto --scale 0.9x0.9 --right-of eDP1"
-  output = ""
 
-[[snippets]]
-  description = "redshift very red"
+[[Snippets]]
+  Description = "redshift very red"
+  Output = ""
+  Tag = []
   command = "redshift -PO 1000"
-  output = ""
 
-[[snippets]]
-  description = "staging cluster credentials"
+[[Snippets]]
+  Description = "staging cluster credentials"
+  Output = ""
+  Tag = []
   command = "gcloud container clusters get-credentials pento-stg-europe-west1 --zone europe-west1 --project pento-staging"
-  output = ""
 
-[[snippets]]
-  description = "show dns server"
+[[Snippets]]
+  Description = "show dns server"
+  Output = ""
+  Tag = []
   command = "nmcli dev show"
-  output = ""
 
-[[snippets]]
-  description = "lookup ip and show dns server used"
+[[Snippets]]
+  Description = "lookup ip and show dns server used"
+  Output = ""
+  Tag = []
   command = "nslookup slack.com"
-  output = ""
 
-[[snippets]]
-  description = "run single go test"
+[[Snippets]]
+  Description = "run single go test"
+  Output = ""
+  Tag = []
   command = "go test -run "
-  output = ""
 
-[[snippets]]
-  description = "go test update golden files"
+[[Snippets]]
+  Description = "go test update golden files"
+  Output = ""
+  Tag = []
   command = "go test -run TestPayslipCSVHandler_GetPayrollVarianceReport -update_files ./..."
-  output = ""
 
-[[snippets]]
-  description = "git, open conflicted files in vim"
+[[Snippets]]
+  Description = "git, open conflicted files in vim"
+  Output = ""
+  Tag = []
   command = "nvim $(git diff --name-only --diff-filter=U)"
-  output = ""
 
-[[snippets]]
-  description = "grep/search word in files and open in vim"
+[[Snippets]]
+  Description = "grep/search word in files and open in vim"
+  Output = ""
+  Tag = []
   command = "rg --vimgrep 'hao' | vim -q /dev/stdin"
-  output = ""
 
-[[snippets]]
-  description = "list audio sources"
+[[Snippets]]
+  Description = "list audio sources"
+  Output = ""
+  Tag = []
   command = "pacmd list-sources"
-  output = ""
 
-[[snippets]]
-  description = "update signatures and system"
+[[Snippets]]
+  Description = "update signatures and system"
+  Output = ""
+  Tag = []
   command = "sudo pacman -Sy archlinux-keyring && sudo pacman -Su"
-  output = ""
 
-[[snippets]]
-  description = "mount usb drive"
+[[Snippets]]
+  Description = "mount usb drive"
+  Output = ""
+  Tag = []
   command = "sudo mkdir /mnt/usb && sudo mount /dev/... /mnt/usb && umount /mnt/usb"
-  output = ""
 
-[[snippets]]
-  description = "batch clean audio with noise sample"
+[[Snippets]]
+  Description = "batch clean audio with noise sample"
+  Output = ""
+  Tag = []
   command = "ls -r -1 *.mp3 | xargs -L1 -I{} sox {}  {}_noise_reduced.mp3  noisered ../../noise_profile_file 0.30"
-  output = ""
 
-[[snippets]]
-  description = "check RAM size"
+[[Snippets]]
+  Description = "check RAM size"
+  Output = ""
+  Tag = []
   command = "grep MemTotal /proc/meminfo"
-  output = ""
 
-[[snippets]]
-  description = "mount ntfs with rw permission"
+[[Snippets]]
+  Description = "mount ntfs with rw permission"
+  Output = ""
+  Tag = []
   command = "sudo mount -o rw,auto,user,fmask=0022,dmask=0000  /dev/sdb2 /mnt/usb "
-  output = ""
 
-[[snippets]]
-  description = "add network to wpa_supplicant"
+[[Snippets]]
+  Description = "add network to wpa_supplicant"
+  Output = ""
+  Tag = []
   command = "wpa_passphrase MYSSID passphrase > /etc/wpa_supplicant/wpa_supplicant.conf"
-  output = ""
 
-[[snippets]]
-  description = "ripgrep ignore dir and glob by fileextension"
+[[Snippets]]
+  Description = "ripgrep ignore dir and glob by fileextension"
+  Output = ""
+  Tag = []
   command = "rg csrf -g '!vendor/' -g '!tests' -g '*.go'"
-  output = ""
 
-[[snippets]]
-  description = "safely remove/unmount usb drive"
+[[Snippets]]
+  Description = "safely remove/unmount usb drive"
+  Output = ""
+  Tag = []
   command = "sudo udisksctl unmount -b /dev/sda1 && sudo udisksctl power-off -b /dev/sda\\n\\n"
-  output = ""
 
-[[snippets]]
-  description = "find process running on port"
+[[Snippets]]
+  Description = "find process running on port"
+  Output = ""
+  Tag = []
   command = "sudo ss -lptn 'sport = :8888'"
-  output = ""
 
-[[snippets]]
-  description = "gtk 3 settings"
+[[Snippets]]
+  Description = "gtk 3 settings"
+  Output = ""
+  Tag = []
   command = "nvim .config/gtk-3.0/settings.ini"
-  output = ""
 
-[[snippets]]
-  description = "vim bookmarks"
+[[Snippets]]
+  Description = "vim bookmarks"
+  Output = ""
+  Tag = []
   command = "ma mA `a `A"
-  output = ""
 
-[[snippets]]
-  description = "show wifi networks"
+[[Snippets]]
+  Description = "show wifi networks"
+  Output = ""
+  Tag = []
   command = "nmcli connection show | grep wifi"
-  output = ""
 
-[[snippets]]
-  description = "show running systemd units"
+[[Snippets]]
+  Description = "show running systemd units"
+  Output = ""
+  Tag = []
   command = "sudo systemctl --type=service --state=running"
-  output = ""
 
-[[snippets]]
-  description = "show wifi pass"
+[[Snippets]]
+  Description = "show wifi pass"
+  Output = ""
+  Tag = []
   command = "sudo nmcli connection show void -s | grep psk"
-  output = ""
 
-[[snippets]]
-  description = "delete docker images where name matches zededa"
+[[Snippets]]
+  Description = "delete docker images where name matches zededa"
+  Output = ""
+  Tag = []
   command = "docker rmi $(docker images | grep 'zededa')"
-  output = ""
 
-[[snippets]]
-  description = "prevent NetworkManager from overwriting resolv.conf"
+[[Snippets]]
+  Description = "prevent NetworkManager from overwriting resolv.conf"
+  Output = ""
+  Tag = []
   command = "sudo tee -a /etc/NetworkManager/NetworkManager.conf > /dev/null <<EOT\\n[main]\\ndns=none\\nrc-manager=unmanaged\\nEOT"
-  output = ""
 
-[[snippets]]
-  description = "remove duplicate lines from file"
+[[Snippets]]
+  Description = "remove duplicate lines from file"
+  Output = ""
+  Tag = []
   command = "awk -i inplace '!seen[$0]++' data/tatoeba/01/input/merge"
-  output = ""
 
-[[snippets]]
-  description = "Clear /var/lib/docker/overlay2. Docker uses /var/lib/docker to store your images, containers, and local named volumes. Deleting this can result in data loss and possibly stop the engine from running. The overlay2 subdirectory specifically contains the various filesystem layers for images and containers. To cleanup unused containers and images, use docker system prune."
+[[Snippets]]
+  Description = "Clear /var/lib/docker/overlay2. Docker uses /var/lib/docker to store your images, containers, and local named volumes. Deleting this can result in data loss and possibly stop the engine from running. The overlay2 subdirectory specifically contains the various filesystem layers for images and containers. To cleanup unused containers and images, use docker system prune."
+  Output = ""
+  Tag = []
   command = "docker system prune --all"
-  output = ""
 
-[[snippets]]
-  description = "segment chinese text"
+[[Snippets]]
+  Description = "segment chinese text"
+  Output = ""
+  Tag = []
   command = "./segment.sh pku ./input UTF-8 0 > ./segmented"
-  output = ""
 
-[[snippets]]
-  description = "theme"
+[[Snippets]]
+  Description = "theme"
+  Output = ""
+  Tag = []
   command = "lxappearance"
-  output = ""
 
-[[snippets]]
-  description = "qt layout"
+[[Snippets]]
+  Description = "qt layout"
+  Output = ""
+  Tag = []
   command = "qt5ct"
-  output = ""
 
-[[snippets]]
-  description = "QT scale factor"
+[[Snippets]]
+  Description = "QT scale factor"
+  Output = ""
+  Tag = []
   command = "export QT_SCALE_FACTOR=1.5 thunar"
-  output = ""
 
-[[snippets]]
-  description = "make gitconfig's InsteadOf work with Cargo"
+[[Snippets]]
+  Description = "make gitconfig's InsteadOf work with Cargo"
+  Output = ""
+  Tag = []
   command = "export CARGO_NET_GIT_FETCH_WITH_CLI=true"
-  output = ""
 
-[[snippets]]
-  description = "zip dir"
+[[Snippets]]
+  Description = "zip dir"
+  Output = ""
+  Tag = []
   command = "zip -r "
-  output = ""
 
-[[snippets]]
-  description = "search git commit and ignore case"
+[[Snippets]]
+  Description = "search git commit and ignore case"
+  Output = ""
+  Tag = []
   command = "git log --all -i --grep='grammar'\\n"
-  output = ""
 
-[[snippets]]
-  description = "find process on port number"
+[[Snippets]]
+  Description = "find process on port number"
+  Output = ""
+  Tag = []
   command = "sudo lsof -i :3000"
-  output = ""
 
-[[snippets]]
-  description = "find 10 largest directories / disk space"
+[[Snippets]]
+  Description = "find 10 largest directories / disk space"
+  Output = ""
+  Tag = []
   command = "sudo du -h --max-depth=1 / | sort -hr | head -10\\n"
-  output = ""
 
-[[snippets]]
-  description = "Clear package cache and remove all cached versions except the three most recent ones / disk space"
+[[Snippets]]
+  Description = "Clear package cache and remove all cached versions except the three most recent ones / disk space"
+  Output = ""
+  Tag = []
   command = "sudo paccache -r\\n"
-  output = ""
 
-[[snippets]]
-  description = "Remove orphaned packages / disk space"
+[[Snippets]]
+  Description = "Remove orphaned packages / disk space"
+  Output = ""
+  Tag = []
   command = "sudo pacman -Rns $(pacman -Qtdq)\\n"
-  output = ""
 
-[[snippets]]
-  description = "Remove journal logs / disk space"
+[[Snippets]]
+  Description = "Remove journal logs / disk space"
+  Output = ""
+  Tag = []
   command = "sudo journalctl --vacuum-size=50M"
-  output = ""
 
-[[snippets]]
-  description = "check for large core dump files / disk space"
+[[Snippets]]
+  Description = "check for large core dump files / disk space"
+  Output = ""
+  Tag = []
   command = "sudo find / -type f -name \"core\" -exec du -h {} + | sort -hr\\n"
-  output = ""
 
-[[snippets]]
-  description = "find class of i3 window"
+[[Snippets]]
+  Description = "find class of i3 window"
+  Output = ""
+  Tag = []
   command = "xprop | grep WM_CLASS"
-  output = ""
 
-[[snippets]]
-  description = "xrandr set brightness"
+[[Snippets]]
+  Description = "xrandr set brightness"
+  Output = ""
+  Tag = []
   command = "xrandr --output DP-1 --brightness 1.0"
-  output = ""
 
-[[snippets]]
-  description = "get GPU info"
+[[Snippets]]
+  Description = "get GPU info"
+  Output = ""
+  Tag = []
   command = "lspci | grep -i vga"
-  output = ""
 
-[[snippets]]
-  description = "curl azure audio api"
+[[Snippets]]
+  Description = "curl azure audio api"
+  Output = ""
+  Tag = []
   command = "curl --location --request POST \"https://germanywestcentral.tts.speech.microsoft.com/cognitiveservices/v0\" \\\\n    --header \"Ocp-Apim-Subscription-Key: 8e1e1b7d9fa34fc8b25fcf7995746e61\" \\\\n    --header \"Content-Type: application/ssml+xml\" \\\\n    --header \"X-Microsoft-OutputFormat: audio-16khz-128kbitrate-mono-mp3\" \\\\n    --header \"User-Agent: curl\" \\\\n    --data-raw '<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xmlns:mstts=\"https://www.w3.org/2001/mstts\" xml:lang=\"zh-CN\">\\n<voice name=\"zh-CN-YunyiMultilingualNeural\">\\n        <mstts:silence  type=\"Tailing-exact\" value=\"1000ms\"/>\\n        <prosody rate=\"0.7\">\\n                   解释\\n        </prosody>\\n    </voice>\\n</speak>' > o.mp3\\n"
-  output = ""
 
-[[snippets]]
-  description = "find my ip in local network"
+[[Snippets]]
+  Description = "find my ip in local network"
+  Output = ""
+  Tag = []
   command = "ip addr show\\n"
-  output = ""
 
-[[snippets]]
-  description = "check what's running on port 80"
+[[Snippets]]
+  Description = "check what's running on port 80"
+  Output = ""
+  Tag = []
   command = "sudo netstat -tlnp | grep :80\\nsudo ss -tlnp | grep :80\\nsudo lsof -i :80"
-  output = ""
+
+[[Snippets]]
+  Description = "check what's currenlty downloading"
+  Output = ""
+  Tag = []
+  command = "sudo lsof -i"
+
+[[Snippets]]
+  Description = "monitor realtime bandwidth usage"
+  Output = ""
+  Tag = []
+  command = "nload"
+
+[[Snippets]]
+  Description = "see which process is downloading the most"
+  Output = ""
+  Tag = []
+  command = "sudo nethogs"

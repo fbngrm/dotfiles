@@ -337,14 +337,6 @@ rsync:
 darkman-cfg:
 	mkdir -p "${HOME}/.config/darkman"
 	ln -vsf "${PWD}/darkman/config.yaml" "${HOME}/.config/darkman/config.yaml"
-
-	# ln -vsf "${PWD}/darkman/hooks/gtk-theme" "${HOME}/.config/darkman/hooks/gtk-theme"
-	# chmod +x "${HOME}/.config/darkman/hooks/gtk-theme"
-	# ln -vsf "${PWD}/darkman/hooks/qt-theme" "${HOME}/.config/darkman/hooks/qt-theme"
-	# chmod +x "${HOME}/.config/darkman/hooks/qt-theme"
-
-	# sudo sh -c 'echo XDG_DATA_DIRS=/usr/local/share:/usr/share >> /etc/environment'
-
 	sudo mkdir -p "/usr/local/share/dark-mode.d"
 	sudo ln -vsf ${PWD}/darkman/scripts/dark-mode.d/* /usr/local/share/dark-mode.d/
 	sudo mkdir -p "/usr/local/share/light-mode.d"

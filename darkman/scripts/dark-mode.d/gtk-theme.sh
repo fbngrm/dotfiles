@@ -1,6 +1,9 @@
-#!/usr/bin/env bash
-# Note: The names for the Arc theme variations are terrible.
-# "Darker" is actually LESS DARK than "Dark".
+#!/bin/sh
+# 1. The most important line for Firefox/Chromium/GTK4:
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
-# gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
-xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark"
+# 2. For standard GTK3 apps:
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+
+# 3. For Qt apps (if you use adwaita-qt):
+export QT_QPA_PLATFORMTHEME=gnome

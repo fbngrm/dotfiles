@@ -986,23 +986,17 @@ let g:go_fmt_command = "goimports"
 set completeopt=menu,menuone,noselect
 
 lua << EOF
-
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
+-- 1. General LSP Mappings (Diagnostic)
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', 'gn', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', 'gm', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
+-- 2. On_Attach: Function to map keys only when LSP is active in a buffer
 local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
@@ -1018,78 +1012,66 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  -- vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
 end
 
-local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
-}
-
--- nvim-cmp setup
+-- 3. nvim-cmp Setup (Completion Engine)
 local cmp = require 'cmp'
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 cmp.setup {
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      vim.fn["UltiSnips#Anon"](args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
+    ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
     ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      end
+      if cmp.visible() then cmp.select_next_item() else fallback() end
     end, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      end
+      if cmp.visible() then cmp.select_prev_item() else fallback() end
     end, { 'i', 's' }),
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'ultisnips' }, -- For ultisnips users.
-    {
-      name = 'buffer',
-      option = {
-        keyword_length = 2,
-        get_bufnrs = function()
-          return vim.api.nvim_list_bufs()
-        end
-      },
-    },
+    { name = 'ultisnips' },
+    { name = 'buffer', option = { keyword_length = 2 } },
   }),
 }
 
+-- 4. New Native LSP Configurations (0.11+)
 
--- Setup lspconfig.
--- Add additional capabilities supported by nvim-cmp
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local lspconfig = require("lspconfig")
-require('lspconfig')['gopls'].setup{
+-- gopls (Go)
+vim.lsp.config('gopls', {
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  root_markers = { "go.work", "go.mod", ".git" },
+  settings = {
     gopls = {
-      analyses = {
-        unusedparams = true,
-      },
+      analyses = { unusedparams = true },
       staticcheck = true,
       gofumpt = true,
     },
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities
-}
-require('lspconfig')['pyright'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities
-}
+  },
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+vim.lsp.enable('gopls')
+
+-- pyright (Python)
+vim.lsp.config('pyright', {
+  cmd = { "pyright-langserver", "--stdio" },
+  filetypes = { "python" },
+  root_markers = { "pyproject.toml", "setup.py", ".git" },
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+vim.lsp.enable('pyright')
+
 EOF
 
 " --------------------------------------------------------------------------------
