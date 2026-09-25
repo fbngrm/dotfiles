@@ -784,3 +784,9 @@
   Output = ""
   Tag = []
   command = "sudo nethogs"
+
+[[Snippets]]
+  Description = "reload touchpad"
+  Output = ""
+  Tag = []
+  command = "sudo modprobe -r i2c_hid_acpi\\nsudo modprobe i2c_hid_acpi"

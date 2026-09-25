@@ -1,5 +1,5 @@
 [Unit]
-Description=Suspend the system when battery is critically low
+Description=Hibernate the system when battery is critically low
 
 [Service]
 Type=oneshot
