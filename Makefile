@@ -262,6 +262,7 @@ sway-pkgs:
 		swaylock \
 		grim \
 		imagemagick \
+		nwg-displays \
 
 sway-pkgs-aur:
 	yay -S --needed --noconfirm \
@@ -275,6 +276,8 @@ sway-cfg:
 	chmod +x "${HOME}/.config/sway/scripts/battery_check.sh"
 	ln -vsf "${PWD}/sway/scripts/lock.sh" "${HOME}/.config/sway/scripts/lock.sh"
 	chmod +x "${HOME}/.config/sway/scripts/lock.sh"
+	mkdir -vp "${HOME}/.config/environment.d"
+	ln -vsf "${PWD}/environment.d/cursor.conf" "${HOME}/.config/environment.d/cursor.conf"
 
 sway-battery-srv:
 	mkdir -vp "${HOME}/.config/systemd/user"
