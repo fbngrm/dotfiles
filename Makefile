@@ -276,6 +276,12 @@ sway-cfg:
 	chmod +x "${HOME}/.config/sway/scripts/battery_check.sh"
 	ln -vsf "${PWD}/sway/scripts/lock.sh" "${HOME}/.config/sway/scripts/lock.sh"
 	chmod +x "${HOME}/.config/sway/scripts/lock.sh"
+	ln -vsf "${PWD}/sway/scripts/dpms_off_unless_playing.sh" "${HOME}/.config/sway/scripts/dpms_off_unless_playing.sh"
+	chmod +x "${HOME}/.config/sway/scripts/dpms_off_unless_playing.sh"
+	ln -vsf "${PWD}/sway/scripts/hibernate_if_on_battery.sh" "${HOME}/.config/sway/scripts/hibernate_if_on_battery.sh"
+	chmod +x "${HOME}/.config/sway/scripts/hibernate_if_on_battery.sh"
+	ln -vsf "${PWD}/sway/scripts/ext_brightness.sh" "${HOME}/.config/sway/scripts/ext_brightness.sh"
+	chmod +x "${HOME}/.config/sway/scripts/ext_brightness.sh"
 	mkdir -vp "${HOME}/.config/environment.d"
 	ln -vsf "${PWD}/environment.d/cursor.conf" "${HOME}/.config/environment.d/cursor.conf"
 
